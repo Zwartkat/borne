@@ -586,6 +586,7 @@ public class ClavierBorneArcade implements KeyListener {
 	    break;
 
 
+
 	case KeyEvent.VK_A:
 	    a = false;
 	    aTape = true;
@@ -767,6 +768,11 @@ public class ClavierBorneArcade implements KeyListener {
 	case KeyEvent.VK_Z:
 	    z = true;
 	    break;
+	default:
+		System.out.println(KeyEvent.getKeyText(key.getKeyCode()));
+
 	}
+
+
     }
 }

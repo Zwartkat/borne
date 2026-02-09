@@ -37,7 +37,13 @@ credits = False
 
 playMusic = True
 
-pygame.mixer.music.load("assets/sound/menu.mp3")
+script_path = os.path.abspath(__file__)
+
+script_dir = os.path.dirname(script_path)
+
+abspath = os.path.dirname(script_dir)
+
+pygame.mixer.music.load(f"{abspath}/assets/sound/menu.mp3")
 pygame.mixer.music.play()
 
 while running:
@@ -64,7 +70,7 @@ while running:
         gameOver, pause = game.showGame()
         
         if playMusic:
-            pygame.mixer.music.load("./assets/sound/music" + str(random.randint(1, 3)) + ".mp3")
+            pygame.mixer.music.load(f"{abspath}/assets/sound/music" + str(random.randint(1, 3)) + ".mp3")
             pygame.mixer.music.play(loops=-1)
             playMusic = False
 
@@ -74,7 +80,7 @@ while running:
         # Si on passe du jeu au menu
         if pause:
             gameState = False
-            pygame.mixer.music.load("assets/sound/menu.mp3")
+            pygame.mixer.music.load(f"{abspath}/assets/sound/menu.mp3")
             pygame.mixer.music.play()
 
     pygame.display.update()

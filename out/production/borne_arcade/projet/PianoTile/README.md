@@ -1,1 +1,0 @@
-posez la question si l'interface peut exister

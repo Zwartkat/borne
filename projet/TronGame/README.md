@@ -25,7 +25,7 @@ Inspiré de l'univers de Tron, ce jeu consiste à diriger un "Light Cycle" (cycl
 ### Installation
 ```bash
 pip install pygame
-python main.py
+python __main__.py
 ```
 
 ## Documentation

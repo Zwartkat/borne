@@ -1,6 +1,9 @@
 package Arcade;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import Arcade.ClavierBorneArcade;
 import MG2D.geometrie.Texture;
@@ -24,14 +27,20 @@ public class Pointeur {
     public void lancerJeu(ClavierBorneArcade clavier){
 	if(clavier.getBoutonJ1ATape()){
 
-	    //System.out.println(Graphique.tableau[getValue()].getChemin());
+	    System.out.println(Graphique.tableau[getValue()].getChemin());
 	    try {
 		Graphique.stopMusiqueFond();
-        ProcessBuilder processBuilder = new ProcessBuilder("python3","main.py");
-        Process p = processBuilder.start();
-        p.waitFor();
+            String folderPath = Graphique.tableau[getValue()].getNom(); // chemin du dossier
+            String absFolderPath = Paths.get("projet/"+folderPath).toAbsolutePath().toString();
+            String pythonFilePath = Paths.get(absFolderPath, "src","__main__.py").toString();
+
+            ProcessBuilder processBuilder = new ProcessBuilder("python",pythonFilePath);
+            System.out.println(absFolderPath);
+            processBuilder.directory(new File(absFolderPath));
+            processBuilder.inheritIO();
+        Process process = processBuilder.start();
 		//Process process = Runtime.getRuntime().exec("./"+Graphique.tableau[getValue()].getNom()+".sh");
-			//ajouté afin d'attendre la fin de l'exécution du jeu pour reprendre le contrôle sur le menu
+		int exitCode = process.waitFor();		//ajouté afin d'attendre la fin de l'exécution du jeu pour reprendre le contrôle sur le menu
 		Graphique.lectureMusiqueFond();
 	    } catch (IOException e) {
 		// TODO Auto-generated catch block

@@ -1,5 +1,6 @@
 package Arcade;
 
+
 import MG2D.geometrie.Rectangle;
 
 public abstract class Boite {

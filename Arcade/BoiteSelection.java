@@ -16,6 +16,7 @@ public class BoiteSelection extends Boite {
     public BoiteSelection(Rectangle rectangle, Pointeur pointeur) {
 	super(rectangle);
 	this.pointeur = pointeur;
+
     }
 
     public boolean selection(ClavierBorneArcade clavier){

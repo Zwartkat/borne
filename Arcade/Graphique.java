@@ -12,6 +12,9 @@ import MG2D.audio.*;
 import MG2D.*;
 import MG2D.FenetrePleinEcran;
 
+/**
+ * Classe Graphique, permet de gérer l'affichage de la borne d'arcade
+ */
 public class Graphique {
 
     //private final Fenetre f;
@@ -33,12 +36,12 @@ public class Graphique {
 
 
     public Graphique(){
-    	
 
 	TAILLEX = 1280;
 	TAILLEY = 1024;
 
 	font = null;
+
 	try{
 	    File in = new File("fonts/PrStart.ttf");
 	    font = font.createFont(Font.TRUETYPE_FONT, in);
@@ -130,7 +133,8 @@ public class Graphique {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	//Creation d'un tableau de musiques
+
+		//Creation d'un tableau de musiques
 	tableauMusiques = new String[cptMus];
 	try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(cheminMusiques)) {
 	    int i = cptMus-1;
@@ -145,6 +149,9 @@ public class Graphique {
 	this.lectureMusiqueFond();
     }
 
+	/**
+	 * Gère la sélection du jeu à lancer
+	 */
     public void selectionJeu(){	
 		Texture fondBlancTransparent = new Texture("./img/blancTransparent.png", new Point(0,0));
 		Rectangle boutonNon = new Rectangle(Couleur.ROUGE, new Point(340, 600), 200, 100, true);
@@ -175,7 +182,7 @@ public class Graphique {
 					frame=-1;
 				}
 				frame++;
-				// System.out.println("frame n°"+frame);
+				//System.out.println("frame n°"+frame);
 			}
 			catch (Exception e) {
 				System.err.println(e.getMessage());
@@ -183,7 +190,6 @@ public class Graphique {
 			try{
 				Thread.sleep(50);
 			}catch(Exception e){}
-			
 			if(!fermetureMenu){
 				if(bs.selection(clavier)){
 				bi.setImage(tableau[pointeur.getValue()].getChemin());
@@ -197,12 +203,9 @@ public class Graphique {
 				System.err.println(e.getMessage());
 				}
 
-				// if(!tableau[pointeur.getValue()].getTexte().getPolice().equals(fontSelect)){
-				// tableau[pointeur.getValue()].getTexte().setPolice(fontSelect);
-				// }
-				
-				
-				
+				if(!tableau[pointeur.getValue()].getTexte().getPolice().equals(fontSelect)){
+				 tableau[pointeur.getValue()].getTexte().setPolice(fontSelect);
+				 }
 				
 
 				tableau[pointeur.getValue()].getTexte().setPolice(font);
@@ -267,16 +270,22 @@ public class Graphique {
 			f.rafraichir();
 		}//fin while true
     }
-    
-    public static void lectureMusiqueFond() {
+
+	/**
+	 * Lancer la musique de fond aléatoirement parmi la liste définie
+	 */
+	public static void lectureMusiqueFond() {
     	musiqueFond = new Bruitage ("sound/bg/"+tableauMusiques[(int)(Math.random()*cptMus)]);
     	musiqueFond.lecture();
     }
-	
+
+	/**
+	 * Arrete la musique
+	 */
 	public static void stopMusiqueFond(){
 		musiqueFond.arret();
 	}
-	
+
 	public static void afficherTexte(int valeur){
 		f.ajouter(tableau[valeur].getTexte());
 	}

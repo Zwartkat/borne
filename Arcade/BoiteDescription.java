@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,7 +38,7 @@ public class BoiteDescription extends Boite {
 	
 	
 	
-    BoiteDescription(Rectangle rectangle) {
+    public BoiteDescription(Rectangle rectangle) {
 	super(rectangle);
 	
 	/*HACKED BY BENDAL*/
@@ -198,7 +199,7 @@ public class BoiteDescription extends Boite {
 	
     public void lireBouton(String path){
 	//System.out.println(path);
-	String fichier =path+"/bouton.txt";
+	String fichier = Paths.get("").toAbsolutePath().toString()+ "/" + path+"/bouton.txt";
 		
 	//lecture du fichier texte	
 	try{
@@ -208,7 +209,7 @@ public class BoiteDescription extends Boite {
 	    String ligne;
 	    ligne = br.readLine();
 	    if(ligne == null){
-		System.err.println("le fichier bouton est surement vide!");
+		System.err.println("le fichier bouton est surement vide!" + fichier);
 	    }else{
 		texteBouton = ligne.split(":");
 		//changer le texte des boutons

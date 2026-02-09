@@ -24,7 +24,7 @@ Bienvenue dans **TRON**, un jeu d'arcade inspiré du film culte de Disney ! Diri
 
 3. **Lancer le jeu :**
    ```bash
-   python main.py
+   python __main__.py
    ```
 
 ## Règles du jeu

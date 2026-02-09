@@ -1,14 +1,18 @@
+import os
 import pygame
 
 from constantes import WHITE, BLACK, RED, GREEN, BLUE, SCREEN_WIDTH, SCREEN_HEIGHT, FONT
+script_path = os.path.abspath(__file__)
 
+script_dir = os.path.dirname(script_path)
 
+abspath = os.path.dirname(script_dir)
 class Menu():
     def __init__(self, screen: pygame.Surface):
         self.screen: pygame.Surface = screen
         self.selectedOption: int = 0
         self.texture: pygame.Surface = pygame.transform.scale(
-            pygame.image.load('./assets/bg_pxl.jpg').convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
+            pygame.image.load(f'{abspath}/assets/bg_pxl.jpg').convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
         #self.sonMenu = sonMenu
 
     def showMenu(self, keyEvent, pause: bool = False) -> bool:

@@ -1,10 +1,15 @@
+import os
 import pygame
 from constantes import RED, SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_SPEED
+script_path = os.path.abspath(__file__)
 
+script_dir = os.path.dirname(script_path)
+
+abspath = os.path.dirname(script_dir)
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.canon = pygame.transform.scale(pygame.image.load("assets/canon.png"),(33,66))
+        self.canon = pygame.transform.scale(pygame.image.load(f"{abspath}/assets/canon.png"),(33,66))
         self.rect = self.canon.get_rect()
         self.image = self.canon
         self.rect.centerx = SCREEN_WIDTH // 2
@@ -49,7 +54,7 @@ class Player(pygame.sprite.Sprite):
 class Wheel(pygame.sprite.Sprite):
     def __init__(self,xoffset):
         super().__init__()
-        self.original_image = pygame.transform.scale(pygame.image.load("assets/wheel.png"),(25,25))
+        self.original_image = pygame.transform.scale(pygame.image.load(f"{abspath}/assets/wheel.png"),(25,25))
         self.image = self.original_image
         self.rect = self.image.get_rect()
         self.xoffset = xoffset

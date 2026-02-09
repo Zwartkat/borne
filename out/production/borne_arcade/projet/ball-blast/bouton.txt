@@ -1,1 +1,0 @@
-Movement:gauche et droite:Interagir:aucun:Retour:aucun:aucun

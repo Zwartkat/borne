@@ -5,8 +5,12 @@ from constantes import WHITE, BLACK, RED, GREEN, BLUE, SCREEN_WIDTH, SCREEN_HEIG
 
 import pygame
 import random
+import os
+script_path = os.path.abspath(__file__)
 
+script_dir = os.path.dirname(script_path)
 
+abspath = os.path.dirname(script_dir)
 class Game():
     def __init__(self, screen: pygame.Surface):
         self.screen: pygame.Surface = screen
@@ -18,7 +22,7 @@ class Game():
         self.perdu: bool = False
         self.shootCD: int = 0
         self.texture: pygame.Surface = pygame.transform.scale(
-            pygame.image.load('./assets/bg_pxl.jpg').convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
+            pygame.image.load(f'{abspath}/assets/bg_pxl.jpg').convert(), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
         # Compteurs de frames pour laisser du temps avant de passer à la suite
         self.frameNumberLoseAnim: int = 0
@@ -32,7 +36,7 @@ class Game():
         # self.sonPop = sonPop
         
         self.shootCD: int = 0
-        self.path: str = "./assets/explosion_frames/frame-"
+        self.path: str = f'{abspath}/assets/explosion_frames/frame-'
         self.perdu = False
 
         # Initialize player, balls, and bullets
@@ -165,7 +169,7 @@ class Game():
                 text_surface, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
             if self.frameNumberLoseAnim == 0:
                 #pygame.mixer.Sound.play(self.sonExplosion)
-                pygame.mixer.music.load("./assets/sound//musicdeath.mp3")
+                pygame.mixer.music.load(f"{abspath}/assets/sound/musicdeath.mp3")
                 pygame.mixer.music.play()
 
             if self.frameNumberLoseAnim < 17:

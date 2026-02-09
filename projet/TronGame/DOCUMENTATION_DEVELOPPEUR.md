@@ -225,7 +225,7 @@ Le jeu est configuré pour démarrer en mode plein écran, idéal pour les borne
 
 ### Lancement du jeu :
 ```bash
-python main.py          # Version principale
+python __main__.py          # Version principale
 python tron_game.py     # Version alternative
 ```
 
