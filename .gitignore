@@ -1,6 +1,52 @@
-*/__pycache__/
-*.class
-.idea
-.git
+
+# =========================
+# IntelliJ / IDE
+# =========================
+.idea/
+*.iml
 out/
+*.ipr
+*.iws
+
+# =========================
+# Java
+# =========================
+*.class
+*.war
+*.ear
+hs_err_pid*
+replay_pid*
+
+# Dossiers de build
+build/
+target/
+bin/
+
+# =========================
+# Python
+# =========================
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+env/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Temp / cache
+# =========================
+tmp/
+temp/
+.cache/
+
+# =========================
+# Config locales
+# =========================
+local.properties
