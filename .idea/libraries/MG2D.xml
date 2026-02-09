@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="MG2D">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/MG2D.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../MG2D.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
