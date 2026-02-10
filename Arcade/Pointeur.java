@@ -21,21 +21,24 @@ public class Pointeur {
 	// this.triangleDroite = new Triangle(Couleur .ROUGE, new Point(550, 560), new Point(520, 510), new Point(550, 460), true);
 	this.triangleDroite = new Texture("img/star.png", new Point(530, 492), 40,40);
 	this.rectangleCentre = new Texture("img/select2.png", new Point(80, 460), 440, 100);
-	this.value = Graphique.tableau.length-1;
+	this.value = 0;
     }
 
     public void lancerJeu(ClavierBorneArcade clavier){
 	if(clavier.getBoutonJ1ATape()){
 
-	    System.out.println(Graphique.tableau[getValue()].getChemin());
 	    try {
 		Graphique.stopMusiqueFond();
-            String folderPath = Graphique.tableau[getValue()].getNom(); // chemin du dossier
-            String absFolderPath = Paths.get("projet/"+folderPath).toAbsolutePath().toString();
-            String pythonFilePath = Paths.get(absFolderPath, "src","__main__.py").toString();
-
-            ProcessBuilder processBuilder = new ProcessBuilder("python",pythonFilePath);
-            System.out.println(absFolderPath);
+            Game game = Graphique.getButtons().get(getValue()).getGame(); // chemin du dossier
+            String absFolderPath = Paths.get(game.getPath()).toAbsolutePath().toString();
+            ProcessBuilder processBuilder = null;
+            if(game.getLang().equals("python")){
+                processBuilder = new ProcessBuilder("python",game.getInput());
+            }
+            else if (game.getLang().equals("java")){
+                processBuilder = new ProcessBuilder("java", game.getInput());
+            }
+            if(processBuilder == null) return;
             processBuilder.directory(new File(absFolderPath));
             processBuilder.inheritIO();
         Process process = processBuilder.start();

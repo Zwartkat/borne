@@ -1,0 +1,5 @@
+directory,lang,input,repo
+ball-blast,python,./src/__main__.py,
+OsuTile,python,./src/__main__.py,
+PianoTile,python,./src/__main__py,
+TronGame,python,./src/__main__.py,

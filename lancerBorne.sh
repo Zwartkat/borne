@@ -2,23 +2,14 @@
 
 setxkbmap borne
 
-cd /home/pi/git/borne_arcade
-echo "nettoyage des répertoires"
-echo "Veuillez patienter"
+cd /home/zwartkat/Desktop/borne/borne
+echo "Nettoyage des répertoires"
 ./clean.sh
 ./compilation.sh
 
 echo "Lancement du  Menu"
-echo "Veuillez patienter"
 
-java -cp .:/home/pi/git/MG2D Main
+java -cp .:./MG2D.jar Main1
 
 ./clean.sh
 
-for i in {30..1}
-do
-    echo Extinction de la borne dans $i secondes
-    sleep 1
-done
-
-sudo halt

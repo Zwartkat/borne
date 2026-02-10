@@ -1,90 +1,85 @@
 package Arcade;
 
 import java.awt.Font;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.io.File;
-
 
 import MG2D.Couleur;
+import MG2D.FenetrePleinEcran;
 import MG2D.geometrie.Point;
 import MG2D.geometrie.Texture;
 import MG2D.geometrie.Texte;
 
 public class Bouton {
-    private Texte texte;
-    private String chemin;
-    private String nom;
+    private Texte text;
+    private String name;
     private Texture texture;
-    private int numeroDeJeu;
+    private int gameId;
+	private Game game;
+	private boolean textIsVisible = true;
 
 
     public Bouton(){
-	this.texte = null;
-	this.texture = null;
-	this.chemin = null;
-	this.nom = null;
+		this.text = null;
+		this.texture = null;
+		this.name = null;
+		this.game = new Game();
+		this.gameId = -1;
     }
 
-    public Bouton(Texte texte, Texture texture, String chemin, String nom){
-	this.texte = texte;
-	this.texture = texture;
-	this.chemin = chemin;
-	this.nom = nom;
-    }
-
-    public static void remplirBouton(){
-	for(int i = 0 ; i < Graphique.tableau.length ; i++){
-	    Graphique.tableau[i] = new Bouton();
+	public Bouton(Game game){
+		this.text = new Texte(new Texte(Couleur .NOIR, game.getName(), new Font("Calibri", Font.TYPE1_FONT, 30), new Point(310, 510)));
+		this.texture = new Texture("img/bouton2.png", new Point(100, 478), 400, 65);
+		this.gameId = game.getGameId();
+		this.name = game.getName();
+		this.game = game;
 	}
 
-	Path yourPath = FileSystems.getDefault().getPath("projet/");
+    public Bouton(String text, String name){
+		this.text = new Texte(new Texte(Couleur .NOIR, text, new Font("Calibri", Font.TYPE1_FONT, 30), new Point(310, 510)));
+		this.texture = new Texture("img/bouton2.png", new Point(100, 478), 400, 65);
+		this.name = name;
+		this.game = new Game();
+    }
 
-	try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(yourPath)) {
-	    int i = Graphique.tableau.length - 1;
-	    for (Path path : directoryStream) {
-		Graphique.tableau[i].setTexte(new Texte(Couleur .NOIR, path.getFileName().toString(), new Font("Calibri", Font.TYPE1_FONT, 30), new Point(310, 510)));
-		Graphique.tableau[i].setTexture(new Texture("img/bouton2.png", new Point(100, 478), 400, 65));
-		for(int j=0;j<Graphique.tableau.length-(i+1);j++){
-		    Graphique.tableau[i].getTexte().translater(0,-110);
-		    Graphique.tableau[i].getTexture().translater(0,-110);
-		}
-		Graphique.tableau[i].setChemin("projet/"+path.getFileName().toString());
-		Graphique.tableau[i].setNom(path.getFileName().toString());
-		Graphique.tableau[i].setNumeroDeJeu(i);
-		i--;
-	    }
-	} catch (IOException e) {
-	    e.printStackTrace();
+	public boolean isTextVisible(){
+		return textIsVisible;
 	}
 
+	public boolean toggleTextVisibility(){
+		textIsVisible = !textIsVisible;
+		return  textIsVisible;
+	}
+
+	public void setTextVisible(boolean visible){
+		textIsVisible = visible;
+	}
+
+	public void translater(int i, int i1 ){
+		texture.translater(i,i1);
+		text.translater(i,i1);
+	}
+
+	public Game getGame(){
+		return game;
+	}
+
+	private void setGame(Game game){
+		this.game = game;
+	}
+
+    public String getName() {
+	return name;
     }
 
-    public String getChemin() {
-	return chemin;
+    public void setName(String name) {
+	this.name = name;
     }
 
-    public void setChemin(String chemin) {
-	this.chemin = chemin;
+    public Texte getText() {
+	return text;
     }
 
-    public String getNom() {
-	return nom;
-    }
-
-    public void setNom(String nom) {
-	this.nom = nom;
-    }
-
-    public Texte getTexte() {
-	return texte;
-    }
-
-    public void setTexte(Texte texte) {
-	this.texte = texte;
+    public void setText(Texte text) {
+	this.text = text;
     }
 
     public Texture getTexture() {
@@ -95,11 +90,15 @@ public class Bouton {
 	this.texture = texture;
     }
 
-    public int getNumeroDeJeu() {
-	return numeroDeJeu;
+    public int getGameId() {
+	return gameId;
     }
 
-    public void setNumeroDeJeu(int numeroDeJeu) {
-	this.numeroDeJeu = numeroDeJeu;
+    public void setGameId(int gameId) {
+	this.gameId = gameId;
     }
+
+	public String toString(){
+		return "Class bouton: Id("+gameId + "),Name(" + name + ")";
+	}
 }

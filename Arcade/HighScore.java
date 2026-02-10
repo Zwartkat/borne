@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-class HighScore{
+public class HighScore{
 
     public static char suivant(char c){
 	if(c>='A' && c<'Z')

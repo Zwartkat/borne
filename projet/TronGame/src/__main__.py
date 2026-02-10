@@ -47,7 +47,7 @@ class TronGame:
 
         # Lancer la musique du menu
         self.current_music = None
-        self.play_music("./assets/sounds/music_menu.wav")
+        self.play_music("assets/sounds/music_menu.wav")
         
     def play_music(self, filepath, fade_ms=1000):
         """Jouer une musique en boucle avec fondu de transition"""
@@ -78,7 +78,7 @@ class TronGame:
                     if event.key == pygame.K_ESCAPE or event.key == pygame.K_f:  # ESCAPE ou touche f
                         if self.current_state in ["game", "options", "score_screen"]:
                             self.current_state = "menu"
-                            self.play_music("./assets/sounds/music_menu.wav")
+                            self.play_music("assets/sounds/music_menu.wav")
                         else:
                             self.running = False
                     # Fonctionnalité de plein écran retirée
@@ -99,11 +99,11 @@ class TronGame:
                     if action:
                         if action == "replay":
                             self.game = Game(self.screen, mode=self.game.mode, difficulty=self.difficulty, move_delay=self.move_delay)
-                            self.play_music("./assets/sounds/music_game.wav")
+                            self.play_music("assets/sounds/music_game.wav")
                             self.current_state = "game"
                         elif action == "menu":
                             self.current_state = "menu"
-                            self.play_music("./assets/sounds/music_menu.wav")
+                            self.play_music("assets/sounds/music_menu.wav")
 
             # Mise à jour
             if self.current_state == "menu":
@@ -137,11 +137,11 @@ class TronGame:
     def process_menu_action(self, action):
         if action == "single_player":
             self.game = Game(self.screen, mode="single", difficulty=self.difficulty, move_delay=self.move_delay)
-            self.play_music("./assets/sounds/music_game.wav")
+            self.play_music("assets/sounds/music_game.wav")
             self.current_state = "game"
         elif action == "two_players":
             self.game = Game(self.screen, mode="multi", move_delay=self.move_delay)
-            self.play_music("./assets/sounds/music_game.wav")
+            self.play_music("assets/sounds/music_game.wav")
             self.current_state = "game"
         elif action == "options":
             from options_main import Options
