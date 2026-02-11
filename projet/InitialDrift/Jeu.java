@@ -1,4 +1,7 @@
 import java.util.ArrayList; //Importation classe ArrayList
+
+import Arcade.ClavierBorneArcade;
+import Arcade.HighScore;
 import MG2D.*; // Importation MG2D
 import MG2D.geometrie.*;
 import MG2D.audio.*;

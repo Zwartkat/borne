@@ -39,7 +39,7 @@ public class Pointeur {
             else if (game.getLang().equals("java")){
                 Path jar = Paths.get("./MG2D.jar").toAbsolutePath();
                 Path parent = Paths.get(".").toAbsolutePath();
-                String classpath = "." + ";" + jar + ";" + parent;
+                String classpath = "." + ":" + jar + ":" + parent;
 
                 processBuilder = new ProcessBuilder("java","-cp",classpath,game.getName());
             }
