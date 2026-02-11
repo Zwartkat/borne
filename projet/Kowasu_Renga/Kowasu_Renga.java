@@ -53,7 +53,7 @@ public class Kowasu_Renga {
 
     private static int nbVies = 3;
 	
-    // Main //	
+    // Columns //
 	
     public static void main ( String [] args ) {
 	

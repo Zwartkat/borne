@@ -31,15 +31,22 @@ public class Pointeur {
 		Graphique.stopMusiqueFond();
             Game game = Graphique.getButtons().get(getValue()).getGame(); // chemin du dossier
             String absFolderPath = Paths.get(game.getPath()).toAbsolutePath().toString();
+
             ProcessBuilder processBuilder = null;
             if(game.getLang().equals("python")){
                 processBuilder = new ProcessBuilder("python",game.getInput());
             }
             else if (game.getLang().equals("java")){
-                processBuilder = new ProcessBuilder("java", game.getInput());
+                Path jar = Paths.get("./MG2D.jar").toAbsolutePath();
+                Path parent = Paths.get(".").toAbsolutePath();
+                String classpath = "." + ";" + jar + ";" + parent;
+
+                processBuilder = new ProcessBuilder("java","-cp",classpath,game.getName());
             }
             if(processBuilder == null) return;
             processBuilder.directory(new File(absFolderPath));
+            System.out.println(processBuilder.command());
+            System.out.println(processBuilder.directory());
             processBuilder.inheritIO();
         Process process = processBuilder.start();
 		//Process process = Runtime.getRuntime().exec("./"+Graphique.tableau[getValue()].getNom()+".sh");
