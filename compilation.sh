@@ -1,20 +1,20 @@
 #!/bin/bash
 
 echo "Compilation du menu de la borne d'arcade"
-cd Arcade
-javac -cp .:../MG2D.jar *.java
-cd ../
+javac -cp .:./MG2D.jar ./Arcade/*.java
 javac -cp .:./Arcade:./MG2D.jar *.java
 
-cd projet
+cd ./projet
 
-for i in *
+while IFS="," read -r dir lang input git
 do
-    cd "$i"
-    echo "Compilation du jeu $i"
+  if [ "$lang" = "java"];
+  then
+    cd "$dir"
+    echo "Compilation du jeu : $dir"
     javac -cp ".:../..:../../MG2D.jar" *.java
     cd ..
-done
+  fi
+done < ../games.csv
 
 cd ..
-

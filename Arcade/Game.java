@@ -147,6 +147,6 @@ public class Game {
     }
 
     public String toString(){
-        return "Class Game: Id( " + gameId + "),Name(" + name + ")";
+        return "Class Game: Id( " + gameId + "),Name(" + name + "),Lang(" + lang + ")";
     }
 }

@@ -33,17 +33,21 @@ public class Pointeur {
             String absFolderPath = Paths.get(game.getPath()).toAbsolutePath().toString();
 
             ProcessBuilder processBuilder = null;
-            if(game.getLang().equals("python")){
-                processBuilder = new ProcessBuilder("python",game.getInput());
+            System.out.println(game);
+            if(game.getLang().equals("Python")){
+                processBuilder = new ProcessBuilder("python","./src/__main__.py");
             }
-            else if (game.getLang().equals("java")){
+            else if (game.getLang().equals("Java")){
                 Path jar = Paths.get("./MG2D.jar").toAbsolutePath();
                 Path parent = Paths.get(".").toAbsolutePath();
-                String classpath = "." + ":" + jar + ":" + parent;
+                String classpath = "." + ";" + jar + ";" + parent;
 
                 processBuilder = new ProcessBuilder("java","-cp",classpath,game.getName());
             }
-            if(processBuilder == null) return;
+            if(processBuilder == null){
+                System.out.println("Lang:" + game.getLang());
+                return;
+            };
             processBuilder.directory(new File(absFolderPath));
             System.out.println(processBuilder.command());
             System.out.println(processBuilder.directory());
@@ -56,6 +60,7 @@ public class Pointeur {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    } catch(Exception e){	//on catche toutes les exceptions, nécessaire pour le waitFor()
+            System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 

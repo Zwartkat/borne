@@ -5,6 +5,7 @@ import MG2D.geometrie.Rectangle;
 import MG2D.geometrie.Texture;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 

@@ -16,7 +16,7 @@ def ensure_maps_exported():
 
             if not os.path.exists(py_path):
                 print(f"Génération de {py_path}")
-                subprocess.run(["python3", "tools/export_map.py", osu_path, py_path])
+                subprocess.run(["python", "tools/export_map.py", osu_path, py_path])
 
 
 if __name__ == "__main__":

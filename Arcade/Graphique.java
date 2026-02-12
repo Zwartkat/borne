@@ -295,22 +295,30 @@ public class Graphique {
 		if(games == null) games = new ArrayList<>();
 
 		Path yourPath = FileSystems.getDefault().getPath("projet/");
+		int cpt = 1;
+		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(yourPath)) {
+			for (Path dirPath : directoryStream) {
+				String name = dirPath.getFileName().toString();
+				String description = "";
+				String path = "projet/" + name;
+				String imagePath = "";
+				String lang = detectLang(dirPath);
+				System.out.println(lang);
+				String input = "";
+
+				Game g = new Game(cpt,name,description,path,imagePath,lang,input);
+				games.add(g);
+				cpt++;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			List<String> lines = Files.readAllLines(Path.of("games.csv"));
 
 			for (int i = 1; i < lines.size(); i++) {
-				String[] parts = lines.get(i).split(",");
-				System.out.println(parts[0] + " " + parts[1]);
-				String name = parts[0];
-				String description = "";
-				String path = "projet/" + name;
-				String imagePath = "";
-				String lang = parts[1];
-				String input = parts[2];
 
-				Game g = new Game(i,name,description,path,imagePath,lang,input);
-				games.add(g);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -337,4 +345,34 @@ public class Graphique {
 		return buttons;
 
 	};
+
+	public static String detectLang(Path gameDir) throws IOException {
+
+		String lang = scanOneLevel(gameDir);
+		if (!lang.equals("Unknown")) return lang;
+
+		Path srcDir = gameDir.resolve("src");
+		if (Files.exists(srcDir) && Files.isDirectory(srcDir)) {
+			lang = scanOneLevel(srcDir);
+		}
+
+		return lang;
+	}
+
+	public static String scanOneLevel(Path dir) throws IOException {
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+			for (Path p : stream) {
+				if (!Files.isRegularFile(p)) continue;
+
+				String file = p.getFileName().toString().toLowerCase();
+
+				if (file.endsWith(".java") || file.endsWith(".jar")) return "Java";
+				if (file.endsWith(".py")) return "Python";
+			}
+		}
+		return "Unknown";
+	}
+
+
+
 }
