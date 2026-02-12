@@ -1,0 +1,263 @@
+name: AI Documentation Proposal
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  propose-docs:
+    runs-on: self-hosted
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Detect modified files
+        shell: pwsh
+        id: detect_files
+        run: |
+          $base = "${{ github.event.pull_request.base.sha }}"
+          $head = "${{ github.event.pull_request.head.sha }}"
+          
+          Write-Host "Base SHA: $base"
+          Write-Host "Head SHA: $head"
+          
+          $files = git diff --name-only $base $head
+          Write-Host "Modified files:"
+          Write-Host $files
+          
+          "files=$files" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+      - name: Build AI context
+        shell: pwsh
+        run: |
+          $base = "${{ github.event.pull_request.base.sha }}"
+          $head = "${{ github.event.pull_request.head.sha }}"
+          
+          "### DIFF CODE" | Out-File -FilePath context.txt -Encoding utf8
+          git diff $base $head | Add-Content context.txt -Encoding utf8
+
+          if (Test-Path "README.md") {
+            "`n### README" | Add-Content context.txt -Encoding utf8
+            Get-Content "README.md" | Add-Content context.txt -Encoding utf8
+          }
+
+          if (Test-Path "docs") {
+            Get-ChildItem docs\*.md -ErrorAction SilentlyContinue | ForEach-Object {
+              "`n### FILE: $($_.Name)" | Add-Content context.txt -Encoding utf8
+              Get-Content $_.FullName | Add-Content context.txt -Encoding utf8
+              "`n### END FILE" | Add-Content context.txt -Encoding utf8
+            }
+          }
+          
+          Write-Host "Context built successfully"
+
+      - name: Generate documentation with Ollama
+        shell: pwsh
+        id: generate_docs
+        run: |
+          $CONTEXT = Get-Content context.txt -Raw
+          
+          # Échapper correctement pour JSON
+          $CONTEXT = $CONTEXT -replace '\\', '\\'
+          $CONTEXT = $CONTEXT -replace '"', '\"'
+          $CONTEXT = $CONTEXT -replace "`r`n", "\n"
+          $CONTEXT = $CONTEXT -replace "`n", "\n"
+          
+          # Limiter la taille du contexte si nécessaire
+          if ($CONTEXT.Length -gt 15000) {
+            $CONTEXT = $CONTEXT.Substring(0, 15000)
+            Write-Host "Context truncated to 15000 chars"
+          }
+
+          $promptText = "Tu es un assistant de documentation logicielle.`n`nIMPORTANT: Réponds UNIQUEMENT avec un patch git valide au format unified diff.`n`nFormat EXACT attendu:`n--- a/docs/installation.md`n+++ b/docs/installation.md`n@@ -1,0 +1,5 @@`n+# Installation`n+`n+## Prérequis`n+...`n`nOU pour un nouveau fichier:`n--- /dev/null`n+++ b/docs/nouveau.md`n@@ -0,0 +1,10 @@`n+# Contenu`n+...`n`nFichiers à mettre à jour/créer:`n- docs/installation.md`n- docs/utilisateur.md`n- docs/technique.md`n- README.md (mettre à jour uniquement si pertinent)`n- CHANGELOG.md`n`nRègles strictes:`n1. Format unified diff uniquement`n2. Pas de texte explicatif avant ou après le patch`n3. Pas de balises markdown autour du diff`n4. Utilise --- a/ et +++ b/ pour fichiers existants`n5. Utilise --- /dev/null et +++ b/ pour nouveaux fichiers`n`nContexte du projet:`n$CONTEXT"
+
+          # Créer le payload JSON correctement
+          $payload = @{
+            model = "${{ vars.AI_MODEL }}"
+            prompt = $promptText
+            stream = $false
+            options = @{
+              temperature = 0.3
+              num_predict = 3000
+            }
+          } | ConvertTo-Json -Depth 10
+
+          Write-Host "Calling Ollama API..."
+          
+          try {
+            $response = Invoke-RestMethod -Uri "http://${{ secrets.APP_IP }}/api/generate" `
+              -Method Post `
+              -ContentType "application/json; charset=utf-8" `
+              -Body $payload `
+              -TimeoutSec 300
+            
+            # Ollama retourne { "response": "...", "done": true }
+            $aiOutput = $response.response
+            
+            Write-Host "AI Response length: $($aiOutput.Length)"
+            Write-Host "First 500 chars:"
+            Write-Host $aiOutput.Substring(0, [Math]::Min(500, $aiOutput.Length))
+            
+            # Nettoyer la réponse
+            # Supprimer les balises markdown si présentes
+            $aiOutput = $aiOutput -replace '```diff\s*', ''
+            $aiOutput = $aiOutput -replace '```\s*$', ''
+            $aiOutput = $aiOutput -replace '^```\s*', ''
+            
+            # Sauvegarder le patch
+            $aiOutput | Out-File -FilePath patch.diff -Encoding utf8 -NoNewline
+            
+            Write-Host "Patch saved to patch.diff"
+            
+          } catch {
+            Write-Host "Error calling Ollama: $_"
+            Write-Host $_.Exception.Message
+            exit 1
+          }
+
+      - name: Validate and show patch
+        shell: pwsh
+        run: |
+          Write-Host "=== PATCH CONTENT ==="
+          Get-Content patch.diff
+          Write-Host "=== END PATCH ==="
+          
+          Write-Host "`nValidating patch format..."
+          
+          $patchContent = Get-Content patch.diff -Raw
+          
+          # Vérifier que c'est un vrai patch
+          if ($patchContent -notmatch '(---|\+\+\+|@@)') {
+            Write-Host "ERROR: Not a valid patch format!"
+            Write-Host "The AI did not generate a proper diff patch."
+            exit 1
+          }
+          
+          Write-Host "Patch format looks valid"
+
+      - name: Apply patch (dry-run)
+        shell: pwsh
+        continue-on-error: true
+        id: dry_run
+        run: |
+          Write-Host "Testing patch application (dry-run)..."
+          
+          git apply --check --verbose patch.diff 2>&1 | Tee-Object -Variable output
+          
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "✅ Patch can be applied successfully"
+            "can_apply=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          } else {
+            Write-Host "⚠️ Patch cannot be applied directly"
+            Write-Host "Output: $output"
+            "can_apply=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          }
+
+      - name: Create documentation files manually
+        shell: pwsh
+        if: steps.dry_run.outputs.can_apply == 'false'
+        run: |
+          Write-Host "Extracting documentation from AI response..."
+          
+          $patchContent = Get-Content patch.diff -Raw
+          
+          # Parser le patch pour extraire les fichiers
+          $lines = $patchContent -split "`n"
+          $currentFile = $null
+          $fileContent = @{}
+          
+          foreach ($line in $lines) {
+            if ($line -match '^\+\+\+ b/(.+)$') {
+              $currentFile = $matches[1]
+              $fileContent[$currentFile] = @()
+              Write-Host "Found file: $currentFile"
+            }
+            elseif ($currentFile -and $line -match '^\+(.*)') {
+              # Ligne ajoutée (sans le +)
+              $fileContent[$currentFile] += $matches[1]
+            }
+          }
+          
+          # Créer les fichiers
+          foreach ($file in $fileContent.Keys) {
+            $dir = Split-Path $file -Parent
+            if ($dir -and !(Test-Path $dir)) {
+              New-Item -ItemType Directory -Path $dir -Force | Out-Null
+              Write-Host "Created directory: $dir"
+            }
+            
+            $content = $fileContent[$file] -join "`n"
+            $content | Out-File -FilePath $file -Encoding utf8 -NoNewline
+            Write-Host "Created/Updated: $file ($($content.Length) chars)"
+          }
+
+      - name: Upload patch artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-doc-patch-pr-${{ github.event.pull_request.number }}
+          path: |
+            patch.diff
+            context.txt
+          retention-days: 30
+
+      - name: Comment PR with results
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            
+            let patchPreview = '';
+            try {
+              const patch = fs.readFileSync('patch.diff', 'utf8');
+              const lines = patch.split('\n').slice(0, 50);
+              patchPreview = lines.join('\n');
+              if (patch.split('\n').length > 50) {
+                patchPreview += '\n\n... (truncated, see artifact for full patch)';
+              }
+            } catch (e) {
+              patchPreview = 'Error reading patch file';
+            }
+            
+            const canApply = '${{ steps.dry_run.outputs.can_apply }}' === 'true';
+            
+            const body = `## 🤖 Documentation IA générée
+            
+            ${canApply ? '✅ Le patch peut être appliqué automatiquement' : '⚠️ Le patch nécessite une intervention manuelle - fichiers créés directement'}
+            
+            ### Aperçu du patch:
+            \`\`\`diff
+            ${patchPreview}
+            \`\`\`
+            
+            ### Actions possibles:
+            
+            ${canApply ? `
+            **Pour appliquer automatiquement:**
+            \`\`\`bash
+            # Télécharger l'artefact depuis Actions
+            git apply patch.diff
+            git add .
+            git commit -m "docs: Apply AI-generated documentation"
+            \`\`\`
+            ` : `
+            **Les fichiers ont été créés/modifiés directement dans le workflow.**
+            Vérifiez les changements et commitez si approprié.
+            `}
+            
+            📎 Patch complet disponible dans les artefacts de ce workflow.
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
