@@ -1,13 +1,5 @@
-IUT du Littoral Côte d'Opale (IUTLCO)
-====================================
-Projet tutoré 2017-2018- 2ème année
-----------------------------------
-
-Groupe projet : Romaric Bougard, Pierre Delobel et Bastien Ducloy
-
-
-Plus d'infos [ici](http://iut.univ-littoral.fr/gitlab/synave/borne_arcade/wikis/home)
-
+# Borne d'arcade
+------------------------------
 # touche de la borne
 
 Correspondance clavier -> bouton borne
@@ -60,9 +52,6 @@ Créez un répertoire git :
 
 On va ensuite télécharger la bibliothèque MG2D et la partie logicielle ici présente. Si vous l'avez déjà téléchargée, vous déplacerez le répertoire dans le répertoire git précédemment créé. Le répertoire doit s'appeler ***borne_arcade***
 
-> git clone http://iut.univ-littoral.fr/gitlab/synave/MG2D.git
-
-> git clone http://iut.univ-littoral.fr/gitlab/synave/borne_arcade.git
 
 Suite à ces téléchargements, vous devez avoir l'arborescence suivante :
 - répertoire personnel
