@@ -50,3 +50,5 @@ temp/
 # Config locales
 # =========================
 local.properties
+
+./actions-runner

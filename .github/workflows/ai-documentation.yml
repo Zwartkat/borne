@@ -64,13 +64,11 @@ jobs:
         run: |
           $CONTEXT = Get-Content context.txt -Raw
           
-          # Échapper correctement pour JSON
           $CONTEXT = $CONTEXT -replace '\\', '\\'
           $CONTEXT = $CONTEXT -replace '"', '\"'
           $CONTEXT = $CONTEXT -replace "`r`n", "\n"
           $CONTEXT = $CONTEXT -replace "`n", "\n"
           
-          # Limiter la taille du contexte si nécessaire
           if ($CONTEXT.Length -gt 15000) {
             $CONTEXT = $CONTEXT.Substring(0, 15000)
             Write-Host "Context truncated to 15000 chars"
@@ -78,7 +76,6 @@ jobs:
 
           $promptText = "Tu es un assistant de documentation logicielle.`n`nIMPORTANT: Réponds UNIQUEMENT avec un patch git valide au format unified diff.`n`nFormat EXACT attendu:`n--- a/docs/installation.md`n+++ b/docs/installation.md`n@@ -1,0 +1,5 @@`n+# Installation`n+`n+## Prérequis`n+...`n`nOU pour un nouveau fichier:`n--- /dev/null`n+++ b/docs/nouveau.md`n@@ -0,0 +1,10 @@`n+# Contenu`n+...`n`nFichiers à mettre à jour/créer:`n- docs/installation.md`n- docs/utilisateur.md`n- docs/technique.md`n- README.md (mettre à jour uniquement si pertinent)`n- CHANGELOG.md`n`nRègles strictes:`n1. Format unified diff uniquement`n2. Pas de texte explicatif avant ou après le patch`n3. Pas de balises markdown autour du diff`n4. Utilise --- a/ et +++ b/ pour fichiers existants`n5. Utilise --- /dev/null et +++ b/ pour nouveaux fichiers`n`nContexte du projet:`n$CONTEXT"
 
-          # Créer le payload JSON correctement
           $payload = @{
             model = "${{ vars.AI_MODEL }}"
             prompt = $promptText

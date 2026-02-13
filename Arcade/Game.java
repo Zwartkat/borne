@@ -5,11 +5,11 @@ package Arcade;
  * <p>
  * Chaque jeu contient les informations suivantes :
  * <ul>
- *     <li>Numéro du jeu</li>
- *     <li>Nom du jeu</li>
- *     <li>Description</li>
- *     <li>Chemin du dossier ou du fichier exécutable</li>
- *     <li>Chemin de l'image associée au jeu (thumbnail ou icône)</li>
+ * <li>Numéro du jeu</li>
+ * <li>Nom du jeu</li>
+ * <li>Description</li>
+ * <li>Chemin du dossier ou du fichier exécutable</li>
+ * <li>Chemin de l'image associée au jeu (thumbnail ou icône)</li>
  * </ul>
  * Cette classe fournit des méthodes pour accéder et modifier ces informations.
  */
@@ -18,7 +18,7 @@ public class Game {
     private String name, description, path, imagePath, lang, input;
     private int gameId;
 
-    public Game(){
+    public Game() {
         this.name = "";
         this.gameId = 0;
         this.path = "";
@@ -36,7 +36,7 @@ public class Game {
      * @param path        Le chemin du dossier ou du fichier exécutable
      * @param imagePath   Le chemin de l'image associée au jeu
      */
-    public Game(int gameId, String name, String description, String path, String imagePath, String lang, String input){
+    public Game(int gameId, String name, String description, String path, String imagePath, String lang, String input) {
         this.gameId = gameId;
         this.name = name;
         this.description = description;
@@ -47,9 +47,9 @@ public class Game {
     }
 
     /**
-     * Retourne le nom du jeu.
+     * Retourne le numéro du jeu.
      *
-     * @return Le nom du jeu
+     * @return Le numéro du jeu
      */
     public int getGameId() {
         return gameId;
@@ -91,11 +91,13 @@ public class Game {
         return imagePath;
     }
 
-    public String getInput(){
+    public String getInput() {
         return this.input;
     }
 
-    public String getLang(){return  this.lang;}
+    public String getLang() {
+        return this.lang;
+    }
 
     /**
      * Définit le numéro du jeu.
@@ -142,11 +144,13 @@ public class Game {
         this.imagePath = imagePath;
     }
 
-    public void setInput(String input){
+    public void setInput(String input) {
         this.input = input;
     }
 
-    public String toString(){
+    public String toString() {
         return "Class Game: Id( " + gameId + "),Name(" + name + "),Lang(" + lang + ")";
     }
-}
+} 
+
+
