@@ -6,15 +6,12 @@ javac -cp .:./Arcade:./MG2D.jar *.java
 
 cd ./projet
 
-while IFS="," read -r dir lang input git
+for i in *
 do
-  if [ "$lang" = "java"];
-  then
-    cd "$dir"
-    echo "Compilation du jeu : $dir"
-    javac -cp ".:../..:../../MG2D.jar" *.java
+    cd $i
+    echo "Compilation du projet $i"
+    javac -cp .:../..:../../MG2D.jar *.java
     cd ..
-  fi
-done < ../games.csv
+done
 
 cd ..
