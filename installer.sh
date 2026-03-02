@@ -1,56 +1,103 @@
-#!/bin/sh
+#!/bin/bash
 
-# === Couleurs ===
+GIT_URL="https://github.com/Zwartkat/borne.git"
+
+# === Couleurs ANSI ===
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-echo "${YELLOW} Démarrage de l'installation"
 
 # === Fonctions ===
-
 check_cmd() {
     command -v "$1" >/dev/null 2>&1 || {
-        echo "${RED}Erreur:${NC} $1 non trouvé."
+        echo -e "${RED}Erreur:${NC} $1 non trouvé."
         exit 1
     }
-    echo  "${GREEN} $1 a été trouvé.${NC}"
-
-
+    echo -e "${GREEN}$1 trouvé.${NC}"
 }
 
-check_cmd java
+loading() {
+    text="$1"
+    echo -n "$text"
+    for i in $(seq 1 3); do
+        echo -n "."
+        sleep 0.3
+    done
+    echo
+}
+
+echo -e "${YELLOW}=== Démarrage de l'installation ===${NC}"
+
+sudo apt update
+sudo apt install -y whiptail java dos2unix gradle
+
+# Vérifications de base
+check_cmd whiptail
+check_cmd open-jdk-21
 check_cmd javac
 check_cmd dos2unix
 
-echo "Choisissez le dossier d'installation :"
-PS3="Entrez le numéro : "
-options=("Dossier courant" "Saisir")
-select opt in "${options[@]}"; do
-    case $opt in
-        Dossier courant)
-            install_dir=pwd
-            break
-            ;;
-        Saisir)
-            while :; do
-                read -p "Entrez le chemin complet du dossier : " install_dir_input
+# === Choix du dossier d'installation ===
+CHOICE=$(whiptail --title "Installation du projet" --menu "Choisissez une option :" 15 60 2 \
+"Dossier courant" "Utiliser le répertoire actuel" \
+"Saisir" "Entrer un autre chemin" 3>&1 1>&2 2>&3)
 
-                install_dir=$(cd "$install_dir_input" 2>/dev/null && pwd)
-                if [ -n "$install_dir" ]; then
-                    echo "Dossier choisi : $install_dir"
-                    break
-                else
-                    echo "${RED}Erreur:${NC} Le dossier n'existe pas. Réessayez."
-                fi
-            done
-            break
-            ;;
-        *)
-            echo "Choix invalide."
-            ;;
-    esac
-done
-echo "Dossier choisi : $install_dir"
+if [ $? -ne 0 ]; then
+    echo "Installation annulée."
+    exit 1
+fi
+
+case $CHOICE in
+    "Dossier courant")
+        install_dir=$(pwd)
+        ;;
+    "Saisir")
+        while :; do
+            NEW_DIR=$(whiptail --inputbox "Entrez le chemin complet du dossier :" 8 60 "$(pwd)" 3>&1 1>&2 2>&3)
+            clear
+
+            if [ -d "$NEW_DIR" ]; then
+                install_dir="$NEW_DIR"
+                break
+            else
+                whiptail --title "Erreur" --msgbox "Le dossier n'existe pas :\n$NEW_DIR" 8 50
+            fi
+        done
+        ;;
+    *)
+        echo "Choix invalide."
+        exit 1
+        ;;
+esac
+
+echo -e "${GREEN}Dossier choisi : $install_dir${NC}"
+
+GIT_DIR="${install_dir}/borne"
+
+loading "Vérification du dépôt Git"
+
+if [ -d "$GIT_DIR/.git" ]; then
+    echo -e "${YELLOW}Le dépôt existe déjà. Mise à jour...${NC}"
+    cd "$GIT_DIR" || { echo "${RED}Impossible d'accéder au dossier Git${NC}"; exit 1; }
+    git fetch --all
+    git reset --hard origin/main
+    cd "$install_dir" || exit 1
+else
+    echo -e "${YELLOW}Clonage du dépôt depuis GitHub...${NC}"
+    git clone "$GIT_URL" "$GIT_DIR"
+fi
+
+echo -e "${GREEN}Dépôt Git prêt : $GIT_DIR${NC}"
+
+loading "Conversion des scripts en format Unix"
+find "$install_dir" -name "*.sh" -exec dos2unix {} \;
+find "$install_dir" -name "*.sh" -exec chmod +x {} \;
+
+cd "$GIT_DIR"
+sed -i "2c\INSTALL_PATH=$GIT_DIR" lancerBorne.sh
+./compilation.sh
+
+echo -e "${GREEN}=== Installation terminée ===${NC}"

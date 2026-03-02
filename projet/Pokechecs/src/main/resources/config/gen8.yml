@@ -1,0 +1,144 @@
+A1:
+    pokemon: "Duralugon"
+    player: 1
+B1:
+    pokemon: "Dunaconda"
+    player: 1
+C1:
+    pokemon: "Shifours"
+    player: 1
+D1:
+    pokemon: "Zacian"
+    player: 1
+E1:
+    pokemon: "Ethernatos"
+    player: 1
+F1:
+    pokemon: "Zamazenta"
+    player: 1
+G1:
+    pokemon: "Sylveroy"
+    player: 1
+H1:
+    pokemon: "Angoliath"
+    player: 1
+I1:
+    pokemon: "Lanssorien"
+    player: 1
+
+A2:
+    pokemon: "Palarticho"
+    player: 1
+B2:
+    pokemon: "Sorcilence"
+    player: 1
+C2:
+    pokemon: "Torgamord"
+    player: 1
+D2:
+    pokemon: "Lézargus"
+    player: 1
+E2:
+    pokemon: "Pyrobut"
+    player: 1
+F2:
+    pokemon: "Gorythmic"
+    player: 1
+G2:
+    pokemon: "Scolocendre"
+    player: 1
+H2:
+    pokemon: "Salarsen"
+    player: 1
+I2:
+    pokemon: "Monthracite"
+    player: 1
+
+C3:
+    pokemon: "Corvaillus"
+    player: 1
+D3:
+    pokemon: "Astronelle"
+    player: 1
+E3:
+    pokemon: "Hexadron"
+    player: 1
+F3:
+    pokemon: "Ixon"
+    player: 1
+G3:
+    pokemon: "Fulgudog"
+    player: 1
+
+
+A9:
+    pokemon: "Duralugon"
+    player: 2
+B9:
+    pokemon: "Dunaconda"
+    player: 2
+C9:
+    pokemon: "Shifours"
+    player: 2
+D9:
+    pokemon: "Zacian"
+    player: 2
+E9:
+    pokemon: "Ethernatos"
+    player: 2
+F9:
+    pokemon: "Zamazenta"
+    player: 2
+G9:
+    pokemon: "Sylveroy"
+    player: 2
+H9:
+    pokemon: "Angoliath"
+    player: 2
+I9:
+    pokemon: "Lanssorien"
+    player: 2
+
+A8:
+    pokemon: "Palarticho"
+    player: 2
+B8:
+    pokemon: "Sorcilence"
+    player: 2
+C8:
+    pokemon: "Torgamord"
+    player: 2
+D8:
+    pokemon: "Lézargus"
+    player: 2
+E8:
+    pokemon: "Pyrobut"
+    player: 2
+F8:
+    pokemon: "Gorythmic"
+    player: 2
+G8:
+    pokemon: "Scolocendre"
+    player: 2
+H8:
+    pokemon: "Salarsen"
+    player: 2
+I8:
+    pokemon: "Monthracite"
+    player: 2
+
+C7:
+    pokemon: "Corvaillus"
+    player: 2
+D7:
+    pokemon: "Astronelle"
+    player: 2
+E7:
+    pokemon: "Hexadron"
+    player: 2
+F7:
+    pokemon: "Ixon"
+    player: 2
+G7:
+    pokemon: "Fulgudog"
+    player: 2

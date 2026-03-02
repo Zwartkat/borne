@@ -47,7 +47,7 @@ class MenuParametres extends Ecran {
 		Entree clavier = this.fenetre.getClavier();
 		if (clavier.echap(Menu.DUREE_TOUCHE)) this.quitter();
 		this.menu.mettreAJour(clavier);
-		Main.setFPS(this.fps_item.getValeur());
+		Puissance_X.setFPS(this.fps_item.getValeur());
 		this.fenetre.getPartie().getRendu().setVitesseChutePion(this.vitesseChute_item.getValeur() == 0 ? 0 : 101 - this.vitesseChute_item.getValeur());
 	}
 
