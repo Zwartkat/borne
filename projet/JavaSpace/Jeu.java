@@ -12,9 +12,8 @@ import java.awt.GraphicsEnvironment;
 
 
 class Jeu{
-rffffff
-ssddffrrdfdfd
-		d	public static final int LARGEUR=1280;
+
+	public static final int LARGEUR=1280;
 	public static final int HAUTEUR=1024;
 
 
