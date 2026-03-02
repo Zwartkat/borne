@@ -370,8 +370,10 @@ public class Graphique {
 
 				String file = p.getFileName().toString().toLowerCase();
 
-				if (file.endsWith(".java") || file.endsWith(".jar"))
+				if (file.endsWith(".java"))
 					return "Java";
+				if(file.endsWith(".jar"))
+					return "Jar";
 				if (file.endsWith(".py"))
 					return "Python";
 			}
