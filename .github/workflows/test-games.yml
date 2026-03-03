@@ -210,8 +210,7 @@ jobs:
     - name: Setup Lua
       run: |
         sudo apt-get update
-        sudo apt-get install -y lua5.3 luarocks
-        sudo luarocks install luacheck
+        sudo apt-get install -y lua5.3 lua5.3-dev luarocks
         echo "✅ Lua installed"
     
     - name: Find Lua games
