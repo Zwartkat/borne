@@ -1,0 +1,1533 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation complète de la Borne d'Arcade - Guide utilisateur, installation et technique">
+      
+      
+        <meta name="author" content="Équipe développement">
+      
+      
+        <link rel="canonical" href="https://zwartkat.github.io/borne/">
+      
+      
+      
+        <link rel="next" href="guide-utilisateur/overview/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Borne d'Arcade</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#borne-darcade-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Borne d&#39;Arcade" class="md-header__button md-logo" aria-label="Borne d'Arcade" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Borne d'Arcade
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Accueil
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="purple"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="purple"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="guide-utilisateur/overview/" class="md-tabs__link">
+          
+  
+  📖 Guide Utilisateur
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="documentation-technique/architecture/" class="md-tabs__link">
+          
+  
+  🛠️ Documentation Technique
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="installation-dev/setup/" class="md-tabs__link">
+          
+  
+  🔧 Installation pour Développeurs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="github-actions/overview/" class="md-tabs__link">
+          
+  
+  📊 GitHub Actions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="faq/" class="md-tabs__link">
+        
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="contributing/" class="md-tabs__link">
+        
+  
+    
+  
+  Contribuer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Borne d&#39;Arcade" class="md-nav__button md-logo" aria-label="Borne d'Arcade" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Borne d'Arcade
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sections-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Sections Principales
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Sections Principales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guide-utilisateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Guide Utilisateur
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-technique" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Documentation Technique
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation-pour-developpeurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Installation pour Développeurs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ GitHub Actions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌟 Caractéristiques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistiques-du-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Statistiques du Projet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-generale" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂️ Architecture Générale
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demarrage-rapide" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Démarrage Rapide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Démarrage Rapide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pour-les-utilisateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pour les utilisateurs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pour-les-developpeurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pour les développeurs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Navigation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribuer" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤝 Contribuer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Licence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      📞 Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#derniers-jeux-ajoutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✨ Derniers Jeux Ajoutés
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    📖 Guide Utilisateur
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            📖 Guide Utilisateur
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/premiers-pas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Premiers pas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Les jeux
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Les jeux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/jeux/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/jeux/ball-blast.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ball Blast
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/jeux/columns.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Columns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/jeux/pong.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pong
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/jeux/snake-eater.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Snake Eater
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/jeux/trongame.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TronGame
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/controls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contrôles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guide-utilisateur/troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dépannage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    🛠️ Documentation Technique
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            🛠️ Documentation Technique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation-technique/architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation-technique/arcade-module/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module Arcade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation-technique/development.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Développement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation-technique/build/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Build et Compilation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation-technique/tests.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation-technique/api-reference.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    🔧 Installation pour Développeurs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🔧 Installation pour Développeurs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation-dev/setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation-dev/environment.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environnement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation-dev/git-workflow.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflow Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    📊 GitHub Actions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            📊 GitHub Actions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="github-actions/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="github-actions/workflows.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribuer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="borne-darcade-documentation">Borne d'Arcade - Documentation<a class="headerlink" href="#borne-darcade-documentation" title="Permanent link">&para;</a></h1>
+<p>Bienvenue dans la documentation complète de la <strong>Borne d'Arcade</strong> ! 🎮</p>
+<p>Cette documentation couvre tous les aspects du projet : du guide utilisateur à la documentation technique pour les développeurs.</p>
+<h2 id="sections-principales">🎯 Sections Principales<a class="headerlink" href="#sections-principales" title="Permanent link">&para;</a></h2>
+<h3 id="guide-utilisateur">📖 <a href="guide-utilisateur/overview/">Guide Utilisateur</a><a class="headerlink" href="#guide-utilisateur" title="Permanent link">&para;</a></h3>
+<p>Pour les utilisateurs finaux qui veulent jouer et comprendre comment utiliser la borne.</p>
+<ul>
+<li>🎮 <a href="guide-utilisateur/jeux/overview/">Les jeux disponibles</a></li>
+<li>⌨️ <a href="guide-utilisateur/controls/">Contrôles</a></li>
+<li>📦 <a href="guide-utilisateur/installation/">Installation</a></li>
+<li>🚀 <a href="guide-utilisateur/premiers-pas/">Premiers pas</a></li>
+</ul>
+<h3 id="documentation-technique">🛠️ <a href="documentation-technique/architecture/">Documentation Technique</a><a class="headerlink" href="#documentation-technique" title="Permanent link">&para;</a></h3>
+<p>Pour les développeurs qui veulent comprendre l'architecture et le code.</p>
+<ul>
+<li>🏗️ <a href="documentation-technique/architecture/">Architecture</a></li>
+<li>📦 <a href="documentation-technique/arcade-module/">Module Arcade</a></li>
+<li>🔧 <a href="documentation-technique/development.md">Développement</a></li>
+<li>📚 <a href="documentation-technique/api-reference.md">API Reference</a></li>
+</ul>
+<h3 id="installation-pour-developpeurs">🔧 <a href="installation-dev/setup/">Installation pour Développeurs</a><a class="headerlink" href="#installation-pour-developpeurs" title="Permanent link">&para;</a></h3>
+<p>Guide complet pour mettre en place l'environnement de développement.</p>
+<ul>
+<li>🖥️ <a href="installation-dev/setup/">Configuration</a></li>
+<li>🐍 <a href="installation-dev/environment.md">Environnement Python</a></li>
+<li>📝 <a href="installation-dev/git-workflow.md">Workflow Git</a></li>
+</ul>
+<h3 id="github-actions">⚡ <a href="github-actions/overview/">GitHub Actions</a><a class="headerlink" href="#github-actions" title="Permanent link">&para;</a></h3>
+<p>Documentation sur les workflows automatisés du projet.</p>
+<hr />
+<h2 id="caracteristiques">🌟 Caractéristiques<a class="headerlink" href="#caracteristiques" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>15 jeux</strong> développés en Java, Python et Lua</li>
+<li><strong>Système de scores</strong> persistant avec leaderboards</li>
+<li><strong>Contrôles arcade</strong> mappés pour joystick</li>
+<li><strong>Documentation automatisée</strong> via GitHub Pages</li>
+<li><strong>CI/CD complet</strong> avec tests automatiques</li>
+<li><strong>Code open-source</strong> et bien organisé</li>
+</ul>
+<hr />
+<h2 id="statistiques-du-projet">📊 Statistiques du Projet<a class="headerlink" href="#statistiques-du-projet" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Métrique</th>
+<th>Valeur</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Jeux</strong></td>
+<td>15</td>
+</tr>
+<tr>
+<td><strong>Langages</strong></td>
+<td>Java, Python, Lua</td>
+</tr>
+<tr>
+<td><strong>Fichiers</strong></td>
+<td>100+</td>
+</tr>
+<tr>
+<td><strong>Lignes de code</strong></td>
+<td>10,000+</td>
+</tr>
+<tr>
+<td><strong>Tests</strong></td>
+<td>JUnit 5</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>MkDocs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="architecture-generale">🗂️ Architecture Générale<a class="headerlink" href="#architecture-generale" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>borne_arcade/
+├── Arcade/                 # Module core (Java)
+├── projet/                 # Jeux individuels
+│   ├── ball-blast/        # Python
+│   ├── columns/           # Java
+│   ├── cursedware/        # Lua
+│   └── ...
+├── docs/                  # Documentation (markdown)
+├── .github/workflows/     # GitHub Actions
+└── mkdocs.yml            # Configuration MkDocs
+</code></pre></div>
+<hr />
+<h2 id="demarrage-rapide">🚀 Démarrage Rapide<a class="headerlink" href="#demarrage-rapide" title="Permanent link">&para;</a></h2>
+<h3 id="pour-les-utilisateurs">Pour les utilisateurs<a class="headerlink" href="#pour-les-utilisateurs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Cloner le projet</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Zwartkat/borne.git
+
+<span class="c1"># 2. Suivre le guide d&#39;installation</span>
+<span class="c1"># Voir: guide-utilisateur/installation.md</span>
+
+<span class="c1"># 3. Lancer la borne</span>
+./launch.sh
+</code></pre></div>
+<h3 id="pour-les-developpeurs">Pour les développeurs<a class="headerlink" href="#pour-les-developpeurs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Cloner et naviguer</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Zwartkat/borne.git
+<span class="nb">cd</span><span class="w"> </span>borne
+
+<span class="c1"># 2. Suivre le guide de configuration</span>
+<span class="c1"># Voir: installation-dev/setup.md</span>
+
+<span class="c1"># 3. Compiler</span>
+bash<span class="w"> </span>compilation.sh
+
+<span class="c1"># 4. Exécuter</span>
+java<span class="w"> </span>-cp<span class="w"> </span>.:./MG2D.jar<span class="w"> </span>Main
+</code></pre></div>
+<hr />
+<h2 id="navigation">📚 Navigation<a class="headerlink" href="#navigation" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Habitude utilisateur ?</strong> → Commencez par le <a href="guide-utilisateur/overview/">Guide Utilisateur</a></li>
+<li><strong>Développeur ?</strong> → Consultez la <a href="documentation-technique/architecture/">Documentation Technique</a></li>
+<li><strong>Nouvelle installation ?</strong> → Suivez le <a href="guide-utilisateur/installation/">Guide d'Installation</a></li>
+<li><strong>Questions fréquentes ?</strong> → Consultez la <a href="faq/">FAQ</a></li>
+</ul>
+<hr />
+<h2 id="contribuer">🤝 Contribuer<a class="headerlink" href="#contribuer" title="Permanent link">&para;</a></h2>
+<p>Vous voulez contribuer ? Excellent ! Consultez le guide <a href="contributing/">Contribuer</a> pour :</p>
+<ul>
+<li>Comment signaler un bug</li>
+<li>Comment proposer une fonctionnalité</li>
+<li>Comment faire une pull request</li>
+<li>Conventions de code</li>
+</ul>
+<hr />
+<h2 id="licence">📄 Licence<a class="headerlink" href="#licence" title="Permanent link">&para;</a></h2>
+<p>Ce projet est sous licence libre. Consultez le fichier <a href="../LICENSE">LICENSE</a> pour plus de détails.</p>
+<hr />
+<h2 id="support">📞 Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
+<ul>
+<li>🐛 <strong>Bug ?</strong> → Ouvrez une <a href="https://github.com/Zwartkat/borne/issues">issue GitHub</a></li>
+<li>💡 <strong>Idée ?</strong> → Créez une <a href="https://github.com/Zwartkat/borne/discussions">discussion</a></li>
+<li>📧 <strong>Question ?</strong> → Consultez la <a href="faq/">FAQ</a></li>
+</ul>
+<hr />
+<h2 id="derniers-jeux-ajoutes">✨ Derniers Jeux Ajoutés<a class="headerlink" href="#derniers-jeux-ajoutes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Ball Blast</strong> - Détruisez les boules</li>
+<li><strong>CursedWare</strong> - Un monde de malédictions</li>
+<li><strong>InitialDrift</strong> - Course arcade</li>
+<li><strong>Kowasu_Renga</strong> - Puzzle en colonnes</li>
+</ol>
+<hr />
+<p><strong>Dernière mise à jour:</strong> 2025
+<strong>Version de la documentation:</strong> v1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.sections", "nav.expand", "toc.integrate", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>

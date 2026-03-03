@@ -1,0 +1,1810 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation complète de la Borne d'Arcade - Guide utilisateur, installation et technique">
+      
+      
+        <meta name="author" content="Équipe développement">
+      
+      
+        <link rel="canonical" href="https://zwartkat.github.io/borne/guide-utilisateur/installation/">
+      
+      
+        <link rel="prev" href="../overview/">
+      
+      
+        <link rel="next" href="../premiers-pas/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Installation - Borne d'Arcade</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installation-guide-complet" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Borne d&#39;Arcade" class="md-header__button md-logo" aria-label="Borne d'Arcade" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Borne d'Arcade
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Installation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="purple"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="purple"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../overview/" class="md-tabs__link">
+          
+  
+  📖 Guide Utilisateur
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../documentation-technique/architecture/" class="md-tabs__link">
+          
+  
+  🛠️ Documentation Technique
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation-dev/setup/" class="md-tabs__link">
+          
+  
+  🔧 Installation pour Développeurs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../github-actions/overview/" class="md-tabs__link">
+          
+  
+  📊 GitHub Actions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../faq/" class="md-tabs__link">
+        
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contributing/" class="md-tabs__link">
+        
+  
+    
+  
+  Contribuer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Borne d&#39;Arcade" class="md-nav__button md-logo" aria-label="Borne d'Arcade" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Borne d'Arcade
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    📖 Guide Utilisateur
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            📖 Guide Utilisateur
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequis" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Prérequis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Prérequis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#systeme-dexploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Système d'Exploitation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logiciels-requis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logiciels Requis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logiciels Requis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-option-pour-developpeurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      En Option (Pour Développeurs)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-par-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥️ Installation par Système
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🖥️ Installation par Système">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-installer-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Installer Java
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cloner-le-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Cloner le Projet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lancer-la-borne" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Lancer la Borne
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      macOS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="macOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-installer-java_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Installer Java
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cloner-le-projet_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Cloner le Projet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-donner-les-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Donner les Permissions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-lancer-la-borne" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Lancer la Borne
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-installer-java_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Installer Java
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cloner-le-projet_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Cloner le Projet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-donner-les-permissions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Donner les Permissions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-lancer-la-borne_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Lancer la Borne
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-de-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Vérification de l'Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#depannage-de-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      🐛 Dépannage de l'Installation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Dépannage de l'Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-command-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Java command not found"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mg2djar-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      "MG2D.jar not found"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permission-denied-linuxmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Permission denied" (Linux/Mac)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-deja-utilise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Port déjà utilisé
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure-des-fichiers-apres-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📂 Structure des Fichiers Après Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#premiers-demarrages" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Premiers Démarrages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Premiers Démarrages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#premier-demarrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Premier Démarrage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-initiale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Initiale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-optionnelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✨ Configuration Optionnelle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✨ Configuration Optionnelle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametres-de-lancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paramètres de Lancement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolution-de-lecran" class="md-nav__link">
+    <span class="md-ellipsis">
+      Résolution de l'Écran
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      🆘 Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cest-pret" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎉 C'est Prêt !
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../premiers-pas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Premiers pas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Les jeux
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Les jeux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeux/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeux/ball-blast.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ball Blast
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeux/columns.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Columns
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeux/pong.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pong
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeux/snake-eater.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Snake Eater
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeux/trongame.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TronGame
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contrôles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dépannage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    🛠️ Documentation Technique
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            🛠️ Documentation Technique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentation-technique/architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentation-technique/arcade-module/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module Arcade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentation-technique/development.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Développement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentation-technique/build/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Build et Compilation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentation-technique/tests.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentation-technique/api-reference.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    🔧 Installation pour Développeurs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🔧 Installation pour Développeurs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation-dev/setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation-dev/environment.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environnement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation-dev/git-workflow.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflow Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    📊 GitHub Actions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            📊 GitHub Actions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-actions/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-actions/workflows.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribuer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="installation-guide-complet">Installation - Guide Complet<a class="headerlink" href="#installation-guide-complet" title="Permanent link">&para;</a></h1>
+<p>Guide d'installation de la Borne d'Arcade pour tous les systèmes d'exploitation.</p>
+<h2 id="prerequis">📋 Prérequis<a class="headerlink" href="#prerequis" title="Permanent link">&para;</a></h2>
+<h3 id="systeme-dexploitation">Système d'Exploitation<a class="headerlink" href="#systeme-dexploitation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Windows 10/11</li>
+<li>✅ macOS 10.12+</li>
+<li>✅ Linux (Ubuntu, Debian, Fedora, etc.)</li>
+</ul>
+<h3 id="logiciels-requis">Logiciels Requis<a class="headerlink" href="#logiciels-requis" title="Permanent link">&para;</a></h3>
+<h4 id="java">Java<a class="headerlink" href="#java" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Java Runtime Environment (JRE)</strong> 11 ou supérieur</li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Télécharger Java</a></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier la version Java</span>
+java<span class="w"> </span>-version
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Java Installé?</p>
+<p>Vous devez voir une version 11 ou supérieure.</p>
+</div>
+<h3 id="en-option-pour-developpeurs">En Option (Pour Développeurs)<a class="headerlink" href="#en-option-pour-developpeurs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Java Development Kit (JDK) 17</li>
+<li>Maven 3.8+</li>
+<li>Git</li>
+</ul>
+<hr />
+<h2 id="installation-par-systeme">🖥️ Installation par Système<a class="headerlink" href="#installation-par-systeme" title="Permanent link">&para;</a></h2>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<h4 id="1-installer-java">1. Installer Java<a class="headerlink" href="#1-installer-java" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Télécharger depuis https://www.oracle.com/java/technologies/downloads/</span>
+<span class="c1"># Choisir &quot;Windows x64 Installer&quot;</span>
+<span class="c1"># Suivre l&#39;installation</span>
+</code></pre></div>
+<h4 id="2-cloner-le-projet">2. Cloner le Projet<a class="headerlink" href="#2-cloner-le-projet" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Option 1 : Avec Git</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Zwartkat/borne.git
+<span class="nb">cd</span><span class="w"> </span>borne
+
+<span class="c1"># Option 2 : Télécharger le ZIP</span>
+<span class="c1"># Aller sur https://github.com/Zwartkat/borne</span>
+<span class="c1"># Cliquer &quot;Code&quot; → &quot;Download ZIP&quot;</span>
+<span class="c1"># Extraire le fichier</span>
+</code></pre></div>
+<h4 id="3-lancer-la-borne">3. Lancer la Borne<a class="headerlink" href="#3-lancer-la-borne" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Double-cliquer sur launch.sh dans l&#39;explorateur</span>
+<span class="c1"># OU via terminal :</span>
+cmd<span class="w"> </span>/c<span class="w"> </span>launch.sh
+</code></pre></div>
+<hr />
+<h3 id="macos">macOS<a class="headerlink" href="#macos" title="Permanent link">&para;</a></h3>
+<h4 id="1-installer-java_1">1. Installer Java<a class="headerlink" href="#1-installer-java_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Avec Homebrew (recommandé)</span>
+brew<span class="w"> </span>install<span class="w"> </span>openjdk@17
+
+<span class="c1"># Ou télécharger depuis https://www.oracle.com/java/technologies/downloads/</span>
+</code></pre></div>
+<h4 id="2-cloner-le-projet_1">2. Cloner le Projet<a class="headerlink" href="#2-cloner-le-projet_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Zwartkat/borne.git
+<span class="nb">cd</span><span class="w"> </span>borne
+</code></pre></div>
+<h4 id="3-donner-les-permissions">3. Donner les Permissions<a class="headerlink" href="#3-donner-les-permissions" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>launch.sh
+</code></pre></div>
+<h4 id="4-lancer-la-borne">4. Lancer la Borne<a class="headerlink" href="#4-lancer-la-borne" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>./launch.sh
+</code></pre></div>
+<hr />
+<h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
+<h4 id="1-installer-java_2">1. Installer Java<a class="headerlink" href="#1-installer-java_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>openjdk-17-jre-headless
+
+<span class="c1"># Fedora/RHEL</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>java-17-openjdk
+
+<span class="c1"># Arch</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>jdk-openjdk
+</code></pre></div>
+<p>Vérifier l'installation :
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-version
+</code></pre></div></p>
+<h4 id="2-cloner-le-projet_2">2. Cloner le Projet<a class="headerlink" href="#2-cloner-le-projet_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Zwartkat/borne.git
+<span class="nb">cd</span><span class="w"> </span>borne
+</code></pre></div>
+<h4 id="3-donner-les-permissions_1">3. Donner les Permissions<a class="headerlink" href="#3-donner-les-permissions_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>launch.sh
+chmod<span class="w"> </span>+x<span class="w"> </span>compilation.sh
+</code></pre></div>
+<h4 id="4-lancer-la-borne_1">4. Lancer la Borne<a class="headerlink" href="#4-lancer-la-borne_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>./launch.sh
+</code></pre></div>
+<hr />
+<h2 id="verification-de-linstallation">🎯 Vérification de l'Installation<a class="headerlink" href="#verification-de-linstallation" title="Permanent link">&para;</a></h2>
+<p>Après l'installation, vérifier que tout fonctionne :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Vérifier Java</span>
+java<span class="w"> </span>-version
+
+<span class="c1"># 2. Compiler le projet</span>
+bash<span class="w"> </span>compilation.sh
+
+<span class="c1"># 3. Vérifier les fichiers</span>
+ls<span class="w"> </span>-la<span class="w"> </span>Arcade/
+
+<span class="c1"># 4. Lancer un test</span>
+java<span class="w"> </span>-cp<span class="w"> </span>.:./MG2D.jar<span class="w"> </span>Main
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Tout Fonctionnel?</p>
+<p>Si vous voyez le menu de la borne, l'installation est correcte ! 🎉</p>
+</div>
+<hr />
+<h2 id="depannage-de-linstallation">🐛 Dépannage de l'Installation<a class="headerlink" href="#depannage-de-linstallation" title="Permanent link">&para;</a></h2>
+<h3 id="java-command-not-found">"Java command not found"<a class="headerlink" href="#java-command-not-found" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier que Java est installé</span>
+java<span class="w"> </span>-version
+
+<span class="c1"># Sur Windows, ajouter Java au PATH</span>
+<span class="c1"># Propriétés système → Variables d&#39;environnement → Ajouter JAVA_HOME</span>
+</code></pre></div>
+<h3 id="mg2djar-not-found">"MG2D.jar not found"<a class="headerlink" href="#mg2djar-not-found" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vérifier que le fichier existe</span>
+ls<span class="w"> </span>-la<span class="w"> </span>*.jar
+
+<span class="c1"># Ne pas supprimer ce fichier !</span>
+</code></pre></div>
+<h3 id="permission-denied-linuxmac">"Permission denied" (Linux/Mac)<a class="headerlink" href="#permission-denied-linuxmac" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Donner les permissions</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>*.sh
+</code></pre></div>
+<h3 id="port-deja-utilise">Port déjà utilisé<a class="headerlink" href="#port-deja-utilise" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Si le port 1099 est utilisé</span>
+<span class="c1"># Terminer le processus Java existant</span>
+<span class="c1"># Ou changer le port dans le code</span>
+</code></pre></div>
+<p>Voir le <a href="../troubleshooting/">guide complet de dépannage</a>.</p>
+<hr />
+<h2 id="structure-des-fichiers-apres-installation">📂 Structure des Fichiers Après Installation<a class="headerlink" href="#structure-des-fichiers-apres-installation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>borne/
+├── Arcade/              # Module core
+│   ├── *.java
+│   └── *.class
+├── projet/              # 15 jeux
+│   ├── ball-blast/
+│   ├── columns/
+│   └── ...
+├── MG2D.jar            # Bibliothèque graphique (IMPORTANT)
+├── launch.sh           # Script de lancement
+├── compilation.sh      # Script de compilation
+├── Main.java           # Point d&#39;entrée
+└── docs/               # Documentation
+</code></pre></div>
+<hr />
+<h2 id="premiers-demarrages">🚀 Premiers Démarrages<a class="headerlink" href="#premiers-demarrages" title="Permanent link">&para;</a></h2>
+<h3 id="premier-demarrage">Premier Démarrage<a class="headerlink" href="#premier-demarrage" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>./launch.sh
+
+<span class="c1"># Vous verrez :</span>
+<span class="c1"># 1. Une fenêtre de chargement</span>
+<span class="c1"># 2. Le menu principal</span>
+<span class="c1"># 3. Une liste des 15 jeux</span>
+<span class="c1"># 4. Des instructions à l&#39;écran</span>
+</code></pre></div>
+<h3 id="configuration-initiale">Configuration Initiale<a class="headerlink" href="#configuration-initiale" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Les scripts du menu créent les dossiers nécessaires</li>
+<li>Les fichiers de scores seront créés automatiquement</li>
+<li>Les ressources (images, sons) seront chargées au démarrage</li>
+</ul>
+<hr />
+<h2 id="configuration-optionnelle">✨ Configuration Optionnelle<a class="headerlink" href="#configuration-optionnelle" title="Permanent link">&para;</a></h2>
+<h3 id="parametres-de-lancement">Paramètres de Lancement<a class="headerlink" href="#parametres-de-lancement" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Modifier dans launch.sh ou Main.java</span>
+java<span class="w"> </span>-cp<span class="w"> </span>.:./MG2D.jar<span class="w"> </span>Main<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-Xmx512m<span class="w"> </span><span class="se">\ </span><span class="w">                   </span><span class="c1"># Mémoire max</span>
+<span class="w">    </span>-Xms256m<span class="w"> </span><span class="se">\ </span><span class="w">                   </span><span class="c1"># Mémoire min</span>
+<span class="w">    </span>-D...<span class="w">                         </span><span class="c1"># Options système</span>
+</code></pre></div>
+<h3 id="resolution-de-lecran">Résolution de l'Écran<a class="headerlink" href="#resolution-de-lecran" title="Permanent link">&para;</a></h3>
+<p>Éditer <code>Arcade/Graphique.java</code> :
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TAILLEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1280</span><span class="p">;</span><span class="w">  </span><span class="c1">// Largeur</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TAILLEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span><span class="w">  </span><span class="c1">// Hauteur</span>
+</code></pre></div></p>
+<hr />
+<h2 id="support">🆘 Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
+<ul>
+<li>📖 <a href="../../faq/">FAQ</a></li>
+<li>🐛 <a href="../troubleshooting/">Dépannage</a></li>
+<li>💬 <a href="https://github.com/Zwartkat/borne/issues">Issues GitHub</a></li>
+<li>📧 <a href="mailto:support@example.com">Email Support</a></li>
+</ul>
+<hr />
+<h2 id="cest-pret">🎉 C'est Prêt !<a class="headerlink" href="#cest-pret" title="Permanent link">&para;</a></h2>
+<p>Une fois installé et lancé, vous verrez :</p>
+<div class="highlight"><pre><span></span><code>=====================================
+  BORNE D&#39;ARCADE 🎮
+=====================================
+
+Sélectionnez un jeu :
+&gt; Ball Blast
+  Columns
+  CursedWare
+  ...
+
+Appuyez sur ACTION pour jouer
+Appuyez sur RETOUR pour quitter
+=====================================
+</code></pre></div>
+<p><strong>Amusez-vous bien ! 🎮</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "nav.expand", "toc.integrate", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>
