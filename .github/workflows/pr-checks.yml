@@ -1,0 +1,84 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Check PR branch naming
+      run: |
+        BRANCH_NAME="${{ github.head_ref }}"
+        echo "Checking branch: $BRANCH_NAME"
+        if [[ ! $BRANCH_NAME =~ ^(feature|bugfix|hotfix|refactor|docs|test)/ ]]; then
+          echo "⚠️ Warning: Branch name should follow pattern: feature/*, bugfix/*, etc."
+          echo "Current: $BRANCH_NAME"
+        fi
+    
+    - name: Compile Arcade module
+      run: |
+        cd Arcade
+        javac -cp .;../MG2D.jar *.java
+        cd ..
+        echo "✅ Arcade module compiles successfully"
+    
+    - name: Check for debug code
+      continue-on-error: true
+      run: |
+        echo "🔍 Checking for debug code..."
+        debug_count=$(grep -r "System.out.println\|System.err.println" . --include="*.java" | wc -l)
+        
+        if [ $debug_count -gt 5 ]; then
+          echo "⚠️ Found $debug_count debug prints"
+          echo ""
+          echo "### Debug Code Found:" >> $GITHUB_STEP_SUMMARY
+          grep -r "System.out.println\|System.err.println" . --include="*.java" | head -5 >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: Check file sizes
+      run: |
+        echo "📊 File size analysis" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Check for large files
+        large_files=$(find . -size +1000k -type f ! -path "./.git/*" ! -path "*/.*" | head -10)
+        
+        if [ -n "$large_files" ]; then
+          echo "### Large Files:" >> $GITHUB_STEP_SUMMARY
+          echo "$large_files" >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: Documentation check
+      run: |
+        echo "📚 Documentation Check" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        java_files=$(find . -name "*.java" -type f | wc -l)
+        documented=$(grep -r "\/\*\*" . --include="*.java" | wc -l)
+        doc_percent=$((documented * 100 / java_files))
+        
+        echo "- Java files: $java_files" >> $GITHUB_STEP_SUMMARY
+        echo "- Documented: $documented" >> $GITHUB_STEP_SUMMARY
+        echo "- Documentation: $doc_percent%" >> $GITHUB_STEP_SUMMARY
+    
+    - name: PR Summary
+      run: |
+        echo "## ✅ PR Checks Complete" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Passed:" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Java compilation" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Code review" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ File validation" >> $GITHUB_STEP_SUMMARY

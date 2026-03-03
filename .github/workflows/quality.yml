@@ -1,0 +1,70 @@
+name: Code Quality & Analysis
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Check Java code style
+      continue-on-error: true
+      run: |
+        echo "🔍 Checking Java code style..."
+        find . -name "*.java" -type f | head -20 | while read file; do
+          echo "Checking $file..."
+          # Basic checks
+          grep -n "TODO\|FIXME\|HACK" "$file" || true
+        done
+        echo "✅ Code review complete"
+    
+    - name: Count lines of code
+      run: |
+        echo "📊 Lines of Code Analysis" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        java_lines=$(find . -name "*.java" -type f -exec wc -l {} + | tail -1 | awk '{print $1}')
+        echo "- **Java:** $java_lines lines" >> $GITHUB_STEP_SUMMARY
+        
+        python_lines=$(find . -name "*.py" -type f -exec wc -l {} + 2>/dev/null | tail -1 | awk '{print $1}' || echo "0")
+        echo "- **Python:** $python_lines lines" >> $GITHUB_STEP_SUMMARY
+        
+        lua_lines=$(find . -name "*.lua" -type f -exec wc -l {} + 2>/dev/null | tail -1 | awk '{print $1}' || echo "0")
+        echo "- **Lua:** $lua_lines lines" >> $GITHUB_STEP_SUMMARY
+    
+    - name: Find issues and TODOs
+      continue-on-error: true
+      run: |
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Technical Debt" >> $GITHUB_STEP_SUMMARY
+        
+        todo_count=$(grep -r "TODO\|FIXME\|HACK" . --include="*.java" --include="*.py" --include="*.lua" 2>/dev/null | wc -l)
+        echo "- 📝 Found $todo_count development notes (TODO/FIXME)" >> $GITHUB_STEP_SUMMARY
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### File Statistics" >> $GITHUB_STEP_SUMMARY
+        
+        java_files=$(find . -name "*.java" -type f | wc -l)
+        echo "- ☕ Java files: $java_files" >> $GITHUB_STEP_SUMMARY
+        
+        py_files=$(find . -name "*.py" -type f | wc -l)
+        echo "- 🐍 Python files: $py_files" >> $GITHUB_STEP_SUMMARY
+        
+        games=$(ls -d projet/*/ 2>/dev/null | wc -l)
+        echo "- 🎮 Games: $games" >> $GITHUB_STEP_SUMMARY

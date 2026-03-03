@@ -3,14 +3,14 @@
 -- et executez le fichier pour lancer le jeu.
 
 -- Libs
-local Vector2 = require("src/classes/Vector2")
-local Color = require("src/classes/Color")
-local Renderer = require("src/libs/Rendering/Renderer")
-local LogManager = require("src/libs/Debug/LogManager")
-local Screen = require("src/libs/Rendering/Screen")
+local Vector2 = require("Arcade/classes/Vector2")
+local Color = require("Arcade/classes/Color")
+local Renderer = require("Arcade/libs/Rendering/Renderer")
+local LogManager = require("Arcade/libs/Debug/LogManager")
+local Screen = require("Arcade/libs/Rendering/Screen")
 
-local TweenService = require("src/libs/Tween")
-local DelayService = require("src/libs/Delay")
+local TweenService = require("Arcade/libs/Tween")
+local DelayService = require("Arcade/libs/Delay")
 
 -- Settings
 Renderer.ScreenSize = Vector2(1280, 1024)
@@ -27,7 +27,7 @@ function love.load()
     math.randomseed(love.timer.getTime())
     love.window.setMode(Renderer.ScreenSize.X, Renderer.ScreenSize.Y, {resizable=false, vsync=false, borderless=true})
 
-    Renderer.changeScreen(Screen.get("Title")) -- Here you can input a screen's name in [src/screens/...], for example "Title", "Test" or "GAME"
+    Renderer.changeScreen(Screen.get("Title")) -- Here you can input a screen's name in [Arcade/screens/...], for example "Title", "Test" or "GAME"
 end
 
 function love.update(dt)

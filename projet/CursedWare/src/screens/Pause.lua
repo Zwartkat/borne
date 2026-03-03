@@ -1,10 +1,10 @@
 -- Libs
-local Vector2 = require("src/classes/Vector2")
-local Color = require("src/classes/Color")
-local Image = require("src/classes/Image")
+local Vector2 = require("Arcade/classes/Vector2")
+local Color = require("Arcade/classes/Color")
+local Image = require("Arcade/classes/Image")
 
-local Screen = require("src/libs/Rendering/Screen")
-local Renderer = require("src/libs/Rendering/Renderer")
+local Screen = require("Arcade/libs/Rendering/Screen")
+local Renderer = require("Arcade/libs/Rendering/Renderer")
 
 -- Settings
 local Menu = Screen.new()

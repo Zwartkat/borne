@@ -7,10 +7,6 @@ import MG2D.geometrie.*;
 import MG2D.audio.*;
 
 import java.awt.Font;
-import java.awt.FontMetrics;
-
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 
 class Jeu{ // Définition de la classe
 

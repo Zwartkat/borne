@@ -1,0 +1,117 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Extract version from tag
+      id: tag_name
+      run: |
+        echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+    
+    - name: Compile full project
+      run: |
+        echo "🔄 Compiling Arcade module..."
+        cd Arcade
+        javac -cp .;../MG2D.jar *.java
+        cd ..
+        
+        echo "🔄 Compiling Main..."
+        javac -cp .;./MG2D.jar *.java
+        
+        echo "✅ Compilation complete"
+    
+    - name: Generate JavaDoc
+      run: |
+        echo "📚 Generating JavaDoc..."
+        javadoc -d doc_borne -cp ./MG2D.jar -sourcepath . Arcade/*.java Main.java
+        echo "✅ JavaDoc generated"
+    
+    - name: Generate Game Documentation
+      run: |
+        echo "📚 Generating game documentation..."
+        python generate_game_docs_v2.py
+        echo "✅ Game docs generated"
+    
+    - name: Create release artifacts
+      run: |
+        mkdir -p release-artifacts
+        
+        # Créer une archive de documentation
+        cd doc_borne
+        zip -r ../release-artifacts/api-documentation-${{ steps.tag_name.outputs.VERSION }}.zip .
+        cd ..
+        
+        cd docs_jeux
+        zip -r ../release-artifacts/game-documentation-${{ steps.tag_name.outputs.VERSION }}.zip .
+        cd ..
+        
+        # Copier les fichiers compilés
+        cp Arcade/*.class release-artifacts/ 2>/dev/null || true
+        cp *.class release-artifacts/ 2>/dev/null || true
+        
+        echo "✅ Release artifacts created"
+    
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: release-artifacts/**
+        draft: false
+        prerelease: false
+        body: |
+          # Release ${{ steps.tag_name.outputs.VERSION }}
+          
+          ## 📦 What's included:
+          - API Documentation (JavaDoc)
+          - Game Documentation
+          - Compiled Arcade module
+          - Compiled Main module
+          
+          ## 📖 Documentation:
+          - [API Docs](https://github.com/${{ github.repository }}/wiki)
+          - [Game Guides](https://github.com/${{ github.repository }}/wiki)
+          
+          ## 🎮 Games Included:
+          - Ball Blast
+          - Columns
+          - CursedWare
+          - DinoRail
+          - InitialDrift
+          - JavaSpace
+          - Kowasu_Renga
+          - Minesweeper
+          - OsuTile
+          - PianoTile
+          - Pokechecs
+          - Pong
+          - Puissance_X
+          - Snake_Eater
+          - TronGame
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Release Summary
+      run: |
+        echo "## 🎉 Release Created" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Version:** ${{ steps.tag_name.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Artifacts:" >> $GITHUB_STEP_SUMMARY
+        echo "- 📖 API Documentation" >> $GITHUB_STEP_SUMMARY
+        echo "- 🎮 Game Documentation" >> $GITHUB_STEP_SUMMARY
+        echo "- ☕ Compiled Classes" >> $GITHUB_STEP_SUMMARY

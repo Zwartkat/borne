@@ -7,10 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import MG2D.geometrie.*;
-import MG2D.geometrie.Point;
 import MG2D.audio.*;
-import MG2D.*;
 import MG2D.FenetrePleinEcran;
 
 /**
@@ -139,7 +136,7 @@ public class Graphique {
 		if (!lang.equals("Unknown"))
 			return lang;
 
-		Path srcDir = gameDir.resolve("src");
+		Path srcDir = gameDir.resolve("Arcade");
 		if (Files.exists(srcDir) && Files.isDirectory(srcDir)) {
 			lang = scanOneLevel(srcDir);
 		}

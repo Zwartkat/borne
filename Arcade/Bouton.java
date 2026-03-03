@@ -3,7 +3,6 @@ package Arcade;
 import java.awt.Font;
 
 import MG2D.Couleur;
-import MG2D.FenetrePleinEcran;
 import MG2D.geometrie.Point;
 import MG2D.geometrie.Texture;
 import MG2D.geometrie.Texte;

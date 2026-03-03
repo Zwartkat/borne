@@ -1,5 +1,5 @@
 -- LIBS
-local Object = require("src/libs/Classic")
+local Object = require("Arcade/libs/Classic")
 
 -- CLASS
 local class = Object:extend()

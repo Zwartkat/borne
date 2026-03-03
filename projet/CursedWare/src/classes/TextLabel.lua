@@ -1,7 +1,7 @@
 -- LIBS
-local Vector2 = require("src/classes/Vector2")
-local Color = require("src/classes/Color")
-local Rect = require("src/classes/Rect")
+local Vector2 = require("Arcade/classes/Vector2")
+local Color = require("Arcade/classes/Color")
+local Rect = require("Arcade/classes/Rect")
 
 -- CLASS
 local class = Rect:extend()

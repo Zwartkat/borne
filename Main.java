@@ -1,6 +1,6 @@
 import Arcade.Graphique;
 
-public class Main1 {
+public class Main {
 	/**
 	 * Méthode principale permettant de lancer la borne d'arcade
 	 * @param args

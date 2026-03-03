@@ -58,7 +58,7 @@ public class Pointeur {
                 ProcessBuilder processBuilder = null;
                 System.out.println(game);
                 if (game.getLang().equals("Python")) {
-                    processBuilder = new ProcessBuilder("python", "./src/__main__.py");
+                    processBuilder = new ProcessBuilder("python", "./Arcade/__main__.py");
                 } else if (game.getLang().equals("Java")) {
                     Path jar = Paths.get("./MG2D.jar").toAbsolutePath();
                     Path parent = Paths.get(".").toAbsolutePath();

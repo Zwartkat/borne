@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "Compilation du menu de la borne d'arcade"
-javac -cp .:./MG2D.jar ./Arcade/*.java
-javac -cp .:./Arcade:./MG2D.jar *.java
+javac -cp .:./MG2D.jar ./src/*.java
+javac -cp .:./src:./MG2D.jar *.java
 
 cd projet
 for proj in */ ; do

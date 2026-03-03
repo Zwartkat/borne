@@ -1,0 +1,81 @@
+name: Build Java Project
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        java-version: ['11', '17']
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ matrix.java-version }}
+        distribution: 'temurin'
+    
+    - name: Compile Arcade module
+      run: |
+        cd Arcade
+        javac -cp .;../MG2D.jar *.java
+        echo "✅ Arcade module compiled successfully"
+    
+    - name: Compile Main module
+      run: |
+        javac -cp .;./MG2D.jar *.java
+        echo "✅ Main module compiled successfully"
+    
+    - name: Compile Game: Columns
+      run: |
+        cd projet/Columns
+        javac -cp .;../..;../../MG2D.jar *.java
+        echo "✅ Columns game compiled successfully"
+        cd ../..
+    
+    - name: Compile Game: Pong
+      run: |
+        cd projet/Pong
+        javac -cp .;../..;../../MG2D.jar *.java
+        echo "✅ Pong game compiled successfully"
+        cd ../..
+    
+    - name: Compile Game: DinoRail
+      run: |
+        cd projet/DinoRail
+        javac -cp .;../..;../../MG2D.jar *.java
+        echo "✅ DinoRail game compiled successfully"
+        cd ../..
+    
+    - name: Upload build artifacts
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: compiled-classes
+        path: |
+          Arcade/*.class
+          *.class
+          projet/*/
+        retention-days: 5
+    
+    - name: Summary
+      if: success()
+      run: |
+        echo "## ✅ Build Successful" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Java version: ${{ matrix.java-version }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Compiled Modules:" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Arcade" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Main" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Columns" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Pong" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ DinoRail" >> $GITHUB_STEP_SUMMARY

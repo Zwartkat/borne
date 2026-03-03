@@ -1,19 +1,19 @@
 -- Game made by LINEZ Guillaume
 -- // LIBS
-local Vector2 = require("src/classes/Vector2")
-local Color = require("src/classes/Color")
-local Square = require("src/classes/Rect")
-local Image = require("src/classes/Image")
-local Quad = require("src/classes/Quad")
-local Spritesheet = require("src/classes/Spritesheet")
-local TextLabel = require("src/classes/TextLabel")
-local ShakingText = require("src/classes/advanced/ShakingText")
+local Vector2 = require("Arcade/classes/Vector2")
+local Color = require("Arcade/classes/Color")
+local Square = require("Arcade/classes/Rect")
+local Image = require("Arcade/classes/Image")
+local Quad = require("Arcade/classes/Quad")
+local Spritesheet = require("Arcade/classes/Spritesheet")
+local TextLabel = require("Arcade/classes/TextLabel")
+local ShakingText = require("Arcade/classes/advanced/ShakingText")
 
-local Renderer = require("src/libs/Rendering/Renderer")
-local LogManager = require("src/libs/Debug/LogManager")
+local Renderer = require("Arcade/libs/Rendering/Renderer")
+local LogManager = require("Arcade/libs/Debug/LogManager")
 
-local TweenService = require("src/libs/Tween")
-local DelayService = require("src/libs/Delay")
+local TweenService = require("Arcade/libs/Tween")
+local DelayService = require("Arcade/libs/Delay")
 
 -- // MANDATORY LIB DECLARATION
 local module = {}

@@ -129,3 +129,4 @@ public class BoiteSelection extends Boite {
 		}
 
 	}
+}

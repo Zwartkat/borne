@@ -1,4 +1,9 @@
-public class KeyboardInput implements KeyListener {
+package Arcade;
+
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+
+public class ClavierBorneArcade implements KeyListener {
     // Boolean variables for directional keys
     public boolean gauche, gaucheTape, droite, droiteTape, haut, hautTape, bas, basTape;
     

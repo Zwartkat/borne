@@ -12,8 +12,6 @@ import MG2D.Couleur;
 import java.io.File;
 
 import java.awt.Font;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 
 public class Kowasu_Renga {
 
