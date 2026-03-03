@@ -1,85 +1,179 @@
-IUT du Littoral Côte d'Opale (IUTLCO)
-====================================
-Projet tutoré 2017-2018- 2ème année
-----------------------------------
+# 🎮 Borne Arcade - Retro Gaming Platform
 
-Groupe projet : Romaric Bougard, Pierre Delobel et Bastien Ducloy
+Une borne d'arcade rétro multimédia programmée en Java, Python et Lua pour Raspberry Pi avec support 2 joueurs.
+
+## 📋 Table des matières
+
+- [Vue d'ensemble](#-vue-densemble)
+- [Jeux disponibles](#-jeux-disponibles)
+- [Spécifications techniques](#-spécifications-techniques)
+- [Installation](#-installation)
+- [Contrôles](#-contrôles)
+- [Architecture](#-architecture)
+- [Développement](#-développement)
+- [Contribution](#-contribution)
+
+---
+
+## 🎯 Vue d'ensemble
+
+**Borne Arcade** est un projet pluridisciplinaire développé à l'IUT du Littoral Côte d'Opale. Il s'agit d'une plateforme de jeu rétro pour arcade personnalisée, permettant de jouer à plusieurs jeux écrits en différents langages (Java, Python, Lua).
+
+### Caractéristiques principales
+- ✅ Gestion de 2 joueurs simultanés
+- ✅ Support de 3 langages : Java, Python, Lua
+
+---
+
+## 🎮 Jeux disponibles
+
+| Jeu | Langage |
+|-----|---------|
+| **Ball Blast** | Python |
+| **Columns** | Python |
+| **CursedWare** | Lua |
+| **DinoRail** | Java |
+| **InitialDrift** | Java |
+| **JavaSpace** | Java |
+| **Kowasu Renga** | Python |
+| **Minesweeper** | Python |
+| **OsuTile** | Python |
+| **PianoTile** | Python |
+| **Pokechecs** | Java |
+| **Pong** | Java |
+| **Puissance X** | Java |
+| **Snake Eater** | Python |
+| **TronGame** | Java |
+
+---
+
+## 💻 Spécifications techniques
+
+### Configuration matérielle **recommandée**
+- **Processeur** : Raspberry Pi 3 ou supérieur
+- **Écran** : 4:3 (résolution 1280x1024)
+- **Entrées** : 2 joysticks + 6 boutons par joueur
+- **OS** : Raspbian / Raspberry Pi OS
+
+### Dépendances logicielles
+- **Java** : JDK 8+ (OpenJDK)
+- **Python** : 3.9+
+- **Lua** : 5.3+
+- **Git** : pour le versioning
+
+---
+
+## 🚀 Installation
 
 
-Plus d'infos [ici](http://iut.univ-littoral.fr/gitlab/synave/borne_arcade/wikis/home)
+---
 
-# touche de la borne
+## 🎮 Contrôles
 
-Correspondance clavier -> bouton borne
+### Joystick Joueur 1
+```
+Haut/Bas/Gauche/Droite → Flèches du clavier
+```
 
-joystick j1
-fleches haut bas gauche droite
+### Joystick Joueur 2
+```
+o=Haut, l=Bas, k=Gauche, m=Droite
+```
 
-joystick j2
-o l k m
+### Boutons Joueur 1
+```
+r=Bouton1, t=Bouton2, y=Bouton3
+f=Bouton4, g=Bouton5, h=Bouton6
+```
 
-6 touches J1
-r t y
-f g h
+### Boutons Joueur 2
+```
+a=Bouton1, z=Bouton2, e=Bouton3
+q=Bouton4, s=Bouton5, d=Bouton6
+```
 
-6 touches J2
-a z e
-q s d 
+### Navigation du menu
+- **Haut/Bas** (J1) : Sélectionner un jeu
+- 
 
-Attention ! De base, l'encodeur clavier de la borne de l'IUT a té mal relié aux boutons. Ce ne sont donc pas les bonnes lettres qui son identifiées lorsque l'on appuie sur un bouton ou fait bouger un joystick. Voir fichier **borne**
-
-
-Contrainte matérielle
-----
-- Raspberry pi model 3 de préférence
-- Ecran 4:3 de résolution 1280x1024
-- Pour borne 2 joueurs, joystick et 6 boutons par joueur + d'autres boutons inutilisés pour le moment.
+### Configuration spéciale
 
 
-Installation du système d'exploitation
-----
-Installez Raspbian sur votre raspberry
+---
 
-Installation des outils
-----
+## 📁 Architecture
 
-Installez le jdk de java. Dans un terminal :
-> sudo apt-get update
+```
+borne_arcade/
+├── Arcade/                    # Module principal Java
+│   ├── Boite.java
+│   ├── BoiteDescription.java
+│   ├── BoiteSelection.java
+│   ├── Bouton.java
+│   ├── Pointeur.java
+│   ├── Graphique.java
+│   ├── Game.java
+│   ├── HighScore.java
+│   └── ClavierBorneArcade.java
+├── projet/                    # Jeux divisés par langage
+│   ├── ball-blast/           (Python)
+│   ├── Pong/                 (Java)
+│   ├── CursedWare/           (Lua)
+│   └── ...
+├── docs/                      # Documentation technique
+├── .github/workflows/         # CI/CD (Tests automatiques)
+├── Main.java                  # Point d'entrée
+├── MG2D.jar                   # Bibliothèque graphique
+└── compilation.sh             # Script de compilation
+```
 
-> sudo apt-get install openjdk-8-jdk
+### Module Arcade
 
-Installez git. Toujours dans le même terminal :
-> sudo apt-get install git
+Pour tous les jeux Java, le module Arcade fournit :
+- **HighScore** : Gestion des scores
 
-Créez un répertoire git :
-> cd ~
+---
 
-> mkdir git
+## 🛠️ Développement
 
-> cd git
+...
 
-On va ensuite télécharger la bibliothèque MG2D et la partie logicielle ici présente. Si vous l'avez déjà téléchargée, vous déplacerez le répertoire dans le répertoire git précédemment créé. Le répertoire doit s'appeler ***borne_arcade***
+### Tests automatisés
 
-> git clone http://iut.univ-littoral.fr/gitlab/synave/MG2D.git
+Le projet utilise GitHub Actions pour tester :
+- ✅ Compilation Java
+- ✅ Syntaxe Python
+- ✅ Syntaxe Lua
 
-> git clone http://iut.univ-littoral.fr/gitlab/synave/borne_arcade.git
+Voir [`.github/workflows/test-games.yml`](.github/workflows/test-games.yml)
 
-Suite à ces téléchargements, vous devez avoir l'arborescence suivante :
-- répertoire personnel
-- &nbsp; &nbsp; |
-- &nbsp; &nbsp; |-> git
-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-> MG2D
-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |-> borne_arcade
+---
 
-Lancez le logiciel au démarrage de la borne
-----
+## 📚 Documentation
 
-> mv borne.desktop ~/.config/autostart/
+- [Documentation technique](docs/documentation-technique/architecture.md)
+- [Guide utilisateur](docs/guide-utilisateur/)
+- [Guide d'installation développeur](docs/installation-dev/)
+---
 
-Redémarrez et normalement, lors du démarrage, un terminal va s'ouvrir et quelques secondes après (10-15 secondes), l'interface de la borne va se lancer. Des informations concernant les opérations en cours sont affichées dans le terminal. Soyez patient.
+## 📝 Crédits
 
-Sélectionnez le jeu avec haut/bas du joystick du joueur 1 et lancez le jeu avec le bouton A du joueur 1.
-Quittez le logiciel avec le bouton Z du joueur 1. Une demande de confirmation s'affichera. Validez oui ou non avec le bouton A du joueur 1.
+**Projet initial** : 
+- Romaric Bougard
+- Pierre Delobel
+- Bastien Ducloy
 
-Si vous quittez le menu, vous reviendrez sur le terminal. Attendez 30 secondes pour une extinction totale de la machine.
+**Institution** : IUT du Littoral Côte d'Opale (IUTLCO)
+
+**Retravail** :
+- Zwartkat
+
+---
+
+## 📧 Support
+
+Pour toute question ou problème :
+- Créer une issue
+- Voir la [documentation technique](docs/documentation-technique/)
+
+**Dernière mise à jour** : Mars 2026
