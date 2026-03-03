@@ -35,7 +35,10 @@ jobs:
     - name: Compile Arcade module
       run: |
         cd Arcade
-        javac -cp .;../MG2D.jar *.java
+        javac -cp .:../MG2D.jar \
+          Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
+          Bouton.java ClavierBorneArcade.java Game.java Graphique.java \
+          HighScore.java LigneHighScore.java Pointeur.java
         cd ..
     
     - name: Compile test files

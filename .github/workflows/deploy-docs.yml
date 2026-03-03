@@ -60,18 +60,7 @@ jobs:
           -use \
           -doctitle "Borne d'Arcade - API Reference" \
           -windowtitle "API Reference" \
-          Arcade/Boite.java \
-          Arcade/BoiteDescription.java \
-          Arcade/BoiteImage.java \
-          Arcade/BoiteSelection.java \
-          Arcade/Bouton.java \
-          Arcade/ClavierBorneArcade.java \
-          Arcade/Game.java \
-          Arcade/Graphique.java \
-          Arcade/HighScore.java \
-          Arcade/LigneHighScore.java \
-          Arcade/Pointeur.java \
-          Main.java 2>&1 || true
+          *.java \ ./Arcade/*.java 2>&1 || true
         
         echo "✅ JavaDoc generated (Test files excluded)"
     
@@ -115,7 +104,7 @@ jobs:
     
     - name: Upload artifact (PR preview)
       if: github.event_name == 'pull_request'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: documentation-preview
         path: site/
