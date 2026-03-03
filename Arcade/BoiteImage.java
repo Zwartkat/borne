@@ -47,7 +47,4 @@ public class BoiteImage extends Boite {
         // this.image.setTaille(400, 320);
     }
 
-}  
-
-
-
+}

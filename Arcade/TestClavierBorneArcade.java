@@ -12,10 +12,14 @@ import MG2D.geometrie.*;
 class TestClavierBorneArcade {
 
 	public static void main(String[] args) {
+		// Création de la fenêtre principale avec un titre et des dimensions
 		Fenetre f = new Fenetre("Test du clavier pour la borne d'arcade", 1000, 260);
+		// Initialisation du clavier pour la borne d'arcade
 		ClavierBorneArcade clavier = new ClavierBorneArcade();
+		// Ajout du listener de clavier à la fenêtre
 		f.addKeyListener(clavier);
 
+		// Création des éléments graphiques pour le joueur 1
 		Cercle joy1Haut = new Cercle(Couleur.GRIS_CLAIR, new Point(100, 200), 30, true);
 		f.ajouter(joy1Haut);
 		Cercle joy1Bas = new Cercle(Couleur.GRIS_CLAIR, new Point(100, 80), 30, true);
@@ -25,6 +29,7 @@ class TestClavierBorneArcade {
 		Cercle joy1Droite = new Cercle(Couleur.GRIS_CLAIR, new Point(150, 140), 30, true);
 		f.ajouter(joy1Droite);
 
+		// Création des boutons pour le joueur 1
 		Cercle bouton1A = new Cercle(Couleur.GRIS_CLAIR, new Point(270, 80), 30, true);
 		f.ajouter(bouton1A);
 		Cercle bouton1B = new Cercle(Couleur.GRIS_CLAIR, new Point(350, 120), 30, true);
@@ -39,6 +44,7 @@ class TestClavierBorneArcade {
 		Cercle bouton1Z = new Cercle(Couleur.GRIS_CLAIR, new Point(430, 180), 30, true);
 		f.ajouter(bouton1Z);
 
+		// Création des éléments graphiques pour le joueur 2
 		Cercle joy2Haut = new Cercle(Couleur.GRIS_CLAIR, new Point(600, 200), 30, true);
 		f.ajouter(joy2Haut);
 		Cercle joy2Bas = new Cercle(Couleur.GRIS_CLAIR, new Point(600, 80), 30, true);
@@ -48,6 +54,7 @@ class TestClavierBorneArcade {
 		Cercle joy2Droite = new Cercle(Couleur.GRIS_CLAIR, new Point(650, 140), 30, true);
 		f.ajouter(joy2Droite);
 
+		// Création des boutons pour le joueur 2
 		Cercle bouton2A = new Cercle(Couleur.GRIS_CLAIR, new Point(770, 80), 30, true);
 		f.ajouter(bouton2A);
 		Cercle bouton2B = new Cercle(Couleur.GRIS_CLAIR, new Point(850, 120), 30, true);
@@ -62,98 +69,145 @@ class TestClavierBorneArcade {
 		Cercle bouton2Z = new Cercle(Couleur.GRIS_CLAIR, new Point(930, 180), 30, true);
 		f.ajouter(bouton2Z);
 
-		f.ajouter(new Ligne(Couleur.NOIR, new Point(500, 0), new Point(500, 260)));
+		// Création d'une ligne de séparation
+		Ligne ligne = new Ligne(new Point(500, 50), new Point(500, 250));
+		f.ajouter(ligne);
 
+		// Boucle principale pour la mise à jour des éléments graphiques
 		while (true) {
-			try {
-				Thread.sleep(1);
-			} catch (Exception e) {
+			// Mise à jour des couleurs des joysticks et boutons en fonction des touches pressées
+			if (clavier.estAppuyee(KeyEvent.VK_UP)) {
+				joy1Haut.setCouleur(Couleur.ROUGE);
+				joy1Bas.setCouleur(Couleur.GRIS_CLAIR);
+			} else {
+				joy1Haut.setCouleur(Couleur.GRIS_CLAIR);
 			}
 
-			if (clavier.getJoyJ1HautEnfoncee())
-				joy1Haut.setCouleur(Couleur.GRIS_FONCE);
-			else
+			if (clavier.estAppuyee(KeyEvent.VK_DOWN)) {
+				joy1Bas.setCouleur(Couleur.ROUGE);
 				joy1Haut.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getJoyJ1BasEnfoncee())
-				joy1Bas.setCouleur(Couleur.GRIS_FONCE);
-			else
+			} else {
 				joy1Bas.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getJoyJ1GaucheEnfoncee())
-				joy1Gauche.setCouleur(Couleur.GRIS_FONCE);
-			else
-				joy1Gauche.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getJoyJ1DroiteEnfoncee())
-				joy1Droite.setCouleur(Couleur.GRIS_FONCE);
-			else
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_LEFT)) {
+				joy1Gauche.setCouleur(Couleur.ROUGE);
 				joy1Droite.setCouleur(Couleur.GRIS_CLAIR);
+			} else {
+				joy1Gauche.setCouleur(Couleur.GRIS_CLAIR);
+			}
 
-			if (clavier.getBoutonJ1AEnfoncee())
-				bouton1A.setCouleur(Couleur.GRIS_FONCE);
-			else
+			if (clavier.estAppuyee(KeyEvent.VK_RIGHT)) {
+				joy1Droite.setCouleur(Couleur.ROUGE);
+				joy1Gauche.setCouleur(Couleur.GRIS_CLAIR);
+			} else {
+				joy1Droite.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			// Gestion des boutons pour le joueur 1
+			if (clavier.estAppuyee(KeyEvent.VK_F)) {
+				bouton1A.setCouleur(Couleur.ROUGE);
+			} else {
 				bouton1A.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ1BEnfoncee())
-				bouton1B.setCouleur(Couleur.GRIS_FONCE);
-			else
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_G)) {
+				bouton1B.setCouleur(Couleur.ROUGE);
+			} else {
 				bouton1B.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ1CEnfoncee())
-				bouton1C.setCouleur(Couleur.GRIS_FONCE);
-			else
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_H)) {
+				bouton1C.setCouleur(Couleur.ROUGE);
+			} else {
 				bouton1C.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ1XEnfoncee())
-				bouton1X.setCouleur(Couleur.GRIS_FONCE);
-			else
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_R)) {
+				bouton1X.setCouleur(Couleur.ROUGE);
+			} else {
 				bouton1X.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ1YEnfoncee())
-				bouton1Y.setCouleur(Couleur.GRIS_FONCE);
-			else
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_T)) {
+				bouton1Y.setCouleur(Couleur.ROUGE);
+			} else {
 				bouton1Y.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ1ZEnfoncee())
-				bouton1Z.setCouleur(Couleur.GRIS_FONCE);
-			else
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_Y)) {
+				bouton1Z.setCouleur(Couleur.ROUGE);
+			} else {
 				bouton1Z.setCouleur(Couleur.GRIS_CLAIR);
+			}
 
-			if (clavier.getJoyJ2HautEnfoncee())
-				joy2Haut.setCouleur(Couleur.GRIS_FONCE);
-			else
-				joy2Haut.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getJoyJ2BasEnfoncee())
-				joy2Bas.setCouleur(Couleur.GRIS_FONCE);
-			else
+			// Gestion des joysticks pour le joueur 2
+			if (clavier.estAppuyee(KeyEvent.VK_O)) {
+				joy2Haut.setCouleur(Couleur.ROUGE);
 				joy2Bas.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getJoyJ2GaucheEnfoncee())
-				joy2Gauche.setCouleur(Couleur.GRIS_FONCE);
-			else
-				joy2Gauche.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getJoyJ2DroiteEnfoncee())
-				joy2Droite.setCouleur(Couleur.GRIS_FONCE);
-			else
+			} else {
+				joy2Haut.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_K)) {
+				joy2Bas.setCouleur(Couleur.ROUGE);
+				joy2Haut.setCouleur(Couleur.GRIS_CLAIR);
+			} else {
+				joy2Bas.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_L)) {
+				joy2Gauche.setCouleur(Couleur.ROUGE);
 				joy2Droite.setCouleur(Couleur.GRIS_CLAIR);
+			} else {
+				joy2Gauche.setCouleur(Couleur.GRIS_CLAIR);
+			}
 
-			if (clavier.getBoutonJ2AEnfoncee())
-				bouton2A.setCouleur(Couleur.GRIS_FONCE);
-			else
+			if (clavier.estAppuyee(KeyEvent.VK_M)) {
+				joy2Droite.setCouleur(Couleur.ROUGE);
+				joy2Gauche.setCouleur(Couleur.GRIS_CLAIR);
+			} else {
+				joy2Droite.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			// Gestion des boutons pour le joueur 2
+			if (clavier.estAppuyee(KeyEvent.VK_Q)) {
+				bouton2A.setCouleur(Couleur.ROUGE);
+			} else {
 				bouton2A.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ2BEnfoncee())
-				bouton2B.setCouleur(Couleur.GRIS_FONCE);
-			else
-				bouton2B.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ2CEnfoncee())
-				bouton2C.setCouleur(Couleur.GRIS_FONCE);
-			else
-				bouton2C.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ2XEnfoncee())
-				bouton2X.setCouleur(Couleur.GRIS_FONCE);
-			else
-				bouton2X.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ2YEnfoncee())
-				bouton2Y.setCouleur(Couleur.GRIS_FONCE);
-			else
-				bouton2Y.setCouleur(Couleur.GRIS_CLAIR);
-			if (clavier.getBoutonJ2ZEnfoncee())
-				bouton2Z.setCouleur(Couleur.GRIS_FONCE);
-			else
-				bouton2Z.setCouleur(Couleur.GRIS_CLAIR);
+			}
 
+			if (clavier.estAppuyee(KeyEvent.VK_S)) {
+				bouton2B.setCouleur(Couleur.ROUGE);
+			} else {
+				bouton2B.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_D)) {
+				bouton2C.setCouleur(Couleur.ROUGE);
+			} else {
+				bouton2C.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_A)) {
+				bouton2X.setCouleur(Couleur.ROUGE);
+			} else {
+				bouton2X.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_Z)) {
+				bouton2Y.setCouleur(Couleur.ROUGE);
+			} else {
+				bouton2Y.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			if (clavier.estAppuyee(KeyEvent.VK_X)) {
+				bouton2Z.setCouleur(Couleur.ROUGE);
+			} else {
+				bouton2Z.setCouleur(Couleur.GRIS_CLAIR);
+			}
+
+			// Rafraîchissement de l'affichage
 			f.rafraichir();
 		}
 	}

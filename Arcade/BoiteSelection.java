@@ -13,6 +13,11 @@ public class BoiteSelection extends Boite {
 	Pointeur pointeur;
 	Font font;
 
+	/**
+	 * Constructeur de la classe BoiteSelection.
+	 * @param rectangle Le rectangle qui définit la zone de la boîte.
+	 * @param pointeur Le pointeur utilisé pour naviguer entre les options.
+	 */
 	public BoiteSelection(Rectangle rectangle, Pointeur pointeur) {
 		super(rectangle);
 		this.pointeur = pointeur;
@@ -124,4 +129,3 @@ public class BoiteSelection extends Boite {
 		}
 
 	}
-}

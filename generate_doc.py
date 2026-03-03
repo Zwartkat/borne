@@ -488,7 +488,7 @@ class OllamaWrapper:
 
 
 ollama = OllamaWrapper(base_url="http://10.22.28.190:11434")
-MODEL_NAME = "gemma2:latest"
+MODEL_NAME = "qwen3:8b"
 SYSTEM_PROMPT = (
     "Tu es un assistant qui ajoute des commentaires et docstrings à toutes les fonctions et constructeurs "
     "dans le code fourni, sans modifier le code existant."

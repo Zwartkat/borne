@@ -18,6 +18,9 @@ public class Game {
     private String name, description, path, imagePath, lang, input;
     private int gameId;
 
+    /**
+     * Constructeur par défaut initialisant les champs à des valeurs vides ou par défaut.
+     */
     public Game() {
         this.name = "";
         this.gameId = 0;
@@ -35,6 +38,8 @@ public class Game {
      * @param description La description du jeu
      * @param path        Le chemin du dossier ou du fichier exécutable
      * @param imagePath   Le chemin de l'image associée au jeu
+     * @param lang        Langage du jeu
+     * @param input       Configuration d'entrée du jeu
      */
     public Game(int gameId, String name, String description, String path, String imagePath, String lang, String input) {
         this.gameId = gameId;
@@ -91,10 +96,20 @@ public class Game {
         return imagePath;
     }
 
+    /**
+     * Retourne la configuration d'entrée du jeu.
+     *
+     * @return La configuration d'entrée
+     */
     public String getInput() {
         return this.input;
     }
 
+    /**
+     * Retourne le langage du jeu.
+     *
+     * @return Le langage du jeu
+     */
     public String getLang() {
         return this.lang;
     }
@@ -127,7 +142,7 @@ public class Game {
     }
 
     /**
-     * Définit le chemin du dossier ou du fichier exécutable du jeu.
+     * Définit le chemin du dossier ou fichier exécutable du jeu.
      *
      * @param path Nouveau chemin du jeu
      */
@@ -144,13 +159,21 @@ public class Game {
         this.imagePath = imagePath;
     }
 
+    /**
+     * Définit la configuration d'entrée du jeu.
+     *
+     * @param input Nouvelle configuration d'entrée
+     */
     public void setInput(String input) {
         this.input = input;
     }
 
+    /**
+     * Retourne une représentation string de l'objet Game.
+     *
+     * @return Chaîne contenant l'identifiant, le nom et le langage du jeu
+     */
     public String toString() {
         return "Class Game: Id( " + gameId + "),Name(" + name + "),Lang(" + lang + ")";
     }
-} 
-
-
+}

@@ -9,9 +9,7 @@ class LigneHighScore {
 		score = 0;
 	}
 	/**
-	 * Constructeur de LigneHighScore avec nom et score. Si le nom est trop long, il est remplacé par "AAA". Si le score est négatif, il est remplacé par 0.
-	 * @param nnom Le nom du joueur
-	 * @param sscore Le score du joueur
+	 * Constructeur par défaut initialisant le nom à "AAA" et le score à 0.
 	 */
 	public LigneHighScore(String nnom, int sscore) {
 		if (nnom.length() > 3)
@@ -48,17 +46,26 @@ class LigneHighScore {
 	}
 
 	public int getScore() {
+		/**
+		 * Retourne le score du joueur.
+		 * @return Le score du joueur
+		 */
 		return score;
 	}
 
 	public String getNom() {
+		/**
+		 * Retourne le nom du joueur.
+		 * @return Le nom du joueur
+		 */
 		return nom;
 	}
 
 	public String toString() {
+		/**
+		 * Retourne la représentation sous forme de chaîne du LigneHighScore au format "Nom-Score".
+		 * @return La chaîne représentant le LigneHighScore
+		 */
 		return nom + "-" + score;
 	}
-} 
-
-
-
+}

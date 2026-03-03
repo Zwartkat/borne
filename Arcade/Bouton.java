@@ -16,6 +16,10 @@ public class Bouton {
 	private Game game;
 	private boolean textIsVisible = true;
 
+	/**
+	 * Constructeur par défaut pour un bouton vide.
+	 * Initialise les attributs à null ou à des valeurs par défaut.
+	 */
 	public Bouton() {
 		this.text = null;
 		this.texture = null;
@@ -164,5 +168,3 @@ public class Bouton {
 		return "Class bouton: Id(" + gameId + "),Name(" + name + ")";
 	}
 }
-
-
