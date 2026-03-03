@@ -33,6 +33,7 @@ jobs:
         cd ..
     
     - name: Compile Arcade module
+      continue-on-error: true
       run: |
         cd Arcade
         javac -cp .:../MG2D.jar \

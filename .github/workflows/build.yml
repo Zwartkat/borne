@@ -26,12 +26,15 @@ jobs:
     - name: Compile Arcade module
       run: |
         cd Arcade
-        javac -cp .:../MG2D.jar *.java
+        javac -cp .:../MG2D.jar \
+          Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
+          Bouton.java ClavierBorneArcade.java Game.java Graphique.java \
+          HighScore.java LigneHighScore.java Pointeur.java
         echo "✅ Arcade module compiled successfully"
     
     - name: Compile Main module
       run: |
-        javac -cp .:./MG2D.jar Main.java
+        javac -cp Arcade/:./MG2D.jar Main.java
         echo "✅ Main module compiled successfully"
     
     - name: Upload build artifacts
