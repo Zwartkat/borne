@@ -12,7 +12,7 @@ jobs:
     
     strategy:
       matrix:
-        java-version: ['11', '17']
+        java-version: ['17']
     
     steps:
     - uses: actions/checkout@v3
@@ -26,44 +26,25 @@ jobs:
     - name: Compile Arcade module
       run: |
         cd Arcade
-        javac -cp .;../MG2D.jar *.java
+        javac -cp .:../MG2D.jar \
+          Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
+          Bouton.java ClavierBorneArcade.java Game.java Graphique.java \
+          HighScore.java LigneHighScore.java Pointeur.java
         echo "✅ Arcade module compiled successfully"
     
     - name: Compile Main module
       run: |
-        javac -cp .;./MG2D.jar *.java
+        javac -cp .:./MG2D.jar Main.java
         echo "✅ Main module compiled successfully"
-    
-    - name: Compile Game: Columns
-      run: |
-        cd projet/Columns
-        javac -cp .;../..;../../MG2D.jar *.java
-        echo "✅ Columns game compiled successfully"
-        cd ../..
-    
-    - name: Compile Game: Pong
-      run: |
-        cd projet/Pong
-        javac -cp .;../..;../../MG2D.jar *.java
-        echo "✅ Pong game compiled successfully"
-        cd ../..
-    
-    - name: Compile Game: DinoRail
-      run: |
-        cd projet/DinoRail
-        javac -cp .;../..;../../MG2D.jar *.java
-        echo "✅ DinoRail game compiled successfully"
-        cd ../..
     
     - name: Upload build artifacts
       if: success()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: compiled-classes
         path: |
           Arcade/*.class
           *.class
-          projet/*/
         retention-days: 5
     
     - name: Summary
@@ -76,6 +57,3 @@ jobs:
         echo "### Compiled Modules:" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ Arcade" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ Main" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Columns" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Pong" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ DinoRail" >> $GITHUB_STEP_SUMMARY

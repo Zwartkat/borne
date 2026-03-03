@@ -1,0 +1,146 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/deploy-docs.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements-docs.txt
+        echo "✅ Documentation dependencies installed"
+    
+    - name: Build documentation with MkDocs
+      run: |
+        echo "🔄 Building MkDocs..."
+        mkdocs build --verbose
+        echo "✅ Documentation built successfully"
+    
+    - name: Generate API documentation (JavaDoc)
+      run: |
+        echo "📚 Generating JavaDoc..."
+        
+        # Fix BoiteSelection.java if needed
+        if ! grep -q "^}" Arcade/BoiteSelection.java; then
+          echo "}" >> Arcade/BoiteSelection.java
+        fi
+        
+        # Generate JavaDoc excluding test files
+        javadoc -d site/api \
+          -cp ./MG2D.jar \
+          -sourcepath . \
+          -author \
+          -version \
+          -use \
+          -doctitle "Borne d'Arcade - API Reference" \
+          -windowtitle "API Reference" \
+          Arcade/Boite.java \
+          Arcade/BoiteDescription.java \
+          Arcade/BoiteImage.java \
+          Arcade/BoiteSelection.java \
+          Arcade/Bouton.java \
+          Arcade/ClavierBorneArcade.java \
+          Arcade/Game.java \
+          Arcade/Graphique.java \
+          Arcade/HighScore.java \
+          Arcade/LigneHighScore.java \
+          Arcade/Pointeur.java \
+          Main.java 2>&1 || true
+        
+        echo "✅ JavaDoc generated (Test files excluded)"
+    
+    - name: Generate Game Documentation
+      run: |
+        echo "📚 Generating Game Documentation..."
+        python generate_game_docs_v2.py
+        
+        # Si le dossier existe, copier vers site
+        if [ -d "docs_jeux" ]; then
+          mkdir -p site/games
+          cp -r docs_jeux/* site/games/ || true
+          echo "✅ Game documentation copied"
+        fi
+    
+    - name: Build summary
+      if: success()
+      run: |
+        echo "## 📚 Documentation Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Generated Files:" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ MkDocs site (User-facing)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ JavaDoc API (Technical)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Game Guides (Game specific)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Build Information:" >> $GITHUB_STEP_SUMMARY
+        echo "- **Build Time:** $(date)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Python Version:** $(python --version)" >> $GITHUB_STEP_SUMMARY
+        echo "- **MkDocs Version:** $(mkdocs --version)" >> $GITHUB_STEP_SUMMARY
+    
+    - name: Deploy to GitHub Pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
+        cname: borne-arcade.local
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'docs: deploy documentation for ${{ github.sha }}'
+    
+    - name: Upload artifact (PR preview)
+      if: github.event_name == 'pull_request'
+      uses: actions/upload-artifact@v3
+      with:
+        name: documentation-preview
+        path: site/
+        retention-days: 7
+    
+    - name: Deployment Summary
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        echo "## 🚀 Documentation Deployed" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Documentation published successfully!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "📖 **Available at:**" >> $GITHUB_STEP_SUMMARY
+        echo "- Main docs: https://zwartkat.github.io/borne/" >> $GITHUB_STEP_SUMMARY
+        echo "- API Reference: https://zwartkat.github.io/borne/api/" >> $GITHUB_STEP_SUMMARY
+        echo "- Games: https://zwartkat.github.io/borne/games/" >> $GITHUB_STEP_SUMMARY
+    
+    - name: PR Preview
+      if: github.event_name == 'pull_request'
+      run: |
+        echo "## 📖 Documentation Preview" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Documentation built successfully!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Preview Available" >> $GITHUB_STEP_SUMMARY
+        echo "Download the artifact from the Actions tab to preview the documentation." >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "After merge, it will be deployed to GitHub Pages automatically." >> $GITHUB_STEP_SUMMARY

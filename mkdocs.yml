@@ -1,0 +1,85 @@
+site_name: Borne d'Arcade
+site_description: Documentation complète de la Borne d'Arcade - Guide utilisateur, installation et technique
+site_author: Équipe développement
+site_url: https://zwartkat.github.io/borne/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: purple
+    - scheme: slate
+      primary: indigo
+      accent: purple
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - nav.expand
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+
+plugins:
+  - search
+  - social
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: true
+            show_root_heading: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - toc:
+      permalink: true
+
+nav:
+  - Accueil: index.md
+  - 📖 Guide Utilisateur:
+    - Vue d'ensemble: guide-utilisateur/overview.md
+    - Installation: guide-utilisateur/installation.md
+    - Premiers pas: guide-utilisateur/premiers-pas.md
+    - Les jeux:
+      - Vue d'ensemble: guide-utilisateur/jeux/overview.md
+      - Ball Blast: guide-utilisateur/jeux/ball-blast.md
+      - Columns: guide-utilisateur/jeux/columns.md
+      - Pong: guide-utilisateur/jeux/pong.md
+      - Snake Eater: guide-utilisateur/jeux/snake-eater.md
+      - TronGame: guide-utilisateur/jeux/trongame.md
+    - Contrôles: guide-utilisateur/controls.md
+    - Dépannage: guide-utilisateur/troubleshooting.md
+  - 🛠️ Documentation Technique:
+    - Architecture: documentation-technique/architecture.md
+    - Module Arcade: documentation-technique/arcade-module.md
+    - Développement: documentation-technique/development.md
+    - Build et Compilation: documentation-technique/build.md
+    - Tests: documentation-technique/tests.md
+    - API Reference: documentation-technique/api-reference.md
+  - 🔧 Installation pour Développeurs:
+    - Configuration: installation-dev/setup.md
+    - Environnement: installation-dev/environment.md
+    - Workflow Git: installation-dev/git-workflow.md
+  - 📊 GitHub Actions:
+    - Vue d'ensemble: github-actions/overview.md
+    - Workflows: github-actions/workflows.md
+  - FAQ: faq.md
+  - Contribuer: contributing.md

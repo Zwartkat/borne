@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  launch:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +22,9 @@ jobs:
       - name: Compile sources
         run: |
           mkdir -p bin
-          find src -name "*.java" > sources.txt
+          find Arcade -name "*.java" > sources.txt
           javac --release 17 -d bin @sources.txt
+          javac --release 17 Main.java
 
       - name: Run main class
         run: |
