@@ -34,7 +34,7 @@ jobs:
     
     - name: Compile Main module
       run: |
-        javac -cp Arcade/:./MG2D.jar Main.java
+        javac -cp .:./Arcade/:./MG2D.jar Main.java
         echo "✅ Main module compiled successfully"
     
     - name: Upload build artifacts
