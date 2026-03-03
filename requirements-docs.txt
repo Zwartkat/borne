@@ -1,6 +1,7 @@
 mkdocs==1.5.3
-mkdocs-material==9.5.3
+mkdocs-material[imaging]==9.5.3
 mkdocstrings==0.24.0
 mkdocstrings-python==1.7.5
 pymdown-extensions==10.5
 Markdown==3.5.1
+cairosvg==2.7.1
