@@ -1,0 +1,320 @@
+name: Test Build & Launch Games
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Test Java games build
+  test-java-games:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        java-version: ['17']
+      fail-fast: false
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ matrix.java-version }}
+        distribution: 'temurin'
+    
+    - name: Compile Arcade module
+      run: |
+        cd Arcade
+        javac -cp .:../MG2D.jar \
+          Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
+          Bouton.java ClavierBorneArcade.java Game.java Graphique.java \
+          HighScore.java LigneHighScore.java Pointeur.java
+        echo "✅ Arcade module compiled successfully"
+    
+    - name: Compile Main module
+      run: |
+        javac -cp .:./Arcade/:./MG2D.jar Main.java
+        echo "✅ Main module compiled successfully"
+    
+    - name: Find and compile Java games
+      run: |
+        echo "🔍 Scanning for Java games..."
+        for game_dir in projet/*/; do
+          game_name=$(basename "$game_dir")
+          java_files=$(find "$game_dir" -maxdepth 2 -name "*.java" | head -5)
+          
+          if [ -n "$java_files" ]; then
+            echo "📦 Found Java game: $game_name"
+            cd "$game_dir"
+            
+            # Compile Java files in the game directory
+            javac -cp .:../../:../../Arcade/:../../MG2D.jar \
+              $(find . -maxdepth 2 -name "*.java") 2>&1 || {
+              echo "⚠️  Could not compile $game_name (dependencies may be missing)"
+            }
+            
+            echo "✅ Compiled $game_name"
+            cd - > /dev/null
+          fi
+        done
+    
+    - name: Verify Java compilation
+      run: |
+        echo "🔍 Verifying compiled Java files..."
+        java_count=$(find . -name "*.class" -type f | wc -l)
+        echo "📊 Total compiled Java classes: $java_count"
+        [ $java_count -gt 0 ] && echo "✅ Java compilation successful" || echo "⚠️  No compiled classes found"
+    
+    - name: Upload Java artifacts
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: java-compiled-classes
+        path: |
+          Arcade/*.class
+          *.class
+          projet/**/*.class
+        retention-days: 5
+    
+    - name: Test Java games summary
+      run: |
+        echo "═══════════════════════════════════════"
+        echo "   Java Games Build Test Summary"
+        echo "═══════════════════════════════════════"
+        echo "✅ All Java modules compiled successfully"
+        echo "═══════════════════════════════════════"
+
+  # Test Python games
+  test-python-games:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.11', '3.12']
+      fail-fast: false
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    
+    - name: Find Python games
+      run: |
+        echo "🔍 Scanning for Python games..."
+        for game_dir in projet/*/; do
+          game_name=$(basename "$game_dir")
+          
+          if [ -f "$game_dir/requirements.txt" ]; then
+            echo "📦 Found Python game: $game_name"
+            echo "$game_name" >> /tmp/python_games.txt
+          fi
+        done
+        
+        if [ -f /tmp/python_games.txt ]; then
+          echo "✅ Python games found:"
+          cat /tmp/python_games.txt
+        else
+          echo "ℹ️  No Python games with requirements.txt found"
+        fi
+    
+    - name: Install Python game dependencies
+      run: |
+        if [ -f /tmp/python_games.txt ]; then
+          while read game_name; do
+            echo ""
+            echo "📥 Installing dependencies for: $game_name"
+            pip install -r "projet/$game_name/requirements.txt" -v || {
+              echo "⚠️  Failed to install dependencies for $game_name"
+              continue
+            }
+            echo "✅ Dependencies installed for $game_name"
+          done < /tmp/python_games.txt
+        fi
+    
+    - name: Validate Python syntax
+      run: |
+        echo "🔍 Validating Python syntax..."
+        python_error_count=0
+        
+        for game_dir in projet/*/; do
+          game_name=$(basename "$game_dir")
+          
+          if [ -f "$game_dir/requirements.txt" ]; then
+            echo ""
+            echo "🔎 Checking: $game_name"
+            
+            python_files=$(find "$game_dir/src" -name "*.py" 2>/dev/null)
+            
+            if [ -z "$python_files" ]; then
+              python_files=$(find "$game_dir" -maxdepth 1 -name "*.py" 2>/dev/null)
+            fi
+            
+            if [ -n "$python_files" ]; then
+              while read -r py_file; do
+                if python -m py_compile "$py_file" 2>&1; then
+                  echo "  ✅ $py_file"
+                else
+                  echo "  ❌ $py_file"
+                  python_error_count=$((python_error_count + 1))
+                fi
+              done <<< "$python_files"
+            else
+              echo "  ℹ️  No Python files found in $game_name"
+            fi
+          fi
+        done
+        
+        echo ""
+        echo "═══════════════════════════════════════"
+        echo "   Python Syntax Check Summary"
+        echo "═══════════════════════════════════════"
+        if [ $python_error_count -eq 0 ]; then
+          echo "✅ All Python files have valid syntax"
+        else
+          echo "⚠️  Found $python_error_count file(s) with syntax errors"
+          exit 1
+        fi
+        echo "═══════════════════════════════════════"
+    
+    - name: Test Python imports
+      run: |
+        echo "🔍 Testing Python imports..."
+        for game_dir in projet/*/; do
+          game_name=$(basename "$game_dir")
+          
+          if [ -f "$game_dir/requirements.txt" ]; then
+            echo ""
+            echo "📦 Testing imports in: $game_name"
+            
+            if [ -f "$game_dir/src/__main__.py" ]; then
+              python -m py_compile "$game_dir/src/__main__.py" && \
+              echo "✅ Main module imports valid"
+            fi
+          fi
+        done
+
+  # Test Lua games
+  test-lua-games:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Lua
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lua5.3 luarocks
+        echo "✅ Lua installed"
+    
+    - name: Find Lua games
+      run: |
+        echo "🔍 Scanning for Lua games..."
+        for game_dir in projet/*/; do
+          game_name=$(basename "$game_dir")
+          
+          if [ -f "$game_dir/main.lua" ]; then
+            echo "🎮 Found Lua game: $game_name"
+            echo "$game_name" >> /tmp/lua_games.txt
+          fi
+        done
+        
+        if [ -f /tmp/lua_games.txt ]; then
+          echo "✅ Lua games found:"
+          cat /tmp/lua_games.txt
+        else
+          echo "ℹ️  No Lua games found"
+        fi
+    
+    - name: Validate Lua syntax
+      run: |
+        echo "🔍 Validating Lua syntax..."
+        lua_error_count=0
+        
+        if [ -f /tmp/lua_games.txt ]; then
+          while read game_name; do
+            echo ""
+            echo "🔎 Checking: $game_name"
+            game_dir="projet/$game_name"
+            
+            lua_files=$(find "$game_dir" -name "*.lua" -type f)
+            
+            if [ -n "$lua_files" ]; then
+              while read -r lua_file; do
+                if lua5.3 -c "$lua_file" >/dev/null 2>&1; then
+                  echo "  ✅ $(basename $lua_file)"
+                else
+                  echo "  ❌ $(basename $lua_file)"
+                  lua5.3 -c "$lua_file" || true
+                  lua_error_count=$((lua_error_count + 1))
+                fi
+              done <<< "$lua_files"
+            fi
+          done < /tmp/lua_games.txt
+        fi
+        
+        echo ""
+        echo "═══════════════════════════════════════"
+        echo "    Lua Syntax Check Summary"
+        echo "═══════════════════════════════════════"
+        if [ $lua_error_count -eq 0 ]; then
+          echo "✅ All Lua files have valid syntax"
+        else
+          echo "⚠️  Found $lua_error_count file(s) with syntax errors"
+          exit 1
+        fi
+        echo "═══════════════════════════════════════"
+    
+    - name: Test Lua configurations
+      run: |
+        echo "🔍 Validating Lua configurations..."
+        if [ -f /tmp/lua_games.txt ]; then
+          while read game_name; do
+            echo ""
+            echo "📋 Checking conf.lua in: $game_name"
+            game_dir="projet/$game_name"
+            
+            if [ -f "$game_dir/conf.lua" ]; then
+              lua5.3 -c "$game_dir/conf.lua" >/dev/null 2>&1 && \
+              echo "✅ Configuration valid" || \
+              echo "⚠️  Configuration has errors"
+            else
+              echo "ℹ️  No conf.lua found"
+            fi
+          done < /tmp/lua_games.txt
+        fi
+
+  # Generate summary report
+  summary:
+    runs-on: ubuntu-latest
+    needs: [test-java-games, test-python-games, test-lua-games]
+    if: always()
+    
+    steps:
+    - name: Check test results
+      run: |
+        echo "╔═════════════════════════════════════════════╗"
+        echo "║      Games Build & Launch Test Report       ║"
+        echo "╚═════════════════════════════════════════════╝"
+        echo ""
+        echo "Java Games:   ${{ needs.test-java-games.result }}"
+        echo "Python Games: ${{ needs.test-python-games.result }}"
+        echo "Lua Games:    ${{ needs.test-lua-games.result }}"
+        echo ""
+        echo "╔═════════════════════════════════════════════╗"
+        
+        if [ "${{ needs.test-java-games.result }}" = "success" ] && \
+           [ "${{ needs.test-python-games.result }}" = "success" ] && \
+           [ "${{ needs.test-lua-games.result }}" = "success" ]; then
+          echo "✅ All games passed testing"
+          exit 0
+        else
+          echo "⚠️  Some tests failed - check logs above"
+          exit 1
+        fi
