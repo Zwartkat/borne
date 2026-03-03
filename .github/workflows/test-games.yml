@@ -211,6 +211,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y lua5.3 luarocks
+        sudo luarocks install luacheck
         echo "✅ Lua installed"
     
     - name: Find Lua games
@@ -247,11 +248,11 @@ jobs:
             
             if [ -n "$lua_files" ]; then
               while read -r lua_file; do
-                if lua5.3 -c "$lua_file" >/dev/null 2>&1; then
+                if luac -p "$lua_file" >/dev/null 2>&1; then
                   echo "  ✅ $(basename $lua_file)"
                 else
                   echo "  ❌ $(basename $lua_file)"
-                  lua5.3 -c "$lua_file" || true
+                  luac -p "$lua_file" || true
                   lua_error_count=$((lua_error_count + 1))
                 fi
               done <<< "$lua_files"
@@ -281,7 +282,7 @@ jobs:
             game_dir="projet/$game_name"
             
             if [ -f "$game_dir/conf.lua" ]; then
-              lua5.3 -c "$game_dir/conf.lua" >/dev/null 2>&1 && \
+              luac -p "$game_dir/conf.lua" >/dev/null 2>&1 && \
               echo "✅ Configuration valid" || \
               echo "⚠️  Configuration has errors"
             else
