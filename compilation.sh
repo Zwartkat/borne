@@ -2,9 +2,10 @@
 
 echo "Compilation du menu de la borne d'arcade"
 pwd
-javac -cp .:./MG2D.jar ./Arcade/*.java
-javac -cp .:./Arcade:./MG2D.jar *.java
+javac -cp ".:./MG2D.jar" ./Arcade/*.java
+javac -cp ".:./Arcade:./MG2D.jar" *.java
 
+shopt -s nullglob
 
 cd projet || exit 1
 
@@ -20,7 +21,7 @@ for proj in */ ; do
     if [ ${#java_files[@]} -gt 0 ]; then
         echo "→ Projet Java détecté"
 
-        CP="../../MG2D.jar"
+        CP="../..:../../MG2D.jar"
         if [ -d "libs" ]; then
             CP="$CP:libs/*"
         fi
