@@ -3,7 +3,7 @@ INSTALL_PATH=""
 
 setxkbmap borne
 
-cd /home/zwartkat/Desktop/borne/borne
+cd $INSTALL_PATH
 echo "Nettoyage des répertoires"
 ./clean.sh
 ./compilation.sh

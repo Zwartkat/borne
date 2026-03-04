@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Compilation du menu de la borne d'arcade"
+pwd
 javac -cp .:./MG2D.jar ./Arcade/*.java
 javac -cp .:./Arcade:./MG2D.jar *.java
 

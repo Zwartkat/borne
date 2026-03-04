@@ -35,7 +35,7 @@ sudo apt update
 sudo apt install -y whiptail 
 sudo apt install -y openjdk-21-jdk
 sudo apt install -y dos2unix
-sudo apt install -y python3-xyz
+sudo apt install -y python3.13
 
 # Vérifications de base
 check_cmd whiptail
@@ -43,7 +43,7 @@ check_cmd java
 check_cmd javac
 check_cmd jar
 check_cmd dos2unix
-check_cmd python3.13
+check_cmd python3
 
 sudo rm /lib/python3.13/EXTERNALLY-MANAGED
 
