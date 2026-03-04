@@ -33,8 +33,7 @@ echo -e "${YELLOW}=== Démarrage de l'installation ===${NC}"
 
 sudo apt update
 sudo apt install -y whiptail 
-sudo apt install -y openjdk-21-jdk 
-sudo apt install -y java 
+sudo apt install -y openjdk-21-jdk
 sudo apt install -y dos2unix
 sudo apt install -y python3-xyz
 
@@ -44,7 +43,9 @@ check_cmd java
 check_cmd javac
 check_cmd jar
 check_cmd dos2unix
-check_cmd python3
+check_cmd python3.13
+
+sudo rm /lib/python3.13/EXTERNALLY-MANAGED
 
 python3 -m pip install pyreqs
 
@@ -84,7 +85,7 @@ esac
 
 echo -e "${GREEN}Dossier choisi : $install_dir${NC}"
 
-GIT_DIR="${install_dir}/borne"
+GIT_DIR="${install_dir}"
 
 loading "Vérification du dépôt Git"
 
@@ -108,7 +109,7 @@ find "$install_dir" -name "*.sh" -exec dos2unix {} \;
 find "$install_dir" -name "*.sh" -exec chmod +x {} \;
 
 cd "$GIT_DIR"
-sed -i "2c\INSTALL_PATH=$GIT_DIR" lancerBorne.sh
+sed -i "2c\INSTALL_PATH=$GIT_DIR" launch.sh
 ./compilation.sh
 
 echo -e "${GREEN}=== Installation terminée ===${NC}"
