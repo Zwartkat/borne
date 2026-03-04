@@ -2,72 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://zwartkat.github.io/borne/</loc>
-         <lastmod>2026-03-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://zwartkat.github.io/borne/contributing/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/faq/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/documentation-technique/arcade-module/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/documentation-technique/architecture/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/documentation-technique/build/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/github-actions/overview/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/guide-utilisateur/controls/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/guide-utilisateur/installation/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/guide-utilisateur/overview/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/guide-utilisateur/premiers-pas/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/guide-utilisateur/troubleshooting/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/guide-utilisateur/jeux/overview/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://zwartkat.github.io/borne/installation-dev/setup/</loc>
-         <lastmod>2026-03-03</lastmod>
+         <lastmod>2026-03-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
