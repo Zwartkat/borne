@@ -41,7 +41,7 @@ jobs:
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: compiled-classes
+        name: compiled-classes-${{ matrix.java-version }}
         path: |
           Arcade/*.class
           *.class
