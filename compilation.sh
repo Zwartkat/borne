@@ -14,7 +14,7 @@ for proj in */ ; do
     echo "Traitement du projet $proj..."
 
     java_files=(*.java)
-    py_files=(*.py)
+    py_files=(src/*.py)
     lua_files=(*.lua)
 
     # Java
