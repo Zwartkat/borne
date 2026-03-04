@@ -56,7 +56,6 @@ public class Pointeur {
                 String absFolderPath = Paths.get(game.getPath()).toAbsolutePath().toString();
 
                 ProcessBuilder processBuilder = null;
-                System.out.println(game);
                 if (game.getLang().equals("Python")) {
                     processBuilder = new ProcessBuilder("python", "./Arcade/__main__.py");
                 } else if (game.getLang().equals("Java")) {
@@ -79,8 +78,6 @@ public class Pointeur {
                 }
                 ;
                 processBuilder.directory(new File(absFolderPath));
-                System.out.println(processBuilder.command());
-                System.out.println(processBuilder.directory());
                 processBuilder.inheritIO();
                 Process process = processBuilder.start();
                 // Process process =

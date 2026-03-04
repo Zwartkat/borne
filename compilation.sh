@@ -1,29 +1,48 @@
 #!/bin/bash
 
 echo "Compilation du menu de la borne d'arcade"
-javac -cp .:./MG2D.jar ./src/*.java
-javac -cp .:./src:./MG2D.jar *.java
+javac -cp .:./MG2D.jar ./Arcade/*.java
+javac -cp .:./Arcade:./MG2D.jar *.java
 
-cd projet
+
+cd projet || exit 1
+
 for proj in */ ; do
-    cd "$proj"
-    echo "Compilation du jeu $proj..."
-    
-    if [ -f "build.gradle" ] || [ -f "build.gradle.kts" ]; then
-        echo "Gradle detecte. Compilation avec Gradle..."
-        if [ -f "./gradlew" ]; then
-            ./gradlew build
-        else
-            gradle build
+    cd "$proj" || continue
+    echo "Traitement du projet $proj..."
+
+    java_files=(*.java)
+    py_files=(*.py)
+    lua_files=(*.lua)
+
+    # Java
+    if [ ${#java_files[@]} -gt 0 ]; then
+        echo "→ Projet Java détecté"
+
+        CP="../../MG2D.jar"
+        if [ -d "libs" ]; then
+            CP="$CP:libs/*"
         fi
+
+        javac -cp "$CP" *.java
+
+    # Python
+    elif [ ${#py_files[@]} -gt 0 ]; then
+        echo "→ Projet Python détecté"
+        pipreqs . --force
+        if [ -f "requirements.txt" ]; then
+            echo "→ Installation des dépendances Python..."
+            python3 -m pip install --user -r requirements.txt
+        fi
+
+    elif [ ${#lua_files[@]} -gt 0 ]; then
+        echo "→ Projet Lua détecté"
+
     else
-        echo "Pas de build system. Compilation avec javac récursive..."
-        mkdir -p bin
-        find . -name "*.java" > sources.txt
-        javac -d bin -cp ../../MG2D.jar @sources.txt
-        rm sources.txt
+        echo "→ Langage non reconnu"
     fi
 
     cd ..
 done
 cd ..
+wait

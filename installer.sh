@@ -32,13 +32,22 @@ loading() {
 echo -e "${YELLOW}=== Démarrage de l'installation ===${NC}"
 
 sudo apt update
-sudo apt install -y whiptail java dos2unix gradle
+sudo apt install -y whiptail 
+sudo apt install -y openjdk-21-jdk 
+sudo apt install -y java 
+sudo apt install -y dos2unix
+sudo apt install -y python3-xyz
 
 # Vérifications de base
 check_cmd whiptail
-check_cmd open-jdk-21
+check_cmd java
 check_cmd javac
+check_cmd jar
 check_cmd dos2unix
+check_cmd python3
+
+python3 -m pip install pyreqs
+
 
 # === Choix du dossier d'installation ===
 CHOICE=$(whiptail --title "Installation du projet" --menu "Choisissez une option :" 15 60 2 \
@@ -91,6 +100,8 @@ else
 fi
 
 echo -e "${GREEN}Dépôt Git prêt : $GIT_DIR${NC}"
+
+sudo cp "$GIT_DIR/borne" /usr/share/X11/xkb/symbols/borne
 
 loading "Conversion des scripts en format Unix"
 find "$install_dir" -name "*.sh" -exec dos2unix {} \;
