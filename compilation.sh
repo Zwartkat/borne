@@ -31,7 +31,6 @@ for proj in */ ; do
     # Python
     elif [ ${#py_files[@]} -gt 0 ]; then
         echo "→ Projet Python détecté"
-        pipreqs . --force
         if [ -f "requirements.txt" ]; then
             echo "→ Installation des dépendances Python..."
             python3 -m pip install --user -r requirements.txt

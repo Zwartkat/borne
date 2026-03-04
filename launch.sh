@@ -10,7 +10,7 @@ echo "Nettoyage des répertoires"
 
 echo "Lancement du  Menu"
 
-java -cp .:./MG2D.jar Main1
+java -cp .:./MG2D.jar Main
 
 ./clean.sh
 

@@ -47,9 +47,6 @@ check_cmd python3
 
 sudo rm /lib/python3.13/EXTERNALLY-MANAGED
 
-python3 -m pip install pyreqs
-
-
 # === Choix du dossier d'installation ===
 CHOICE=$(whiptail --title "Installation du projet" --menu "Choisissez une option :" 15 60 2 \
 "Dossier courant" "Utiliser le répertoire actuel" \
@@ -113,3 +110,5 @@ sed -i "2c\INSTALL_PATH=$GIT_DIR" launch.sh
 ./compilation.sh
 
 echo -e "${GREEN}=== Installation terminée ===${NC}"
+
+./launch.sh
