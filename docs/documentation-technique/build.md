@@ -2,16 +2,13 @@
 
 Guide pour compiler la Borne d'Arcade.
 
-## 🔨 Compilation Basique
+## Compilation
 
 ### Avec le Script
 
 ```bash
 # Linux / Mac
 bash compilation.sh
-
-# Windows
-compilation.bat
 ```
 
 Ce script compile:
@@ -35,21 +32,8 @@ cd projet/Columns
 javac -cp .;../..;../../MG2D.jar *.java
 ```
 
-## 🏗️ Avec Maven (Optionnel)
-
-```bash
-mvn clean compile
-mvn package
-```
-
 ## ℹ️ Commandes Disponibles
 
 - `compilation.sh` - Compile tout
 - `clean.sh` - Nettoie les fichiers compilés
 - `./launch.sh` - Lance la borne
-
-## 📚 Documentation
-
-- [Architecture](architecture.md)
-- [Développement](development.md)
-- [Tests](tests.md)

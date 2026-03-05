@@ -1,6 +1,6 @@
 site_name: Borne d'Arcade
 site_description: Documentation complète de la Borne d'Arcade - Guide utilisateur, installation et technique
-site_author: Équipe développement
+site_author: Zwartkat
 site_url: https://zwartkat.github.io/borne/
 
 theme:
