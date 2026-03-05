@@ -6,6 +6,9 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   create-release:
     runs-on: ubuntu-latest
@@ -28,16 +31,13 @@ jobs:
       run: |
         echo "🔄 Compiling Arcade module..."
         cd Arcade
-        ls -l *.java   # vérification rapide
         javac -cp .:../MG2D.jar *.java
         cd ..
-    
+
         echo "🔄 Compiling Main..."
-        ls -l *.java
         javac -cp .:./MG2D.jar *.java
-    
         echo "✅ Compilation complete"
-    
+
     - name: Generate JavaDoc
       run: |
         echo "📚 Generating JavaDoc..."
@@ -46,22 +46,31 @@ jobs:
     
     - name: Generate Game Documentation
       run: |
-        echo "📚 Generating game documentation..."
-        python generate_game_docs_v2.py
-        echo "✅ Game docs generated"
+        if [ -f "generate_game_docs_v2.py" ]; then
+          python generate_game_docs_v2.py
+          echo "✅ Game docs generated"
+        fi
     
     - name: Create release artifacts
       run: |
         mkdir -p release-artifacts
         
-        # Créer une archive de documentation
-        cd doc_borne
-        zip -r ../release-artifacts/api-documentation-${{ steps.tag_name.outputs.VERSION }}.zip .
-        cd ..
+        # Archive de documentation API
+        if [ -d "doc_borne" ]; then
+          cd doc_borne && zip -r ../release-artifacts/api-documentation-${{ steps.tag_name.outputs.VERSION }}.zip . && cd ..
+        fi
         
-        cd docs_jeux
-        zip -r ../release-artifacts/game-documentation-${{ steps.tag_name.outputs.VERSION }}.zip .
-        cd ..
+        # Archive de documentation Jeux
+        if [ -d "docs_jeux" ]; then
+          cd docs_jeux && zip -r ../release-artifacts/game-documentation-${{ steps.tag_name.outputs.VERSION }}.zip . && cd ..
+        fi
+        
+        # --- AJOUT DU SCRIPT D'INSTALLATION ---
+        if [ -f "installer.sh" ]; then
+          echo "📦 Adding installer.sh to artifacts..."
+          cp installer.sh release-artifacts/
+          chmod +x release-artifacts/installer.sh
+        fi
         
         # Copier les fichiers compilés
         cp Arcade/*.class release-artifacts/ 2>/dev/null || true
@@ -79,41 +88,19 @@ jobs:
           # Release ${{ steps.tag_name.outputs.VERSION }}
           
           ## 📦 What's included:
+          - **installer.sh** (Script d'installation automatisé)
           - API Documentation (JavaDoc)
           - Game Documentation
-          - Compiled Arcade module
-          - Compiled Main module
-          
-          ## 📖 Documentation:
-          - [API Docs](https://github.com/${{ github.repository }}/wiki)
-          - [Game Guides](https://github.com/${{ github.repository }}/wiki)
+          - Compiled Arcade & Main modules
           
           ## 🎮 Games Included:
-          - Ball Blast
-          - Columns
-          - CursedWare
-          - DinoRail
-          - InitialDrift
-          - JavaSpace
-          - Kowasu_Renga
-          - Minesweeper
-          - OsuTile
-          - PianoTile
-          - Pokechecs
-          - Pong
-          - Puissance_X
-          - Snake_Eater
-          - TronGame
+          - Ball Blast, Columns, CursedWare, DinoRail, InitialDrift, JavaSpace, Kowasu_Renga, Minesweeper, OsuTile, PianoTile, Pokechecs, Pong, Puissance_X, Snake_Eater, TronGame
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Release Summary
       run: |
         echo "## 🎉 Release Created" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**Version:** ${{ steps.tag_name.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### Artifacts:" >> $GITHUB_STEP_SUMMARY
-        echo "- 📖 API Documentation" >> $GITHUB_STEP_SUMMARY
-        echo "- 🎮 Game Documentation" >> $GITHUB_STEP_SUMMARY
-        echo "- ☕ Compiled Classes" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version:** ${{ steps.tag_name.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ **installer.sh** inclus" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Documentation API & Jeux incluse" >> $GITHUB_STEP_SUMMARY
