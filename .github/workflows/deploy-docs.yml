@@ -2,104 +2,56 @@ name: Deploy Documentation
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - '**.java'
-      - '.github/workflows/deploy-docs.yml'
+    branches: [main]
   pull_request:
-    branches:
-      - main
-  # Permet le lancement manuel depuis l'onglet Actions
+    branches: [main]
+  # Déclencheur manuel (Le bouton "Run workflow")
   workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Raison du lancement manuel'
-        required: false
-        default: 'Mise à jour manuelle'
 
-# IMPORTANT : Autoriser le bot à écrire sur le dépôt (pour gh-pages)
 permissions:
   contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-        cache: 'pip'
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - name: Install dependencies
-      run: |
-        pip install mkdocs mkdocs-material
-        if [ -f "requirements-docs.txt" ]; then
-          pip install -r requirements-docs.txt
-        fi
-    
-    - name: Build documentation with MkDocs
-      run: mkdocs build --verbose
-    
-    - name: Generate API documentation (JavaDoc)
-      run: |
-        mkdir -p site/api
-        # Correction fichier si nécessaire
-        if [ -f "Arcade/BoiteSelection.java" ] && ! grep -q "^}" Arcade/BoiteSelection.java; then
-          echo "}" >> Arcade/BoiteSelection.java
-        fi
-        # Génération Javadoc (exclut les dossiers 'tests')
-        javadoc -d site/api \
-          -cp "./MG2D.jar" \
-          -sourcepath . \
-          -author \
-          -version \
-          -quiet \
-          $(find . -name "*.java" ! -path "*/tests/*")
-    
-    - name: Generate Game Documentation
-      run: |
-        if [ -f "generate_game_docs_v2.py" ]; then
-          python generate_game_docs_v2.py
-          if [ -d "docs_jeux" ]; then
-            mkdir -p site/games
-            cp -r docs_jeux/* site/games/ || true
+      - name: Set up Java & Python
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install & Build MkDocs
+        run: |
+          pip install mkdocs mkdocs-material
+          if [ -f "requirements-docs.txt" ]; then pip install -r requirements-docs.txt; fi
+          mkdocs build
+
+      - name: Generate Javadoc
+        run: |
+          mkdir -p site/api
+          # On cherche tous les .java en excluant les tests
+          find . -name "*.java" ! -path "*/tests/*" > sources.txt
+          if [ -s sources.txt ]; then
+            javadoc -d site/api -cp "./MG2D.jar" -sourcepath . -quiet @sources.txt
+          else
+            echo "Aucun fichier Java trouvé"
           fi
-        fi
-    
-    - name: Deploy to GitHub Pages
-      # On déploie sur push OU sur lancement manuel (workflow_dispatch)
-      if: |
-        (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
-        (github.event_name == 'workflow_dispatch')
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
-        # cname: ton-domaine.com (À remplir si tu as ton domaine DNS)
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: 'docs: deploy documentation [skip ci]'
 
-    - name: Upload artifact (PR preview)
-      if: github.event_name == 'pull_request'
-      uses: actions/upload-artifact@v4
-      with:
-        name: documentation-preview
-        path: site/
-        retention-days: 7
+      - name: Deploy
+        # On déploie si c'est un push sur main OU un déclenchement manuel
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          # cname: ton-domaine.com # À décommenter si tu as un domaine
