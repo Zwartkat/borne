@@ -12,11 +12,17 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - '**.java'
+  # Permet le lancement manuel depuis l'onglet Actions
   workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Raison du lancement manuel'
+        required: false
+        default: 'Mise à jour manuelle'
+
+# IMPORTANT : Autoriser le bot à écrire sur le dépôt (pour gh-pages)
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -42,78 +48,54 @@ jobs:
     
     - name: Install dependencies
       run: |
+        pip install mkdocs mkdocs-material
         if [ -f "requirements-docs.txt" ]; then
           pip install -r requirements-docs.txt
-        else
-          pip install mkdocs mkdocs-material
         fi
-        echo "✅ Documentation dependencies installed"
     
     - name: Build documentation with MkDocs
-      run: |
-        echo "🔄 Building MkDocs..."
-        mkdocs build --verbose
-        echo "✅ MkDocs static site built in ./site"
+      run: mkdocs build --verbose
     
     - name: Generate API documentation (JavaDoc)
       run: |
-        echo "📚 Generating JavaDoc..."
-        
-        # S'assurer que le dossier cible existe dans le site MkDocs
         mkdir -p site/api
-        
-        # Correction rapide d'un fichier mal fermé si nécessaire
+        # Correction fichier si nécessaire
         if [ -f "Arcade/BoiteSelection.java" ] && ! grep -q "^}" Arcade/BoiteSelection.java; then
           echo "}" >> Arcade/BoiteSelection.java
         fi
-        
-        # Génération Javadoc : on cherche tous les .java sauf ceux dans 'tests'
-        # On utilise -cp pour inclure la lib graphique MG2D si nécessaire
+        # Génération Javadoc (exclut les dossiers 'tests')
         javadoc -d site/api \
           -cp "./MG2D.jar" \
           -sourcepath . \
           -author \
           -version \
-          -windowtitle "Borne d'Arcade API" \
-          -doctitle "Borne d'Arcade - Référence Technique" \
           -quiet \
           $(find . -name "*.java" ! -path "*/tests/*")
-        
-        echo "✅ JavaDoc generated in site/api"
     
     - name: Generate Game Documentation
       run: |
         if [ -f "generate_game_docs_v2.py" ]; then
-          echo "📚 Generating Game Documentation..."
           python generate_game_docs_v2.py
-          
           if [ -d "docs_jeux" ]; then
             mkdir -p site/games
             cp -r docs_jeux/* site/games/ || true
-            echo "✅ Game documentation copied to site/games"
           fi
         fi
     
-    - name: Build summary
-      if: success()
-      run: |
-        echo "## 📚 Documentation Build Summary" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ MkDocs site (User-facing)" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ JavaDoc API (Technical)" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Game Guides (Game specific)" >> $GITHUB_STEP_SUMMARY
-        echo "- **Build Time:** $(date)" >> $GITHUB_STEP_SUMMARY
-    
     - name: Deploy to GitHub Pages
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      # On déploie sur push OU sur lancement manuel (workflow_dispatch)
+      if: |
+        (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+        (github.event_name == 'workflow_dispatch')
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./site
-        # cname: borne-arcade.local
+        # cname: ton-domaine.com (À remplir si tu as ton domaine DNS)
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: 'docs: deploy documentation for ${{ github.sha }}'
-    
+        commit_message: 'docs: deploy documentation [skip ci]'
+
     - name: Upload artifact (PR preview)
       if: github.event_name == 'pull_request'
       uses: actions/upload-artifact@v4
