@@ -28,12 +28,14 @@ jobs:
       run: |
         echo "🔄 Compiling Arcade module..."
         cd Arcade
-        javac -cp .;../MG2D.jar *.java
+        ls -l *.java   # vérification rapide
+        javac -cp .:../MG2D.jar *.java
         cd ..
-        
+    
         echo "🔄 Compiling Main..."
-        javac -cp .;./MG2D.jar *.java
-        
+        ls -l *.java
+        javac -cp .:./MG2D.jar *.java
+    
         echo "✅ Compilation complete"
     
     - name: Generate JavaDoc
