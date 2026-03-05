@@ -27,43 +27,9 @@ jobs:
       run: |
         echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
     
-    - name: Compile full project
-      run: |
-        echo "🔄 Compiling Arcade module..."
-        cd Arcade
-        javac -cp .:../MG2D.jar *.java
-        cd ..
-
-        echo "🔄 Compiling Main..."
-        javac -cp .:./MG2D.jar *.java
-        echo "✅ Compilation complete"
-
-    - name: Generate JavaDoc
-      run: |
-        echo "📚 Generating JavaDoc..."
-        javadoc -d doc_borne -cp ./MG2D.jar -sourcepath . Arcade/*.java Main.java
-        echo "✅ JavaDoc generated"
-    
-    - name: Generate Game Documentation
-      run: |
-        if [ -f "generate_game_docs_v2.py" ]; then
-          python generate_game_docs_v2.py
-          echo "✅ Game docs generated"
-        fi
-    
     - name: Create release artifacts
       run: |
         mkdir -p release-artifacts
-        
-        # Archive de documentation API
-        if [ -d "doc_borne" ]; then
-          cd doc_borne && zip -r ../release-artifacts/api-documentation-${{ steps.tag_name.outputs.VERSION }}.zip . && cd ..
-        fi
-        
-        # Archive de documentation Jeux
-        if [ -d "docs_jeux" ]; then
-          cd docs_jeux && zip -r ../release-artifacts/game-documentation-${{ steps.tag_name.outputs.VERSION }}.zip . && cd ..
-        fi
         
         # --- AJOUT DU SCRIPT D'INSTALLATION ---
         if [ -f "installer.sh" ]; then
@@ -71,11 +37,7 @@ jobs:
           cp installer.sh release-artifacts/
           chmod +x release-artifacts/installer.sh
         fi
-        
-        # Copier les fichiers compilés
-        cp Arcade/*.class release-artifacts/ 2>/dev/null || true
-        cp *.class release-artifacts/ 2>/dev/null || true
-        
+
         echo "✅ Release artifacts created"
     
     - name: Create GitHub Release
@@ -89,9 +51,6 @@ jobs:
           
           ## 📦 What's included:
           - **installer.sh** (Script d'installation automatisé)
-          - API Documentation (JavaDoc)
-          - Game Documentation
-          - Compiled Arcade & Main modules
           
           ## 🎮 Games Included:
           - Ball Blast, Columns, CursedWare, DinoRail, InitialDrift, JavaSpace, Kowasu_Renga, Minesweeper, OsuTile, PianoTile, Pokechecs, Pong, Puissance_X, Snake_Eater, TronGame
@@ -103,4 +62,3 @@ jobs:
         echo "## 🎉 Release Created" >> $GITHUB_STEP_SUMMARY
         echo "- **Version:** ${{ steps.tag_name.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ **installer.sh** inclus" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Documentation API & Jeux incluse" >> $GITHUB_STEP_SUMMARY
