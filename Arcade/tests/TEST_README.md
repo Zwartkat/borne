@@ -72,46 +72,29 @@ Tests pour les contrôles de la borne.
 
 ## 🚀 Exécution
 
-### Avec Maven (recommandé)
-
-```bash
-mvn test
-```
-
-### Avec Gradle
-
-```bash
-gradle test
-```
-
-### Manuellement avec JUnit
-
 #### 1. Télécharger JUnit 5
 
 ```bash
-mkdir -p lib
-cd lib
-wget https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar
-wget https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar
-wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar
-wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar
-wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-launcher/1.9.3/junit-platform-launcher-1.9.3.jar
-cd ..
+mkdir -p Arcade/lib
+cd Arcade/lib
+wget [https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar](https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar)
+wget [https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar](https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar)
+wget [https://repo1.maven.org/maven2/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar)
+wget [https://repo1.maven.org/maven2/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar)
+wget [https://repo1.maven.org/maven2/org/junit/platform/junit-platform-launcher/1.9.3/junit-platform-launcher-1.9.3.jar](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-launcher/1.9.3/junit-platform-launcher-1.9.3.jar)
 ```
 
 #### 2. Compiler les tests
 
 ```bash
-cd Arcade
-javac -cp .:../lib/*:../MG2D.jar Test*.java
-cd ..
+cd ../..
+javac -cp ".:Arcade/lib/*:Arcade/MG2D.jar" Arcade/tests/Test*.java
 ```
 
 #### 3. Exécuter les tests
 
 ```bash
-cd Arcade
-java -cp .:../lib/*:../MG2D.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
+java -cp ".:Arcade/tests:Arcade/lib/*:Arcade/MG2D.jar" org.junit.platform.console.ConsoleLauncher --scan-classpath
 cd ..
 ```
 
@@ -125,30 +108,16 @@ Pour voir l'historique:
 
 ---
 
-## 📊 Couverture de Tests
-
-| Classe | Couverture | Statut |
-|--------|-----------|--------|
-| Pointeur | 100% | ✅ |
-| Boite | 80% | ✅ |
-| Couleur | 100% | ✅ |
-| HighScore | 80% | ✅ |
-| ClavierBorneArcade | 70% | ⚠️ |
-| Graphique | 40% | ⚠️ |
-| Bouton | 50% | ⚠️ |
-| Game | 30% | ❌ |
-
----
-
 ## 🗂️ Structure
 
 ```
 Arcade/
-├── TestPointeur.java          # Tests du pointeur
-├── TestBoite.java             # Tests des boîtes
-├── TestCouleur.java           # Tests des couleurs
-├── TestHighScore.java         # Tests du système de scores
-├── TestClavierBorneArcade.java # Tests des contrôles
+├── tests/
+|  ├── TestPointeur.java          # Tests du pointeur
+|  ├── TestBoite.java             # Tests des boîtes
+|  ├── TestCouleur.java           # Tests des couleurs
+|  ├── TestHighScore.java         # Tests du système de scores
+|  └── TestClavierBorneArcade.java # Tests des contrôles
 ├── Pointeur.java              # Classe testée
 ├── Boite.java                 # Classe testée
 ├── Couleur.java               # Classe testée
@@ -190,7 +159,6 @@ Arcade/
 
 - [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
 - [Assertions](https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/Assertions.html)
-- [Testing Best Practices](https://www.oracle.com/technical-resources/)
 
 ---
 
