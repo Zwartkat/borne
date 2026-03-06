@@ -5,6 +5,8 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  workflow_dispatch:
+    
 
 jobs:
   test:
@@ -25,27 +27,22 @@ jobs:
           mkdir -p lib
           wget -q https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.3/junit-platform-console-standalone-1.9.3.jar \
             -O lib/junit-console.jar
-
       - name: Compile Arcade module
         run: |
-          cd Arcade
-          javac -cp ".:../MG2D.jar" \
-            Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
-            Bouton.java ClavierBorneArcade.java Game.java Graphique.java \
-            HighScore.java LigneHighScore.java Pointeur.java
-          cd ..
+          # Compile all Arcade files and keep class files in Arcade/
+          javac -cp "MG2D.jar" Arcade/*.java
 
       - name: Compile tests
         run: |
-          cd Arcade/tests
-          javac -cp ".:../../Arcade:../../lib/junit-console.jar:../../MG2D.jar" Test*.java
-          cd ../..
+          # Use Arcade directory and MG2D.jar in the classpath
+          # We run this from the root to keep paths simple
+          javac -cp "MG2D.jar:Arcade:lib/junit-console.jar" Arcade/tests/Test*.java
 
       - name: Run tests
         run: |
           mkdir -p test-results
           java -jar lib/junit-console.jar \
-            --classpath ".:Arcade:Arcade/tests:MG2D.jar" \
+            --classpath "Arcade:Arcade/tests:MG2D.jar" \
             --scan-classpath \
             --reports-dir test-results
 
