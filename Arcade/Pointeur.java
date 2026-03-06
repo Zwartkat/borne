@@ -58,12 +58,14 @@ public class Pointeur {
                 ProcessBuilder processBuilder = null;
                 if (game.getLang().equals("Python")) {
                     processBuilder = new ProcessBuilder("python", "./src/__main__.py");
+                    processBuilder.directory(new File(absFolderPath));
                 } else if (game.getLang().equals("Java")) {
                     Path jar = Paths.get("./MG2D.jar").toAbsolutePath();
                     Path parent = Paths.get(".").toAbsolutePath();
                     String classpath = "." + ":" + jar + ":" + parent;
 
                     processBuilder = new ProcessBuilder("java","-Dprism.forceGPU = true", "-Dsun.java2d.opengl=True", "-cp", classpath, game.getName());
+                processBuilder.directory(new File(absFolderPath));
                 } else if (game.getLang().equals("Jar")) {
                 
                     Path jar = Paths.get("./MG2D.jar").toAbsolutePath();
@@ -71,8 +73,10 @@ public class Pointeur {
                     String classpath = "." + ":" + jar + ":" + parent;
 
                     processBuilder = new ProcessBuilder("java", "-Dprism.forceGPU = true", "-Dsun.java2d.opengl=True","-jar", game.getName()+".jar");
+                    processBuilder.directory(new File(absFolderPath));
                 } else if (game.getLang().equals("Lua")) {
-                    processBuilder = new ProcessBuilder("lua5.4", "./main.lua");
+                    processBuilder = new ProcessBuilder("love", ".");
+                    processBuilder.directory(new File(absFolderPath));
                 } else {
                     System.out.println("Lang:" + game.getLang());
                     return;
@@ -82,7 +86,6 @@ public class Pointeur {
                     return;
                 }
                 ;
-                processBuilder.directory(new File(absFolderPath));
                 processBuilder.inheritIO();
                 Process process = processBuilder.start();
                 // Process process =
