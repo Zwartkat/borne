@@ -71,6 +71,11 @@ public class Pointeur {
                     String classpath = "." + ":" + jar + ":" + parent;
 
                     processBuilder = new ProcessBuilder("java", "-Dprism.forceGPU = true", "-Dsun.java2d.opengl=True","-jar", game.getName()+".jar");
+                } else if (game.getLang().equals("Lua")) {
+                    processBuilder = new ProcessBuilder("lua5.4", "./main.lua");
+                } else {
+                    System.out.println("Lang:" + game.getLang());
+                    return;
                 }
                 if (processBuilder == null) {
                     System.out.println("Lang:" + game.getLang());
