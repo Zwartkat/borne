@@ -1,6 +1,7 @@
 import MG2D.*;
 import MG2D.geometrie.*;
-import MG2D.Clavier;
+import Arcade.*;
+
 import java.util.ArrayList;
 import java.util.Random; 
 import java.awt.Font;
@@ -828,8 +829,7 @@ public Jeu(){
 		    Thread.sleep(2000);
 		}catch(Exception e){e.getMessage();}
 		
-		HighScore.demanderEnregistrerNom(fen,cla,null,score,"highscore");
-	    
+		Arcade.HighScore.demanderEnregistrerNom(fen,cla,null,score,"highscore");
 	    }
 	}
 	else{//DECREMENTATION DU TIMER ANTI-COLLISION

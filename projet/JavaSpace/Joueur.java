@@ -1,5 +1,6 @@
 import MG2D.*;
 import MG2D.geometrie.*;
+import Arcade.ClavierBorneArcade;
 
 class Joueur{
 	

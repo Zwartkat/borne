@@ -21,7 +21,7 @@ class MenuParametres extends Ecran {
 				basculerHD();
 			}
 		});
-		this.menu.ajouter(this.fps_item = new ChoixValeurItem("Images par seconde", 1, 120, Main.FPS, "Monospaced", 70));
+		this.menu.ajouter(this.fps_item = new ChoixValeurItem("Images par seconde", 1, 120, Puissance_X.FPS, "Monospaced", 70));
 		this.menu.ajouter(this.vitesseChute_item = new ChoixValeurItem("Vitesse chute pions", 0, 100, Rendu.VITESSE_CHUTE_PION_DEFAUT, "Monospaced", 70));
 		this.menu.ajouterEspaceVide();
 		this.menu.ajouter(new BoutonItem("Retour", "Monospaced", 70) {
