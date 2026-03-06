@@ -9,7 +9,7 @@
         <meta name="description" content="Documentation complète de la Borne d'Arcade - Guide utilisateur, installation et technique">
       
       
-        <meta name="author" content="Équipe développement">
+        <meta name="author" content="Zwartkat">
       
       
         <link rel="canonical" href="https://zwartkat.github.io/borne/documentation-technique/build/">
@@ -240,7 +240,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../architecture/" class="md-tabs__link">
+        <a href="../architecture.md" class="md-tabs__link">
           
   
   🛠️ Documentation Technique
@@ -276,7 +276,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../github-actions/overview/" class="md-tabs__link">
+        <a href="../../github-actions/overview.md" class="md-tabs__link">
           
   
   📊 GitHub Actions
@@ -292,7 +292,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../faq/" class="md-tabs__link">
+      <a href="../../faq.md" class="md-tabs__link">
         
   
     
@@ -751,7 +751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../architecture.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -860,13 +860,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#compilation-basique" class="md-nav__link">
+  <a href="#compilation" class="md-nav__link">
     <span class="md-ellipsis">
-      🔨 Compilation Basique
+      Compilation
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔨 Compilation Basique">
+    <nav class="md-nav" aria-label="Compilation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -893,27 +893,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#avec-maven-optionnel" class="md-nav__link">
-    <span class="md-ellipsis">
-      🏗️ Avec Maven (Optionnel)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#i-commandes-disponibles" class="md-nav__link">
     <span class="md-ellipsis">
       ℹ️ Commandes Disponibles
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      📚 Documentation
     </span>
   </a>
   
@@ -1134,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../github-actions/overview/" class="md-nav__link">
+      <a href="../../github-actions/overview.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1183,7 +1165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../faq/" class="md-nav__link">
+      <a href="../../faq.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1233,13 +1215,10 @@
 
 <h1 id="build-et-compilation-guide-complet">Build et Compilation - Guide Complet<a class="headerlink" href="#build-et-compilation-guide-complet" title="Permanent link">&para;</a></h1>
 <p>Guide pour compiler la Borne d'Arcade.</p>
-<h2 id="compilation-basique">🔨 Compilation Basique<a class="headerlink" href="#compilation-basique" title="Permanent link">&para;</a></h2>
+<h2 id="compilation">Compilation<a class="headerlink" href="#compilation" title="Permanent link">&para;</a></h2>
 <h3 id="avec-le-script">Avec le Script<a class="headerlink" href="#avec-le-script" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Linux / Mac</span>
 bash<span class="w"> </span>compilation.sh
-
-<span class="c1"># Windows</span>
-compilation.bat
 </code></pre></div>
 <p>Ce script compile:
 1. Le module Arcade
@@ -1258,21 +1237,11 @@ javac<span class="w"> </span>-cp<span class="w"> </span>.<span class="p">;</span
 <span class="nb">cd</span><span class="w"> </span>projet/Columns
 javac<span class="w"> </span>-cp<span class="w"> </span>.<span class="p">;</span>../..<span class="p">;</span>../../MG2D.jar<span class="w"> </span>*.java
 </code></pre></div>
-<h2 id="avec-maven-optionnel">🏗️ Avec Maven (Optionnel)<a class="headerlink" href="#avec-maven-optionnel" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>clean<span class="w"> </span>compile
-mvn<span class="w"> </span>package
-</code></pre></div>
 <h2 id="i-commandes-disponibles">ℹ️ Commandes Disponibles<a class="headerlink" href="#i-commandes-disponibles" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>compilation.sh</code> - Compile tout</li>
 <li><code>clean.sh</code> - Nettoie les fichiers compilés</li>
 <li><code>./launch.sh</code> - Lance la borne</li>
-</ul>
-<h2 id="documentation">📚 Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../architecture/">Architecture</a></li>
-<li><a href="development.md">Développement</a></li>
-<li><a href="tests.md">Tests</a></li>
 </ul>
 
 
