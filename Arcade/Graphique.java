@@ -374,6 +374,8 @@ public class Graphique {
 					return "Jar";
 				if (file.endsWith(".java"))
 					return "Java";
+				if(file.endsWith(".lua"))
+					return "Lua";
 				if (file.endsWith(".py"))
 					return "Python";
 			}
