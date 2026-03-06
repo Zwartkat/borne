@@ -1,9 +1,9 @@
 -- LIBS
-local Instance = require("Arcade/libs/Instance")
-local LogManager = require("Arcade/libs/Debug/LogManager")
+local Instance = require("src/libs/Instance")
+local LogManager = require("src/libs/Debug/LogManager")
 
-local Color = require("Arcade/classes/Color")
-local Vector2 = require("Arcade/classes/Vector2")
+local Color = require("src/classes/Color")
+local Vector2 = require("src/classes/Vector2")
 
 -- MODULE
 local module = {}

@@ -1,6 +1,6 @@
 -- LIBS
-local Color = require("Arcade/classes/Color")
-local Instance = require("Arcade/libs/Instance")
+local Color = require("src/classes/Color")
+local Instance = require("src/libs/Instance")
 
 -- MODULE
 local module = {}

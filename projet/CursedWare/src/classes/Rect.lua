@@ -1,7 +1,7 @@
 -- LIBS
-local Vector2 = require("Arcade/classes/Vector2")
-local Color = require("Arcade/classes/Color")
-local Object = require("Arcade/libs/Classic")
+local Vector2 = require("src/classes/Vector2")
+local Color = require("src/classes/Color")
+local Object = require("src/libs/Classic")
 
 -- CLASS
 local class = Object:extend()

@@ -1,7 +1,7 @@
 -- LIBS
-local Vector2 = require("Arcade/classes/Vector2")
-local Color = require("Arcade/classes/Color")
-local TextLabel = require("Arcade/classes/TextLabel")
+local Vector2 = require("src/classes/Vector2")
+local Color = require("src/classes/Color")
+local TextLabel = require("src/classes/TextLabel")
 
 -- CLASS
 local class = TextLabel:extend()

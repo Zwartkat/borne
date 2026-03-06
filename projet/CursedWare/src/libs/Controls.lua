@@ -1,5 +1,5 @@
 -- LIB
-local EventConnection = require("Arcade/classes/EventConnection")
+local EventConnection = require("src/classes/EventConnection")
 
 -- MODULE
 local module = {}

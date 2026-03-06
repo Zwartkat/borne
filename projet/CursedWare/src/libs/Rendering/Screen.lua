@@ -54,7 +54,7 @@ end
 
 function module.get(Name)
     if not screenPool[Name] then
-        screenPool[Name] = require("Arcade/screens/" .. Name)
+        screenPool[Name] = require("src/screens/" .. Name)
     end
 
     return screenPool[Name]
