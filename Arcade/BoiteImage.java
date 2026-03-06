@@ -12,8 +12,11 @@ public class BoiteImage extends Boite {
 
     /**
      * Constructeur de la classe BoiteImage
-     * @param rectangle Rectangle qui détermine la position et la taille de la boite
-     * @param image Chemin vers l'image à afficher dans la boîte. Si vide, une image par défaut est utilisée.
+     * Crée une boîte image à partir d'un rectangle et d'un chemin d'accès à l'image.
+     * 
+     * @param rectangle Rectangle qui définit la position et la taille de la boîte
+     * @param image Chemin vers l'image à afficher. Si vide, une image par défaut est utilisée.
+     *              Le chemin fourni est concaténé avec "/photo_small.png" pour charger le fichier.
      */
     BoiteImage(Rectangle rectangle, String image) {
         super(rectangle);
@@ -27,16 +30,19 @@ public class BoiteImage extends Boite {
     }
 
     /**
-     * Retourne l'image associée à la boîte.
-     * @return La texture de l'image affichée dans la boîte.
+     * Retourne la texture associée à l'image affichée dans la boîte.
+     * 
+     * @return La texture de l'image affichée dans la boîte
      */
     public Texture getImage() {
         return this.image;
     }
 
     /**
-     * Modifie l'image affichée dans la boîte.
-     * @param chemin Chemin vers le nouvel image à afficher.
+     * Met à jour l'image affichée dans la boîte.
+     * 
+     * @param chemin Nouveau chemin d'accès à l'image. Si vide, l'image par défaut est utilisée.
+     *              Le chemin fourni est concaténé avec "/photo_small.png" pour charger le fichier.
      */
     public void setImage(String chemin) {
         if (!chemin.isEmpty()) {

@@ -9,7 +9,8 @@ class LigneHighScore {
 		score = 0;
 	}
 	/**
-	 * Constructeur par défaut initialisant le nom à "AAA" et le score à 0.
+	 * Constructeur par défaut initialisant le nom à "AAA" (valeur par défaut pour nom inconnu)
+	 * et le score à 0. Cette valeur est utilisée lorsque le nom est vide ou inconnu.
 	 */
 	public LigneHighScore(String nnom, int sscore) {
 		if (nnom.length() > 3)
@@ -22,7 +23,8 @@ class LigneHighScore {
 			score = sscore;
 	}
 	/**
-	 * Constructeur de LigneHighScore à partir d'un autre LigneHighScore.
+	 * Constructeur de copie permettant de créer une nouvelle instance à partir d'une autre
+	 * LigneHighScore. Effectue une copie profonde des données.
 	 * @param l Le LigneHighScore à copier
 	 */
 	public LigneHighScore(LigneHighScore l) {
@@ -30,8 +32,9 @@ class LigneHighScore {
 		score = l.score;
 	}
 	/**
-	 * Constructeur de LigneHighScore à partir d'une chaîne de caractères au format "Nom-Score".
-	 * @param str La chaîne de caractères représentant le LigneHighScore
+	 * Constructeur à partir d'une chaîne au format "Nom-Score" (ex: "John-123").
+	 * Effectue une validation de format et retourne des valeurs par défaut en cas d'erreur.
+	 * @param str La chaîne à parser
 	 */
 	public LigneHighScore(String str) {
 		String[] tab = str.split("-");
@@ -47,7 +50,8 @@ class LigneHighScore {
 
 	public int getScore() {
 		/**
-		 * Retourne le score du joueur.
+		 * Retourne le score du joueur. Cette méthode permet d'obtenir la valeur du score
+		 * sans modifier l'objet.
 		 * @return Le score du joueur
 		 */
 		return score;
@@ -55,7 +59,8 @@ class LigneHighScore {
 
 	public String getNom() {
 		/**
-		 * Retourne le nom du joueur.
+		 * Retourne le nom du joueur. Cette méthode permet d'obtenir la valeur du nom
+		 * sans modifier l'objet.
 		 * @return Le nom du joueur
 		 */
 		return nom;
@@ -64,6 +69,7 @@ class LigneHighScore {
 	public String toString() {
 		/**
 		 * Retourne la représentation sous forme de chaîne du LigneHighScore au format "Nom-Score".
+		 * Cette méthode est utilisable pour l'affichage ou le stockage dans des formats textuels.
 		 * @return La chaîne représentant le LigneHighScore
 		 */
 		return nom + "-" + score;

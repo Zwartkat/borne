@@ -1,4 +1,4 @@
-package Arcade;
+package Arcade.tests;
 
 import MG2D.*;
 import MG2D.geometrie.*;

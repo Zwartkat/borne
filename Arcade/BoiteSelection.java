@@ -15,6 +15,8 @@ public class BoiteSelection extends Boite {
 
 	/**
 	 * Constructeur de la classe BoiteSelection.
+	 * Initialise la boîte de sélection avec un rectangle de positionnement
+	 * et un pointeur pour naviguer entre les options.
 	 * @param rectangle Le rectangle qui définit la zone de la boîte.
 	 * @param pointeur Le pointeur utilisé pour naviguer entre les options.
 	 */
@@ -25,8 +27,10 @@ public class BoiteSelection extends Boite {
 	}
 	/**
 	 * Gère la sélection des boutons dans la boîte de sélection.
+	 * Traite les entrées clavier pour naviguer entre les options,
+	 * joue un son d'effet et retourne un indicateur de continuité de la sélection.
 	 * @param clavier Le clavier pour détecter les entrées utilisateur.
-	 * @return True si la sélection doit continuer, false sinon.
+	 * @return True si la sélection doit continuer, false si l'utilisateur a confirmé une option.
 	 */
 	public boolean selection(ClavierBorneArcade clavier) {
 
@@ -71,7 +75,7 @@ public class BoiteSelection extends Boite {
 	}
 	/**
 	 * Retourne le pointeur associé à la boîte de sélection.
-	 * @return Le pointeur.
+	 * @return Le pointeur utilisé pour naviguer entre les options.
 	 */
 	public Pointeur getPointeur() {
 		return pointeur;
@@ -85,6 +89,7 @@ public class BoiteSelection extends Boite {
 	}
 	/**
 	 * Passe à la sélection suivante dans la liste des boutons.
+	 * Met à jour la position et l'apparence des boutons pour refléter la sélection.
 	 */
 	public void nextSelection() {
 		ArrayList<Bouton> buttons = Graphique.getButtons();
@@ -107,6 +112,7 @@ public class BoiteSelection extends Boite {
 	}
 	/**
 	 * Passe à la sélection précédente dans la liste des boutons.
+	 * Met à jour la position et l'apparence des boutons pour refléter la sélection.
 	 */
 	public void previousSelection() {
 		ArrayList<Bouton> buttons = Graphique.getButtons();

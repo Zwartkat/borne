@@ -3,15 +3,12 @@ package Arcade;
 /**
  * Représente un jeu dans la borne d'arcade.
  * <p>
- * Chaque jeu contient les informations suivantes :
- * <ul>
- * <li>Numéro du jeu</li>
- * <li>Nom du jeu</li>
- * <li>Description</li>
- * <li>Chemin du dossier ou du fichier exécutable</li>
- * <li>Chemin de l'image associée au jeu (thumbnail ou icône)</li>
- * </ul>
- * Cette classe fournit des méthodes pour accéder et modifier ces informations.
+ * Cette classe modélise les informations associées à un jeu, notamment son identifiant unique,
+ * son nom, sa description, le chemin d'accès à son exécutable, le chemin de son image associée,
+ * ainsi que ses configurations de langage et d'entrée. Elle permet de gérer les données des jeux
+ * dans un système de borne d'arcade.
+ * <p>
+ * Les attributs sont tous initialisés à des valeurs vides ou par défaut lors de la création d'une instance.
  */
 public class Game {
 
@@ -20,6 +17,8 @@ public class Game {
 
     /**
      * Constructeur par défaut initialisant les champs à des valeurs vides ou par défaut.
+     * <p>
+     * Tous les attributs sont initialisés à vide ou à zéro, sauf le gameId qui est mis à 0.
      */
     public Game() {
         this.name = "";
@@ -33,13 +32,13 @@ public class Game {
     /**
      * Crée une instance de Game avec les informations fournies.
      *
-     * @param gameId      Le numéro du jeu
-     * @param name        Le nom du jeu
-     * @param description La description du jeu
-     * @param path        Le chemin du dossier ou du fichier exécutable
-     * @param imagePath   Le chemin de l'image associée au jeu
-     * @param lang        Langage du jeu
-     * @param input       Configuration d'entrée du jeu
+     * @param gameId      L'identifiant unique du jeu
+     * @param name        Le nom affiché du jeu
+     * @param description Une brève description du jeu
+     * @param path        Le chemin d'accès au fichier exécutable ou au dossier contenant le jeu
+     * @param imagePath   Le chemin d'accès à l'image associée (thumbnail ou icône)
+     * @param lang        Code du langage supporté par le jeu (ex: "en", "fr")
+     * @param input       Configuration spécifique d'entrée (ex: "keyboard", "joystick")
      */
     public Game(int gameId, String name, String description, String path, String imagePath, String lang, String input) {
         this.gameId = gameId;
@@ -52,18 +51,18 @@ public class Game {
     }
 
     /**
-     * Retourne le numéro du jeu.
+     * Retourne l'identifiant unique du jeu.
      *
-     * @return Le numéro du jeu
+     * @return L'identifiant numérique unique du jeu
      */
     public int getGameId() {
         return gameId;
     }
 
     /**
-     * Retourne le nom du jeu.
+     * Retourne le nom affiché du jeu.
      *
-     * @return Le nom du jeu
+     * @return Le nom du jeu tel qu'il apparaît à l'utilisateur
      */
     public String getName() {
         return name;
@@ -72,59 +71,59 @@ public class Game {
     /**
      * Retourne la description du jeu.
      *
-     * @return La description du jeu
+     * @return Une brève explication du contenu ou des caractéristiques du jeu
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Retourne le chemin du dossier ou fichier exécutable du jeu.
+     * Retourne le chemin d'accès au fichier exécutable ou au dossier contenant le jeu.
      *
-     * @return Le chemin du jeu
+     * @return Le chemin complet vers l'exécutable ou le dossier du jeu
      */
     public String getPath() {
         return path;
     }
 
     /**
-     * Retourne le chemin de l'image associée au jeu.
+     * Retourne le chemin d'accès à l'image associée au jeu.
      *
-     * @return Le chemin de l'image
+     * @return Le chemin complet vers l'image (thumbnail ou icône)
      */
     public String getImagePath() {
         return imagePath;
     }
 
     /**
-     * Retourne la configuration d'entrée du jeu.
+     * Retourne la configuration d'entrée spécifique au jeu.
      *
-     * @return La configuration d'entrée
+     * @return La configuration d'entrée (ex: "keyboard", "joystick", "touchscreen")
      */
     public String getInput() {
         return this.input;
     }
 
     /**
-     * Retourne le langage du jeu.
+     * Retourne le code du langage supporté par le jeu.
      *
-     * @return Le langage du jeu
+     * @return Code ISO du langage (ex: "en" pour anglais, "fr" pour français)
      */
     public String getLang() {
         return this.lang;
     }
 
     /**
-     * Définit le numéro du jeu.
+     * Définit l'identifiant unique du jeu.
      *
-     * @param gameId Nouveau numéro du jeu
+     * @param gameId Nouvel identifiant numérique du jeu
      */
     public void setGameId(int gameId) {
         this.gameId = gameId;
     }
 
     /**
-     * Définit le nom du jeu.
+     * Définit le nom affiché du jeu.
      *
      * @param name Nouveau nom du jeu
      */
@@ -142,25 +141,25 @@ public class Game {
     }
 
     /**
-     * Définit le chemin du dossier ou fichier exécutable du jeu.
+     * Définit le chemin d'accès au fichier exécutable ou au dossier contenant le jeu.
      *
-     * @param path Nouveau chemin du jeu
+     * @param path Nouveau chemin d'accès à l'exécutable ou au dossier
      */
     public void setPath(String path) {
         this.path = path;
     }
 
     /**
-     * Définit le chemin de l'image associée au jeu.
+     * Définit le chemin d'accès à l'image associée au jeu.
      *
-     * @param imagePath Nouveau chemin de l'image
+     * @param imagePath Nouveau chemin d'accès à l'image
      */
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
 
     /**
-     * Définit la configuration d'entrée du jeu.
+     * Définit la configuration d'entrée spécifique au jeu.
      *
      * @param input Nouvelle configuration d'entrée
      */
