@@ -24,19 +24,29 @@ jobs:
         java-version: ${{ matrix.java-version }}
         distribution: 'temurin'
     
-    - name: Compile Arcade module
-      run: |
-        cd Arcade
-        javac -cp .:../MG2D.jar \
-          Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
-          Bouton.java ClavierBorneArcade.java Game.java Graphique.java \
-          HighScore.java LigneHighScore.java Pointeur.java
-        echo "✅ Arcade module compiled successfully"
+    - name: Download compiled Arcade module
+      uses: actions/download-artifact@v4
+      with:
+        name: compiled-classes-21
+        path: archived-build
     
-    - name: Compile Main module
+    - name: Restore compiled classes
       run: |
-        javac -cp .:./Arcade/:./MG2D.jar Main.java
-        echo "✅ Main module compiled successfully"
+        if [ -d "archived-build" ] && [ -n "$(ls -A archived-build)" ]; then
+          echo "📦 Restoring compiled Arcade module from artifact..."
+          cp -r archived-build/Arcade/*.class Arcade/ 2>/dev/null || true
+          cp -r archived-build/*.class . 2>/dev/null || true
+          echo "✅ Classes restored"
+        else
+          echo "⚠️ Build artifact not found, recompiling..."
+          cd Arcade
+          javac -cp .:../MG2D.jar \
+            Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
+            Bouton.java ClavierBorneArcade.java Game.java Graphique.java \
+            HighScore.java LigneHighScore.java Pointeur.java
+          cd ..
+          javac -cp .:./Arcade/:./MG2D.jar Main.java
+        fi
     
     - name: Find and compile Java games
       run: |
@@ -77,6 +87,7 @@ jobs:
           *.class
           projet/**/*.class
         retention-days: 5
+        compression-level: 6
     
     - name: Test Java games summary
       run: |

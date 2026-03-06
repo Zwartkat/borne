@@ -31,9 +31,15 @@ jobs:
     - name: Compile Arcade module
       run: |
         cd Arcade
-        javac -cp .;../MG2D.jar *.java
-        cd ..
-        echo "✅ Arcade module compiles successfully"
+        # On utilise : au lieu de ; pour le classpath sur Linux
+        # Et on vérifie s'il y a des fichiers java avant de lancer javac
+        if ls *.java >/dev/null 2>&1; then
+          javac -cp ".:../MG2D.jar" *.java
+          echo "✅ Arcade module compiles successfully"
+        else
+          echo "⚠️ Aucun fichier .java trouvé dans Arcade/"
+          exit 1
+        fi
     
     - name: Check for debug code
       continue-on-error: true
