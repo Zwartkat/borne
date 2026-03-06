@@ -102,6 +102,7 @@ check_cmd "java" "openjdk-21-jdk"
 check_cmd "dos2unix" "dos2unix"
 check_cmd "python3" "python3.13"
 check_cmd "git" "git"
+check_cmd "lua5.4" "lua5.4"
 
 # Correction spécifique Python
 if [ -f /lib/python3.13/EXTERNALLY-MANAGED ]; then
