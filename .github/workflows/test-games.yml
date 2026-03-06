@@ -7,13 +7,12 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  # Test Java games build
   test-java-games:
     runs-on: ubuntu-latest
     
     strategy:
       matrix:
-        java-version: ['17']
+        java-version: ['21']
       fail-fast: false
     
     steps:
@@ -87,13 +86,12 @@ jobs:
         echo "✅ All Java modules compiled successfully"
         echo "═══════════════════════════════════════"
 
-  # Test Python games
   test-python-games:
     runs-on: ubuntu-latest
     
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12']
+        python-version: ['3.13']
       fail-fast: false
     
     steps:
@@ -104,57 +102,49 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
-    
     - name: Find Python games
       run: |
         echo "🔍 Scanning for Python games..."
+        touch /tmp/python_games.txt
         for game_dir in projet/*/; do
           game_name=$(basename "$game_dir")
-          
-          if [ -f "$game_dir/requirements.txt" ]; then
-            echo "📦 Found Python game: $game_name"
+          # Détection par présence de fichiers .py
+          if ls "$game_dir"*.py >/dev/null 2>&1 || [ -d "$game_dir/src" ]; then
+            echo "🐍 Found Python game: $game_name"
             echo "$game_name" >> /tmp/python_games.txt
           fi
         done
         
-        if [ -f /tmp/python_games.txt ]; then
+        if [ -s /tmp/python_games.txt ]; then
           echo "✅ Python games found:"
           cat /tmp/python_games.txt
         else
-          echo "ℹ️  No Python games with requirements.txt found"
+          echo "ℹ️  No Python games found"
         fi
-    
+
     - name: Install Python game dependencies
       run: |
-        if [ -f /tmp/python_games.txt ]; then
+        if [ -s /tmp/python_games.txt ]; then
           while read game_name; do
-            echo ""
-            echo "📥 Installing dependencies for: $game_name"
-            pip install -r "projet/$game_name/requirements.txt" -v || {
-              echo "⚠️  Failed to install dependencies for $game_name"
-              continue
-            }
-            echo "✅ Dependencies installed for $game_name"
+            if [ -f "projet/$game_name/requirements.txt" ]; then
+              echo "📥 Installing dependencies for: $game_name"
+              pip install -r "projet/$game_name/requirements.txt" -v
+            else
+              echo "ℹ️  No requirements.txt for $game_name, skipping."
+            fi
           done < /tmp/python_games.txt
         fi
-    
+
     - name: Validate Python syntax
       run: |
         echo "🔍 Validating Python syntax..."
         python_error_count=0
-        
-        for game_dir in projet/*/; do
-          game_name=$(basename "$game_dir")
-          
-          if [ -f "$game_dir/requirements.txt" ]; then
-            echo ""
+        if [ -s /tmp/python_games.txt ]; then
+          while read game_name; do
+            game_dir="projet/$game_name"
             echo "🔎 Checking: $game_name"
-            
-            python_files=$(find "$game_dir/src" -name "*.py" 2>/dev/null)
-            
-            if [ -z "$python_files" ]; then
-              python_files=$(find "$game_dir" -maxdepth 1 -name "*.py" 2>/dev/null)
-            fi
+            # Cherche dans src/ ou à la racine du projet
+            python_files=$(find "$game_dir" -name "*.py" ! -path "*/.*")
             
             if [ -n "$python_files" ]; then
               while read -r py_file; do
@@ -165,23 +155,14 @@ jobs:
                   python_error_count=$((python_error_count + 1))
                 fi
               done <<< "$python_files"
-            else
-              echo "  ℹ️  No Python files found in $game_name"
             fi
-          fi
-        done
-        
-        echo ""
-        echo "═══════════════════════════════════════"
-        echo "   Python Syntax Check Summary"
-        echo "═══════════════════════════════════════"
-        if [ $python_error_count -eq 0 ]; then
-          echo "✅ All Python files have valid syntax"
-        else
-          echo "⚠️  Found $python_error_count file(s) with syntax errors"
+          done < /tmp/python_games.txt
+        fi
+
+        if [ $python_error_count -ne 0 ]; then
+          echo "⚠️ Found $python_error_count file(s) with syntax errors"
           exit 1
         fi
-        echo "═══════════════════════════════════════"
     
     - name: Test Python imports
       run: |
