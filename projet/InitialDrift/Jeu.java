@@ -142,7 +142,7 @@ class Jeu{ // Définition de la classe
 	}
 	catch(Exception e){}
 	ac.arret();
-	ac = new Bruitage("sons/Dejavu.mp3");
+	ac = new Bruitage("sons/RunningInThe90.mp3");
 	ac.lecture();
 
 	//Ecran d'accueil
@@ -180,7 +180,7 @@ class Jeu{ // Définition de la classe
 	ac.arret();
 	
 	// musique de fond ( Initial D <3 )
-	ac = new Bruitage("sons/RunninInThe90.mp3");
+	ac = new Bruitage("sons/Dejavu.mp3");
 	ac.lecture();
     }
 

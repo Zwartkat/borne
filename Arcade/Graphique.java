@@ -316,16 +316,6 @@ public class Graphique {
 			e.printStackTrace();
 		}
 
-		try {
-			List<String> lines = Files.readAllLines(Path.of("games.csv"));
-
-			for (int i = 1; i < lines.size(); i++) {
-
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		return games;
 	}
 
