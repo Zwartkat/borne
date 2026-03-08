@@ -9,36 +9,24 @@ on:
 jobs:
   test-java-games:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         java-version: ['21']
       fail-fast: false
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up JDK ${{ matrix.java-version }}
-      uses: actions/setup-java@v3
-      with:
-        java-version: ${{ matrix.java-version }}
-        distribution: 'temurin'
-    
-    - name: Download compiled Arcade module
-      uses: actions/download-artifact@v4
-      with:
-        name: compiled-classes-21
-        path: archived-build
-    
-    - name: Restore compiled classes
-      run: |
-        if [ -d "archived-build" ] && [ -n "$(ls -A archived-build)" ]; then
-          echo "📦 Restoring compiled Arcade module from artifact..."
-          cp -r archived-build/Arcade/*.class Arcade/ 2>/dev/null || true
-          cp -r archived-build/*.class . 2>/dev/null || true
-          echo "✅ Classes restored"
-        else
-          echo "⚠️ Build artifact not found, recompiling..."
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+
+      - name: Compile Arcade module
+        run: |
+          echo "🔨 Compiling Arcade module..."
           cd Arcade
           javac -cp .:../MG2D.jar \
             Boite.java BoiteDescription.java BoiteImage.java BoiteSelection.java \
@@ -46,57 +34,42 @@ jobs:
             HighScore.java LigneHighScore.java Pointeur.java
           cd ..
           javac -cp .:./Arcade/:./MG2D.jar Main.java
-        fi
-    
-    - name: Find and compile Java games
-      run: |
-        echo "🔍 Scanning for Java games..."
-        for game_dir in projet/*/; do
-          game_name=$(basename "$game_dir")
-          java_files=$(find "$game_dir" -maxdepth 2 -name "*.java" | head -5)
-          
-          if [ -n "$java_files" ]; then
-            echo "📦 Found Java game: $game_name"
-            cd "$game_dir"
-            
-            # Compile Java files in the game directory
-            javac -cp .:../../:../../Arcade/:../../MG2D.jar \
-              $(find . -maxdepth 2 -name "*.java") 2>&1 || {
-              echo "⚠️  Could not compile $game_name (dependencies may be missing)"
-            }
-            
-            echo "✅ Compiled $game_name"
-            cd - > /dev/null
-          fi
-        done
-    
-    - name: Verify Java compilation
-      run: |
-        echo "🔍 Verifying compiled Java files..."
-        java_count=$(find . -name "*.class" -type f | wc -l)
-        echo "📊 Total compiled Java classes: $java_count"
-        [ $java_count -gt 0 ] && echo "✅ Java compilation successful" || echo "⚠️  No compiled classes found"
-    
-    - name: Upload Java artifacts
-      if: success()
-      uses: actions/upload-artifact@v4
-      with:
-        name: java-compiled-classes
-        path: |
-          Arcade/*.class
-          *.class
-          projet/**/*.class
-        retention-days: 5
-        compression-level: 6
-    
-    - name: Test Java games summary
-      run: |
-        echo "═══════════════════════════════════════"
-        echo "   Java Games Build Test Summary"
-        echo "═══════════════════════════════════════"
-        echo "✅ All Java modules compiled successfully"
-        echo "═══════════════════════════════════════"
+          echo "✅ Arcade module compiled"
 
+      - name: Compile Java games
+        run: |
+          echo "🔍 Scanning for Java games..."
+          for game_dir in projet/*/; do
+            game_name=$(basename "$game_dir")
+            java_files=$(find "$game_dir" -maxdepth 2 -name "*.java" | head -5)
+
+            if [ -n "$java_files" ]; then
+              echo "📦 Compiling Java game: $game_name"
+              cd "$game_dir"
+
+              javac -cp .:../../:../../Arcade/:../../MG2D.jar $(find . -maxdepth 2 -name "*.java") 2>&1 || {
+                echo "⚠️ Could not compile $game_name (dependencies may be missing)"
+              }
+
+              echo "✅ $game_name compiled"
+              cd - > /dev/null
+            fi
+          done
+
+      - name: Verify Java compilation
+        run: |
+          echo "🔍 Verifying compiled Java files..."
+          java_count=$(find . -name "*.class" -type f | wc -l)
+          echo "📊 Total compiled Java classes: $java_count"
+          [ $java_count -gt 0 ] && echo "✅ Java compilation successful" || echo "⚠️ No compiled classes found"
+
+      - name: Java games summary
+        run: |
+          echo "═══════════════════════════════════════"
+          echo "   Java Games Build Test Summary"
+          echo "═══════════════════════════════════════"
+          echo "✅ All Java modules compiled successfully"
+          echo "═══════════════════════════════════════"
   test-python-games:
     runs-on: ubuntu-latest
     
