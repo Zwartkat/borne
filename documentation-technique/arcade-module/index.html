@@ -270,7 +270,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../installation-dev/setup/" class="md-tabs__link">
+        <a href="../../installation-dev/setup.md" class="md-tabs__link">
           
   
   
@@ -517,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guide-utilisateur/premiers-pas/" class="md-nav__link">
+      <a href="../../guide-utilisateur/premiers-pas.md" class="md-nav__link">
         
   
   
@@ -597,7 +597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guide-utilisateur/jeux/overview/" class="md-nav__link">
+      <a href="../../guide-utilisateur/jeux/overview.md" class="md-nav__link">
         
   
   
@@ -1075,28 +1075,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation-complete" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📚 Documentation Complète
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧪 Tests
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#sujets-connexes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1294,7 +1272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../installation-dev/setup/" class="md-nav__link">
+      <a href="../../installation-dev/setup.md" class="md-nav__link">
         
   
   
@@ -1566,6 +1544,8 @@
 
 <h1 id="module-arcade">Module Arcade<a class="headerlink" href="#module-arcade" title="Permanent link">&para;</a></h1>
 <p>Documentation détaillée du module core Arcade.</p>
+<p>Pour plus des informations plus technique concernant le code de l'Arcade. </p>
+<p><a href="../../doc_borne/index.html">Javadoc</a></p>
 <h2 id="vue-densemble">📦 Vue d'Ensemble<a class="headerlink" href="#vue-densemble" title="Permanent link">&para;</a></h2>
 <p>Le module Arcade est le cœur de la Borne. Il gère :</p>
 <ul>
@@ -1578,10 +1558,6 @@
 <h2 id="classes-principales">🏗️ Classes Principales<a class="headerlink" href="#classes-principales" title="Permanent link">&para;</a></h2>
 <h3 id="graphiquejava">Graphique.java<a class="headerlink" href="#graphiquejava" title="Permanent link">&para;</a></h3>
 <p>Gestion graphique et interface utilisateur principale.</p>
-<p><strong>Responsabilités:</strong>
-- Fenêtre plein écran
-- Rendu des éléments
-- Gestion des états</p>
 <h3 id="menujava">Menu.java<a class="headerlink" href="#menujava" title="Permanent link">&para;</a></h3>
 <p>Menu de sélection des jeux.</p>
 <h3 id="boiteselectionjava">BoiteSelection.java<a class="headerlink" href="#boiteselectionjava" title="Permanent link">&para;</a></h3>
@@ -1592,21 +1568,9 @@
 <p>Persistence et gestion des scores.</p>
 <h3 id="clavierbornearcadejava">ClavierBorneArcade.java<a class="headerlink" href="#clavierbornearcadejava" title="Permanent link">&para;</a></h3>
 <p>Gestion des entrées (clavier, joystick).</p>
-<h2 id="documentation-complete">📚 Documentation Complète<a class="headerlink" href="#documentation-complete" title="Permanent link">&para;</a></h2>
-<p>Voir <a href="architecture.md">architecture.md</a> pour le diagramme UML complet.</p>
-<h2 id="tests">🧪 Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
-<p>Les tests sont dans <code>Arcade/Test*.java</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exécuter les tests</span>
-<span class="nb">cd</span><span class="w"> </span>Arcade
-javac<span class="w"> </span>-cp<span class="w"> </span>.:../lib/*:../MG2D.jar<span class="w"> </span>Test*.java
-java<span class="w"> </span>-cp<span class="w"> </span>.:../lib/*:../MG2D.jar<span class="w"> </span>org.junit.platform.console.ConsoleLauncher<span class="w"> </span>--scan-classpath
-</code></pre></div>
 <h2 id="sujets-connexes">🔗 Sujets Connexes<a class="headerlink" href="#sujets-connexes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="architecture.md">Architecture Globale</a></li>
-<li><a href="development.md">Guide de Développement</a></li>
 <li><a href="../build/">Build et Compilation</a></li>
-<li><a href="api-reference.md">API Reference</a></li>
 </ul>
 
 
