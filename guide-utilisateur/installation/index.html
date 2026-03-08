@@ -21,8 +21,11 @@
         <link rel="next" href="../premiers-pas/">
       
       
+        
+      
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
     
     
       
@@ -30,10 +33,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -52,11 +55,10 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -95,12 +97,12 @@
     <a href="../.." title="Borne d&#39;Arcade" class="md-header__button md-logo" aria-label="Borne d'Arcade" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -138,30 +140,32 @@
       
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
@@ -169,7 +173,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -180,6 +184,7 @@
     </div>
   </div>
 </div>
+      
     
     
   </nav>
@@ -200,9 +205,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../.." class="md-tabs__link">
         
+  
   
     
   
@@ -216,6 +223,7 @@
         
   
   
+  
     
   
   
@@ -224,6 +232,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../overview/" class="md-tabs__link">
           
+  
   
   📖 Guide Utilisateur
 
@@ -237,11 +246,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../documentation-technique/architecture.md" class="md-tabs__link">
           
+  
   
   🛠️ Documentation Technique
 
@@ -255,11 +266,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../installation-dev/setup/" class="md-tabs__link">
           
+  
   
   🔧 Installation pour Développeurs
 
@@ -273,11 +286,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../github-actions/overview.md" class="md-tabs__link">
           
+  
   
   📊 GitHub Actions
 
@@ -291,9 +306,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../../faq.md" class="md-tabs__link">
         
+  
   
     
   
@@ -308,9 +325,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../../contributing.md" class="md-tabs__link">
         
+  
   
     
   
@@ -348,7 +367,7 @@
     <a href="../.." title="Borne d&#39;Arcade" class="md-nav__button md-logo" aria-label="Borne d'Arcade" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     Borne d'Arcade
@@ -366,9 +385,16 @@
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Accueil
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -388,13 +414,17 @@
     
     
     
+      
+        
+        
+      
+      
+        
+      
     
-      
-      
     
     <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
@@ -403,9 +433,16 @@
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     📖 Guide Utilisateur
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -414,7 +451,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            📖 Guide Utilisateur
+            
+  
+    📖 Guide Utilisateur
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -428,9 +469,16 @@
       <a href="../overview/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Vue d'ensemble
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -458,9 +506,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     Installation
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -469,9 +524,16 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Installation
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -494,7 +556,9 @@
         <li class="md-nav__item">
   <a href="#prerequis" class="md-nav__link">
     <span class="md-ellipsis">
-      📋 Prérequis
+      
+        📋 Prérequis
+      
     </span>
   </a>
   
@@ -504,7 +568,9 @@
           <li class="md-nav__item">
   <a href="#systeme-dexploitation" class="md-nav__link">
     <span class="md-ellipsis">
-      Système d'Exploitation
+      
+        Système d'Exploitation
+      
     </span>
   </a>
   
@@ -513,7 +579,9 @@
           <li class="md-nav__item">
   <a href="#logiciels-requis" class="md-nav__link">
     <span class="md-ellipsis">
-      Logiciels Requis
+      
+        Logiciels Requis
+      
     </span>
   </a>
   
@@ -523,7 +591,9 @@
           <li class="md-nav__item">
   <a href="#java" class="md-nav__link">
     <span class="md-ellipsis">
-      Java
+      
+        Java
+      
     </span>
   </a>
   
@@ -537,7 +607,9 @@
           <li class="md-nav__item">
   <a href="#en-option-pour-developpeurs" class="md-nav__link">
     <span class="md-ellipsis">
-      En Option (Pour Développeurs)
+      
+        En Option (Pour Développeurs)
+      
     </span>
   </a>
   
@@ -551,7 +623,9 @@
         <li class="md-nav__item">
   <a href="#installation-par-systeme" class="md-nav__link">
     <span class="md-ellipsis">
-      🖥️ Installation par Système
+      
+        🖥️ Installation par Système
+      
     </span>
   </a>
   
@@ -561,7 +635,9 @@
           <li class="md-nav__item">
   <a href="#windows" class="md-nav__link">
     <span class="md-ellipsis">
-      Windows
+      
+        Windows
+      
     </span>
   </a>
   
@@ -571,7 +647,9 @@
           <li class="md-nav__item">
   <a href="#1-installer-java" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Installer Java
+      
+        1. Installer Java
+      
     </span>
   </a>
   
@@ -580,7 +658,9 @@
           <li class="md-nav__item">
   <a href="#2-cloner-le-projet" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Cloner le Projet
+      
+        2. Cloner le Projet
+      
     </span>
   </a>
   
@@ -589,7 +669,9 @@
           <li class="md-nav__item">
   <a href="#3-lancer-la-borne" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Lancer la Borne
+      
+        3. Lancer la Borne
+      
     </span>
   </a>
   
@@ -603,7 +685,9 @@
           <li class="md-nav__item">
   <a href="#macos" class="md-nav__link">
     <span class="md-ellipsis">
-      macOS
+      
+        macOS
+      
     </span>
   </a>
   
@@ -613,7 +697,9 @@
           <li class="md-nav__item">
   <a href="#1-installer-java_1" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Installer Java
+      
+        1. Installer Java
+      
     </span>
   </a>
   
@@ -622,7 +708,9 @@
           <li class="md-nav__item">
   <a href="#2-cloner-le-projet_1" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Cloner le Projet
+      
+        2. Cloner le Projet
+      
     </span>
   </a>
   
@@ -631,7 +719,9 @@
           <li class="md-nav__item">
   <a href="#3-donner-les-permissions" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Donner les Permissions
+      
+        3. Donner les Permissions
+      
     </span>
   </a>
   
@@ -640,7 +730,9 @@
           <li class="md-nav__item">
   <a href="#4-lancer-la-borne" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Lancer la Borne
+      
+        4. Lancer la Borne
+      
     </span>
   </a>
   
@@ -654,7 +746,9 @@
           <li class="md-nav__item">
   <a href="#linux" class="md-nav__link">
     <span class="md-ellipsis">
-      Linux
+      
+        Linux
+      
     </span>
   </a>
   
@@ -664,7 +758,9 @@
           <li class="md-nav__item">
   <a href="#1-installer-java_2" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Installer Java
+      
+        1. Installer Java
+      
     </span>
   </a>
   
@@ -673,7 +769,9 @@
           <li class="md-nav__item">
   <a href="#2-cloner-le-projet_2" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Cloner le Projet
+      
+        2. Cloner le Projet
+      
     </span>
   </a>
   
@@ -682,7 +780,9 @@
           <li class="md-nav__item">
   <a href="#3-donner-les-permissions_1" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Donner les Permissions
+      
+        3. Donner les Permissions
+      
     </span>
   </a>
   
@@ -691,7 +791,9 @@
           <li class="md-nav__item">
   <a href="#4-lancer-la-borne_1" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Lancer la Borne
+      
+        4. Lancer la Borne
+      
     </span>
   </a>
   
@@ -710,7 +812,9 @@
         <li class="md-nav__item">
   <a href="#verification-de-linstallation" class="md-nav__link">
     <span class="md-ellipsis">
-      🎯 Vérification de l'Installation
+      
+        🎯 Vérification de l'Installation
+      
     </span>
   </a>
   
@@ -719,17 +823,21 @@
         <li class="md-nav__item">
   <a href="#depannage-de-linstallation" class="md-nav__link">
     <span class="md-ellipsis">
-      🐛 Dépannage de l'Installation
+      
+        🐛 Dépannage de l'Installation
+      
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🐛 Dépannage de l'Installation">
+    <nav class="md-nav" aria-label="🐛 Dépannage de l&#39;Installation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#java-command-not-found" class="md-nav__link">
     <span class="md-ellipsis">
-      "Java command not found"
+      
+        "Java command not found"
+      
     </span>
   </a>
   
@@ -738,7 +846,9 @@
           <li class="md-nav__item">
   <a href="#mg2djar-not-found" class="md-nav__link">
     <span class="md-ellipsis">
-      "MG2D.jar not found"
+      
+        "MG2D.jar not found"
+      
     </span>
   </a>
   
@@ -747,7 +857,9 @@
           <li class="md-nav__item">
   <a href="#permission-denied-linuxmac" class="md-nav__link">
     <span class="md-ellipsis">
-      "Permission denied" (Linux/Mac)
+      
+        "Permission denied" (Linux/Mac)
+      
     </span>
   </a>
   
@@ -756,7 +868,9 @@
           <li class="md-nav__item">
   <a href="#port-deja-utilise" class="md-nav__link">
     <span class="md-ellipsis">
-      Port déjà utilisé
+      
+        Port déjà utilisé
+      
     </span>
   </a>
   
@@ -770,7 +884,9 @@
         <li class="md-nav__item">
   <a href="#structure-des-fichiers-apres-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      📂 Structure des Fichiers Après Installation
+      
+        📂 Structure des Fichiers Après Installation
+      
     </span>
   </a>
   
@@ -779,7 +895,9 @@
         <li class="md-nav__item">
   <a href="#premiers-demarrages" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Premiers Démarrages
+      
+        🚀 Premiers Démarrages
+      
     </span>
   </a>
   
@@ -789,7 +907,9 @@
           <li class="md-nav__item">
   <a href="#premier-demarrage" class="md-nav__link">
     <span class="md-ellipsis">
-      Premier Démarrage
+      
+        Premier Démarrage
+      
     </span>
   </a>
   
@@ -798,7 +918,9 @@
           <li class="md-nav__item">
   <a href="#configuration-initiale" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration Initiale
+      
+        Configuration Initiale
+      
     </span>
   </a>
   
@@ -812,7 +934,9 @@
         <li class="md-nav__item">
   <a href="#configuration-optionnelle" class="md-nav__link">
     <span class="md-ellipsis">
-      ✨ Configuration Optionnelle
+      
+        ✨ Configuration Optionnelle
+      
     </span>
   </a>
   
@@ -822,7 +946,9 @@
           <li class="md-nav__item">
   <a href="#parametres-de-lancement" class="md-nav__link">
     <span class="md-ellipsis">
-      Paramètres de Lancement
+      
+        Paramètres de Lancement
+      
     </span>
   </a>
   
@@ -831,7 +957,9 @@
           <li class="md-nav__item">
   <a href="#resolution-de-lecran" class="md-nav__link">
     <span class="md-ellipsis">
-      Résolution de l'Écran
+      
+        Résolution de l'Écran
+      
     </span>
   </a>
   
@@ -845,7 +973,9 @@
         <li class="md-nav__item">
   <a href="#support" class="md-nav__link">
     <span class="md-ellipsis">
-      🆘 Support
+      
+        🆘 Support
+      
     </span>
   </a>
   
@@ -854,7 +984,9 @@
         <li class="md-nav__item">
   <a href="#cest-pret" class="md-nav__link">
     <span class="md-ellipsis">
-      🎉 C'est Prêt !
+      
+        🎉 C'est Prêt !
+      
     </span>
   </a>
   
@@ -879,9 +1011,16 @@
       <a href="../premiers-pas/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Premiers pas
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -900,13 +1039,17 @@
     
     
     
+      
+      
+        
+          
+          
+        
+      
     
-      
-      
     
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
-        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
@@ -915,9 +1058,16 @@
           <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Les jeux
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -926,7 +1076,11 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
-            Les jeux
+            
+  
+    Les jeux
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -940,9 +1094,16 @@
       <a href="../jeux/overview/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Vue d'ensemble
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -961,9 +1122,16 @@
       <a href="../jeux/ball-blast.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Ball Blast
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -982,9 +1150,16 @@
       <a href="../jeux/columns.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Columns
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1003,9 +1178,16 @@
       <a href="../jeux/pong.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Pong
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1024,9 +1206,16 @@
       <a href="../jeux/snake-eater.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Snake Eater
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1045,9 +1234,16 @@
       <a href="../jeux/trongame.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     TronGame
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1074,9 +1270,16 @@
       <a href="../controls/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contrôles
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1095,9 +1298,16 @@
       <a href="../troubleshooting/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Dépannage
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1123,24 +1333,32 @@
     
     
     
-    
       
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     🛠️ Documentation Technique
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -1149,7 +1367,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            🛠️ Documentation Technique
+            
+  
+    🛠️ Documentation Technique
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1163,9 +1385,16 @@
       <a href="../../documentation-technique/architecture.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Architecture
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1184,9 +1413,16 @@
       <a href="../../documentation-technique/arcade-module/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module Arcade
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1205,9 +1441,16 @@
       <a href="../../documentation-technique/development.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Développement
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1226,9 +1469,16 @@
       <a href="../../documentation-technique/build/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Build et Compilation
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1247,9 +1497,16 @@
       <a href="../../documentation-technique/tests.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Tests
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1268,9 +1525,16 @@
       <a href="../../documentation-technique/api-reference.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     API Reference
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1296,24 +1560,32 @@
     
     
     
-    
       
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     🔧 Installation pour Développeurs
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -1322,7 +1594,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            🔧 Installation pour Développeurs
+            
+  
+    🔧 Installation pour Développeurs
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1336,9 +1612,16 @@
       <a href="../../installation-dev/setup/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Configuration
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1357,9 +1640,16 @@
       <a href="../../installation-dev/environment.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Environnement
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1378,9 +1668,16 @@
       <a href="../../installation-dev/git-workflow.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Workflow Git
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1406,24 +1703,32 @@
     
     
     
-    
       
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     📊 GitHub Actions
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -1432,7 +1737,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            📊 GitHub Actions
+            
+  
+    📊 GitHub Actions
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1446,9 +1755,16 @@
       <a href="../../github-actions/overview.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Vue d'ensemble
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1467,9 +1783,16 @@
       <a href="../../github-actions/workflows.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Workflows
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1495,9 +1818,16 @@
       <a href="../../faq.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     FAQ
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1515,9 +1845,16 @@
       <a href="../../contributing.md" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contribuer
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1535,9 +1872,11 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
+
 
 
 <h1 id="installation-guide-complet">Installation - Guide Complet<a class="headerlink" href="#installation-guide-complet" title="Permanent link">&para;</a></h1>
@@ -1769,7 +2108,7 @@ Appuyez sur RETOUR pour quitter
             </div>
           
           
-  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
 
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
@@ -1800,10 +2139,13 @@ Appuyez sur RETOUR pour quitter
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "nav.expand", "toc.integrate", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "nav.expand", "toc.integrate", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
