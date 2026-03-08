@@ -148,22 +148,10 @@ echo -e "${INFO} Optimisation des scripts (dos2unix & chmod)..."
 find "$install_dir" -name "*.sh" -exec dos2unix -q {} \;
 find "$install_dir" -name "*.sh" -exec chmod +x {} \;
 
-DESKTOP_FILE="$HOME/.config/autostart/borne.desktop"
-mkdir -p "$(dirname "$DESKTOP_FILE")"
-
-cat > "$DESKTOP_FILE" <<EOF
-[Desktop Entry]
-Type=Application
-Name=Borne
-Comment=Borne d'arcade
-Exec=$GIT_DIR/launch.sh
-Icon=applications-games
-Terminal=false
-Categories=Game;
-EOF
-
-chmod +x "$DESKTOP_FILE"
-echo -e "${CHECK} Fichier .desktop créé pour lancement automatique"
+# Configuration du chemin dans le launcher
+if [ -f "$GIT_DIR/launch.sh" ]; then
+    # Utilisation de | comme délimiteur sed car le chemin contient des /
+    sed -i "s|^INSTALL_PATH=.*|INSTALL_PATH=$GIT_DIR|" "$GIT_DIR/launch.sh"
 fi
 
 echo -e "${GREEN}${BOLD}"
