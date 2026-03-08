@@ -78,7 +78,6 @@ handle_python() {
 handle_lua() {
     local dir="$1"
     log_info "Projet Lua détecté"
-    # À implémenter selon tes besoins
 }
 
 # Traitement d'un projet
@@ -90,11 +89,10 @@ process_project() {
     
     log_info "Traitement du projet: $proj_name"
     
-    # Définir nullglob localement
     shopt -s nullglob
-    local java_files=(*.java)
-    local py_files=(src/*.py)
-    local lua_files=(*.lua)
+    local java_files=($(find . -name "*.java" -type f))
+    local py_files=($(find . -path "*/src/*.py" -type f))
+    local lua_files=($(find . -name "*.lua" -type f))
     shopt -u nullglob
     
     local result=0
@@ -113,10 +111,11 @@ process_project() {
     cd ..
     return $result
 }
-
 # Main
 main() {
     check_requirements
+
+    ./clean.sh
     
     compile_menu || exit 1
     

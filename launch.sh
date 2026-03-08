@@ -47,7 +47,7 @@ fi
 
 cd "$INSTALL_PATH" || exit 1
 
-echo -e "\n${BOLD}${GREEN}🚀 Lancement du Menu...${NC}"
+echo -e "\n${BOLD}${GREEN} Lancement du Menu...${NC}"
 echo -e "${CYAN}--------------------------------------------------${NC}\n"
 
 if [ ! -f "MG2D.jar" ]; then
@@ -59,7 +59,6 @@ java -cp .:./MG2D.jar Main
 
 echo -e "\n${CYAN}--------------------------------------------------${NC}"
 echo -ne "${INFO} Fermeture... "
-./clean.sh > /dev/null 2>&1
 echo -e "${CHECK}"
 
 echo -e "${BOLD}${GREEN}Au revoir !${NC}\n"
