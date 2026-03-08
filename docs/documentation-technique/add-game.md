@@ -54,13 +54,19 @@ Un jeu Java doit contenir :
 * un ou plusieurs fichiers `.java`
 * une classe principale dont le nom est exactement celui du dossier
 
+Si il s'agit d'un .jar executable, il suffit de le mettre avec le même nom que le dossier
+
 ### Exemple
 
 ```
-projet/mon-jeu/
- ├── Main.java
+projet/Example/
+ ├── Example.java (Main)
  ├── Player.java
  └── Map.java
+
+ projet/Example1/
+ └── Example1.jar (Executable)
+
 ```
 
 ### Fonctionnement

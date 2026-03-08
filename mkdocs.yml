@@ -46,32 +46,12 @@ markdown_extensions:
 
 nav:
   - Accueil: index.md
-  - 📖 Guide Utilisateur:
+  - Guide Utilisateur:
     - Vue d'ensemble: guide-utilisateur/overview.md
     - Installation: guide-utilisateur/installation.md
-    - Premiers pas: guide-utilisateur/premiers-pas.md
-    - Les jeux:
-      - Vue d'ensemble: guide-utilisateur/jeux/overview.md
-      - Ball Blast: guide-utilisateur/jeux/ball-blast.md
-      - Columns: guide-utilisateur/jeux/columns.md
-      - Pong: guide-utilisateur/jeux/pong.md
-      - Snake Eater: guide-utilisateur/jeux/snake-eater.md
-      - TronGame: guide-utilisateur/jeux/trongame.md
     - Contrôles: guide-utilisateur/controls.md
     - Dépannage: guide-utilisateur/troubleshooting.md
-  - 🛠️ Documentation Technique:
-    - Architecture: documentation-technique/architecture.md
+  - Documentation Technique:
     - Module Arcade: documentation-technique/arcade-module.md
-    - Développement: documentation-technique/development.md
     - Build et Compilation: documentation-technique/build.md
-    - Tests: documentation-technique/tests.md
-    - API Reference: documentation-technique/api-reference.md
-  - 🔧 Installation pour Développeurs:
-    - Configuration: installation-dev/setup.md
-    - Environnement: installation-dev/environment.md
-    - Workflow Git: installation-dev/git-workflow.md
-  - 📊 GitHub Actions:
-    - Vue d'ensemble: github-actions/overview.md
-    - Workflows: github-actions/workflows.md
-  - FAQ: faq.md
-  - Contribuer: contributing.md
+    - Add a game: documentation-technique/add-game.md

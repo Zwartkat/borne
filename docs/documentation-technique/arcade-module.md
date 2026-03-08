@@ -39,3 +39,4 @@ Gestion des entrées (clavier, joystick).
 ## 🔗 Sujets Connexes
 
 - [Build et Compilation](build.md)
+- [Ajouter un jeu](add-game.md)
