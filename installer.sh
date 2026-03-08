@@ -99,13 +99,13 @@ sudo apt update -y >/dev/null 2>&1
 check_cmd "whiptail" "whiptail"
 check_cmd "java" "openjdk-21-jdk"
 check_cmd "dos2unix" "dos2unix"
-check_cmd "python3" "python3.13"
+check_cmd "python3" "python3.11"
 check_cmd "git" "git"
 check_cmd "love" "love"
 
-if [ -f /lib/python3.13/EXTERNALLY-MANAGED ]; then
+if [ -f /lib/python3.11/EXTERNALLY-MANAGED ]; then
     echo -e "${INFO} Correction de l'environnement Python..."
-    sudo rm /lib/python3.13/EXTERNALLY-MANAGED
+    sudo rm /lib/python3.11/EXTERNALLY-MANAGED
 fi
 
 CHOICE=$(whiptail --title "Installation Borne" --menu "Où souhaitez-vous installer le projet ?" 15 60 2 \
