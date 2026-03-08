@@ -158,11 +158,12 @@ echo "      Installation terminée avec succès !"
 echo "      Le projet est prêt dans : $GIT_DIR"
 echo -e "${NC}"
 
+cd "$GIT_DIR" || exit
 ./compilation.sh
 
 # Demander avant de lancer
 if whiptail --title "Lancement" --yesno "Voulez-vous lancer l'application maintenant ?" 8 45; then
-    cd "$GIT_DIR" || exit
+
     ./launch.sh
 else
     echo -e "${INFO} Pour lancer plus tard : cd $GIT_DIR && ./launch.sh"
