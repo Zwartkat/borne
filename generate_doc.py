@@ -79,10 +79,9 @@ class OllamaGenerateResult:
     eval_count: Optional[int] = None
 
 
-# ------------------------------
-# Wrapper principal
-# ------------------------------
-
+# ============================================================================
+# ⬇️ WRAPPER OLLAMAWRAPPER - INCHANGÉ - NE PAS MODIFIER ⬇️
+# ============================================================================
 
 class OllamaWrapper:
     """
@@ -376,41 +375,6 @@ class OllamaWrapper:
                 else None
             ),
         )
-
-    # --------------------------
-    # Bonus : embeddings (optionnel pour ton cours)
-    # --------------------------
-
-    def embed(
-        self,
-        *,
-        model: str,
-        text: str,
-    ) -> List[float]:
-        """
-        Génère un embedding.
-
-        Note doc : l'endpoint "Generate Embedding" a été supersédé par /api/embed
-        (selon docs/api.md). :contentReference[oaicite:7]{index=7}
-        """
-        body: Dict[str, Any] = {"model": model, "input": text}
-        payload = self._http_request_json("POST", "/api/embed", body=body)
-
-        # Selon versions, la forme peut varier ; on vise un cas courant : {"embeddings":[[...]]} ou {"embedding":[...]}.
-        if isinstance(payload.get("embedding"), list):
-            emb = payload["embedding"]
-            if all(isinstance(x, (int, float)) for x in emb):
-                return [float(x) for x in emb]
-
-        if isinstance(payload.get("embeddings"), list) and payload["embeddings"]:
-            first = payload["embeddings"][0]
-            if isinstance(first, list) and all(
-                isinstance(x, (int, float)) for x in first
-            ):
-                return [float(x) for x in first]
-
-        raise OllamaResponseError(f"Réponse /api/embed inattendue: {payload!r}")
-
     # --------------------------
     # Couche HTTP (sans dépendance externe)
     # --------------------------
@@ -489,43 +453,453 @@ class OllamaWrapper:
 
 ollama = OllamaWrapper(base_url="http://10.22.28.190:11434")
 MODEL_NAME = "qwen3:8b"
-SYSTEM_PROMPT = (
-    "Tu es un assistant qui ajoute des commentaires et docstrings à toutes les fonctions et constructeurs "
-    "dans le code fourni, sans modifier le code existant."
-)
 
-# ------------------------------
-# Configuration du projet
-# ------------------------------
-SOURCE_DIRS = ["Arcade"]
+SYSTEM_PROMPT = """Tu es un assistant qui AJOUTE UNIQUEMENT des commentaires et docstrings au code.
+
+INTERDICTIONS ABSOLUES :
+1. NE MODIFIE JAMAIS les noms de variables, fonctions ou classes
+2. NE MODIFIE JAMAIS la logique du code (boucles, conditions, appels de fonction)
+3. NE MODIFIE JAMAIS les indentations existantes
+4. NE SUPPRIME JAMAIS du code existant
+5. NE RÉORGANISE JAMAIS les fonctions ou classes
+6. NE RENOMME JAMAIS les paramètres
+7. NE CHANGE JAMAIS les valeurs par défaut des paramètres
+
+AUTORISÉ UNIQUEMENT :
+1. Ajouter des docstrings (\"\"\" \"\"\") au-dessus des fonctions et classes
+2. Ajouter des commentaires explicatifs (#) avant les blocs de code
+3. Ajouter des commentaires en fin de ligne pour clarifier
+4. Ajouter des annotations de type manquantes SANS CHANGER LE RESTE
+
+LE CODE DOIT RESTER IDENTIQUE EN STRUCTURE, SEULS LES COMMENTAIRES CHANGENT."""
+from pathlib import Path
+
+SOURCE_DIRS = ["projet/Snake_Eater"]
 EXTENSIONS = [".py", ".java", ".lua"]
 
-# ------------------------------
-# Fonction principale
-# ------------------------------
 def annotate_file(file_path: Path):
-    print(f"➡️ Traitement de {file_path}")
-    code = file_path.read_text(encoding="utf-8")
-    
-    prompt = f"Ajoute des commentaires/docstrings au code suivant sans modifier le code existant. Ne renvoit que le texte du code en brut, sans formatage MARKDOWN ou texte descriptif autre que du code.\n\n{code}\n\n N'inclu pas de formatage de code dans ta réponse du style ```, la réponse doit être le contenu du fichier executable"
-    
+
+    print(f"\nTraitement de {file_path}")
+
+    original_code = file_path.read_text(encoding="utf-8")
+
+    strict_prompt = f"""TÂCHE UNIQUE : Ajoute UNIQUEMENT des commentaires et docstrings.
+
+CODE À ANNOTER :
+{original_code}
+
+RÈGLES ABSOLUES :
+1. JAMAIS modifier le code existant
+2. JAMAIS supprimer une ligne
+3. JAMAIS renommer une fonction/classe/variable
+4. JAMAIS changer l'indentation
+5. Ajouter UNIQUEMENT des commentaires ou docstrings
+
+IMPORTANT : SI TU SUPPRIMES OU MODIFIES DU CODE, LA TÂCHE ÉCHOUE !
+
+RÉPONSE EXIGÉE :
+- Code complet avec les commentaires ajoutés
+- Pas de formatage markdown
+- Pas d'explication
+"""
+
     try:
-        result = ollama.generate_text(model=MODEL_NAME, prompt=prompt, system=SYSTEM_PROMPT)
-        annotated_code = result.response
-        file_path.write_text(annotated_code, encoding="utf-8")
-        print(f"✅ Code annoté écrit dans : {file_path}")
+
+        result = ollama.generate_text(
+            model=MODEL_NAME,
+            prompt=strict_prompt,
+            system=SYSTEM_PROMPT
+        )
+
+        annotated_code = result.response.strip()
+
+        ext = file_path.suffix.lower()
+
+        if ext == ".py":
+            langage = "python"
+        elif ext == ".java":
+            langage = "java"
+        else:
+            return True 
+
+        inserer_docstrings_dans_fichier(
+            fichier_original=str(file_path),
+            code_genere_par_ia=annotated_code,
+            langage=langage
+        )
+
+        return True
+
     except Exception as e:
-        print(f"⚠️ Erreur lors de l'annotation de {file_path}: {e}")
+        print(f"Erreur lors de l'annotation de {file_path}: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+
 
 def main():
+
+    print("\n" + "="*70)
+    print("DÉMARRAGE DE L'ANNOTATION")
+    print("="*70)
+
     for src_dir in SOURCE_DIRS:
+
         path = Path(src_dir)
+
         if not path.exists():
-            print(f"⚠️ Dossier inexistant : {src_dir}")
+            print(f"Dossier inexistant : {src_dir}")
             continue
+
+        print(f"\nExploration du dossier : {src_dir}")
+
+        files_count = 0
+
         for file_path in path.rglob("*"):
+
             if file_path.suffix in EXTENSIONS:
+
+                files_count += 1
                 annotate_file(file_path)
+
+        if files_count == 0:
+            print("Aucun fichier trouvé")
+
+    print("\n" + "="*70)
+    print("ANNOTATION TERMINÉE")
+    print("="*70)
+
 
 if __name__ == "__main__":
     main()
+
+
+    
+    
+    
+def extraire_docstrings_du_code(code_genere: str, langage: str = "python") -> dict:
+    """
+    Extrait les docstrings d'un fichier de code complet généré par l'IA.
+        
+    Args:
+        code_genere: Le code complet retourné par l'IA (Python ou Java)
+        langage: "python" ou "java"
+    
+    Returns:
+        Dictionnaire {nom_fonction: docstring}
+        
+    """
+    resultat = {}
+    
+    if langage.lower() == "python":
+        resultat = _extraire_docstrings_python(code_genere)
+    elif langage.lower() == "java":
+        resultat = _extraire_docstrings_java(code_genere)
+    else:
+        print(f"Langage '{langage}' non supporté")
+    
+    return resultat
+
+
+def _extraire_docstrings_python(code: str) -> dict:
+    """
+    Extrait les docstrings Python (entre triple quotes).
+     """
+    import re
+    
+    docstrings = {}
+    lignes = code.split('\n')
+    
+    i = 0
+    while i < len(lignes):
+        ligne = lignes[i]
+        
+        # Cherche une définition de fonction ou classe en cherchant avec une regex
+        match_fonction = re.search(r'^\s*def\s+(\w+)\s*\(', ligne)
+        match_classe = re.search(r'^\s*class\s+(\w+)', ligne)
+        
+        if match_fonction or match_classe:
+            
+            nom = match_fonction.group(1) if match_fonction else match_classe.group(1)
+            
+            i += 1
+            if i < len(lignes):
+                ligne_suivante = lignes[i].strip()
+                
+                # Vérifier si c'est une docstring
+                if ligne_suivante.startswith('"""') or ligne_suivante.startswith("'''"):
+                    quote_type = '"""' if ligne_suivante.startswith('"""') else "'''"
+                    
+                    # Si la docstring est sur une seule ligne
+                    if ligne_suivante.count(quote_type) >= 2:
+                        docstring = ligne_suivante.replace(quote_type, '').strip()
+                        docstrings[nom] = docstring
+                    
+                    # Si la docstring est multi-lignes
+                    else:
+                        lignes_docstring = []
+                        i += 1
+                        
+                        # Stocke tant qu'il n'a pas trouvé la fin de la docstring
+                        while i < len(lignes):
+                            if quote_type in lignes[i]:
+                                break
+                            lignes_docstring.append(lignes[i])
+                            i += 1
+                        
+                        docstring = '\n'.join(lignes_docstring).strip()
+                        docstrings[nom] = docstring
+        
+        i += 1
+    
+    return docstrings
+
+
+def _extraire_docstrings_java(code: str) -> dict:
+    """
+    Extrait les docstrings Java (commentaires Javadoc /** ... */).
+    
+    Cherche les patterns :
+    - /**
+    -  * Description
+    -  */
+    - public void nomMethode()
+    """
+    import re
+    
+    docstrings = {}
+    lignes = code.split('\n')
+    
+    i = 0
+    while i < len(lignes):
+        ligne = lignes[i].strip()
+        
+        # Chercher le début d'un Javadoc
+        if ligne.startswith('/**'):
+            lignes_javadoc = []
+            i += 1
+            
+            # Collecter toutes les lignes du Javadoc
+            while i < len(lignes):
+                ligne_javadoc = lignes[i].strip()
+                
+                # Fin du Javadoc
+                if '*/' in ligne_javadoc:
+                    i += 1
+                    break
+                
+                # Nettoyer la ligne (enlever le * au début)
+                ligne_propre = ligne_javadoc.lstrip('*').strip()
+                if ligne_propre:
+                    lignes_javadoc.append(ligne_propre)
+                
+                i += 1
+            
+            # Maintenant chercher la méthode/classe juste après
+            while i < len(lignes):
+                ligne_code = lignes[i].strip()
+                
+                # Ignorer les lignes vides et annotations
+                if not ligne_code or ligne_code.startswith('@'):
+                    i += 1
+                    continue
+                
+                # Chercher une méthode ou classe
+                match_methode = re.search(r'\b(\w+)\s*\(', ligne_code)
+                match_classe = re.search(r'class\s+(\w+)', ligne_code)
+                
+                if match_methode or match_classe:
+                    nom = match_methode.group(1) if match_methode else match_classe.group(1)
+                    docstring = '\n'.join(lignes_javadoc)
+                    docstrings[nom] = docstring
+                
+                break
+        
+        i += 1
+    
+    return docstrings
+
+def inserer_docstrings_dans_fichier(fichier_original: str, code_genere_par_ia: str, langage: str = "python"):
+    """
+    Insère les docstrings extraites du code généré par l'IA dans le fichier original.
+    
+    Extrait les docstrings du code généré par l'IA
+    Insère les docstrings aux bons endroits
+    Sauvegarde le fichier modifié
+    
+    Args:
+        fichier_original: Chemin du fichier à modifier
+        code_genere_par_ia: Code complet retourné par l'IA (avec docstrings)
+        langage: "python" ou "java"
+    
+    Exemple:
+        >>> inserer_docstrings_dans_fichier("mon_code.py", code_ia, "python")
+    """
+    
+    docstrings : dict = extraire_docstrings_du_code(code_genere_par_ia, langage)
+    
+    print(f"{len(docstrings)} docstrings extraites du code IA")
+    for nom in docstrings.keys():
+        print(f"   - {nom}")
+    
+    with open(fichier_original, 'r', encoding='utf-8') as f:
+        lignes_originales = f.readlines()
+    
+    # Insertion des docstrings
+    if langage.lower() == "python":
+        lignes_modifiees = _inserer_python(lignes_originales, docstrings)
+    elif langage.lower() == "java":
+        lignes_modifiees = _inserer_java(lignes_originales, docstrings)
+    else:
+        print(f"Langage '{langage}' non supporté")
+        return
+    
+    with open(fichier_original, 'w', encoding='utf-8') as f:
+        f.writelines(lignes_modifiees)
+    
+    print(f"Fichier {fichier_original} mis à jour")
+
+
+def _inserer_python(lignes: list, docstrings: dict) -> list:
+    """
+    Insère les docstrings Python dans le code.
+    
+    Args:
+        lignes: Liste des lignes du fichier original
+        docstrings: Dictionnaire {nom_fonction: docstring}
+    
+    Returns:
+        Liste des lignes modifiées
+    """
+    import re
+    
+    nouvelles_lignes = []
+    i = 0
+    
+    while i < len(lignes):
+        ligne = lignes[i]
+        nouvelles_lignes.append(ligne)
+        
+        # Chercher une définition de fonction ou classe
+        match_fonction = re.search(r'^\s*def\s+(\w+)\s*\(', ligne)
+        match_classe = re.search(r'^\s*class\s+(\w+)', ligne)
+        
+        if match_fonction or match_classe:
+            nom = match_fonction.group(1) if match_fonction else match_classe.group(1)
+            
+            # Si on a une docstring pour cette fonction
+            if nom in docstrings:
+                # Calculer l'indentation
+                indentation_def = len(ligne) - len(ligne.lstrip())
+                indentation_docstring = ' ' * (indentation_def + 4)
+                
+                # Vérifier si une docstring existe déjà
+                i += 1
+                a_deja_docstring = False
+                
+                if i < len(lignes):
+                    ligne_suivante = lignes[i].strip()
+                    
+                    # Si la ligne suivante est une docstring, on la saute
+                    if ligne_suivante.startswith('"""') or ligne_suivante.startswith("'''"):
+                        a_deja_docstring = True
+                        quote_type = '"""' if ligne_suivante.startswith('"""') else "'''"
+                        
+                        # Si docstring sur une ligne, on saute juste cette ligne
+                        if ligne_suivante.count(quote_type) >= 2:
+                            i += 1
+                        else:
+                            # Sinon on saute jusqu'à la fin de la docstring
+                            i += 1
+                            while i < len(lignes):
+                                if quote_type in lignes[i]:
+                                    i += 1
+                                    break
+                                i += 1
+                
+                docstring_text = docstrings[nom]
+                
+                # Formater la docstring avec indentation
+                lignes_docstring = []
+                lignes_docstring.append(f'{indentation_docstring}"""\n')
+                
+                for ligne_doc in docstring_text.split('\n'):
+                    if ligne_doc.strip():
+                        lignes_docstring.append(f'{indentation_docstring}{ligne_doc}\n')
+                    else:
+                        lignes_docstring.append('\n')
+                
+                lignes_docstring.append(f'{indentation_docstring}"""\n')
+                
+                # Insérer la nouvelle docstring à la position actuelle
+                for ligne_doc in lignes_docstring:
+                    nouvelles_lignes.append(ligne_doc)
+                
+                continue 
+        
+        i += 1
+    
+    return nouvelles_lignes
+
+def _inserer_java(lignes: list, docstrings: dict) -> list:
+    import re
+
+    nouvelles_lignes = []
+    i = 0
+
+    while i < len(lignes):
+        ligne = lignes[i]
+        ligne_stripped = ligne.strip()
+
+        # Chercher une méthode ou classe
+        match_methode = re.search(r'\b(\w+)\s*\(', ligne)
+        match_classe = re.search(r'\bclass\s+(\w+)', ligne)
+
+        inserer_javadoc = False
+        nom_trouve = None
+
+        # Si on trouve une méthode ou une classe, on vérifie si on a une docstring pour elle
+        if match_methode or match_classe:
+            nom_trouve = match_methode.group(1) if match_methode else match_classe.group(1)
+
+            if nom_trouve in docstrings:
+                inserer_javadoc = True
+
+        if inserer_javadoc:
+
+            # supprimer un Javadoc déjà présent dans nouvelles_lignes
+            j = len(nouvelles_lignes) - 1
+
+            while j >= 0 and not nouvelles_lignes[j].strip():
+                j -= 1
+
+            if j >= 0 and nouvelles_lignes[j].strip().endswith("*/"):
+                k = j
+                while k >= 0:
+                    if "/**" in nouvelles_lignes[k]:
+                        del nouvelles_lignes[k:j+1]
+                        break
+                    k -= 1
+
+            # Calculer l'indentation de la ligne actuelle
+            indentation = len(ligne) - len(ligne.lstrip())
+            indent = " " * indentation
+
+            docstring_text = docstrings[nom_trouve]
+
+            nouvelles_lignes.append(f"{indent}/**\n")
+
+            # Formater la docstring avec indentation
+            for l in docstring_text.split("\n"):
+                l = l.strip()
+                if l:
+                    nouvelles_lignes.append(f"{indent} * {l}\n")
+                else:
+                    nouvelles_lignes.append(f"{indent} *\n")
+
+            nouvelles_lignes.append(f"{indent} */\n")
+
+        nouvelles_lignes.append(ligne)
+        i += 1
+
+    return nouvelles_lignes
