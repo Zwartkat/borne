@@ -54,7 +54,7 @@ Une borne d'arcade rétro multimédia programmée en Java, Python et Lua pour Ra
 
 ### Dépendances logicielles
 - **Java** : JDK 21+ (OpenJDK)
-- **Python** : 3.11+
+- **Python** : 3.13+
 - **Lua** : 5.4+
 - **Git** : pour le versioning
 

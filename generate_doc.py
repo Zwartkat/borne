@@ -1,9 +1,7 @@
-# ------------------------------
-# Exceptions spécifiques (pédagogie + robustesse)
-# ------------------------------
+
 from __future__ import (
     annotations,
-)  # Permet les annotations de types en avant-référence (Python < 3.11)
+)  # Permet les annotations de types en avant-référence (Python < 3.13)
 
 import base64  # Encodage base64 requis pour envoyer des images à /api/generate
 import json  # Sérialisation/désérialisation JSON
@@ -18,9 +16,6 @@ from typing import Any, Dict, List, Literal, Mapping, Optional, Sequence, Union
 import numpy as np  # Types
 
 
-# ------------------------------
-# Exceptions spécifiques (pédagogie + robustesse)
-# ------------------------------
 
 
 class OllamaError(RuntimeError):
@@ -39,9 +34,6 @@ class OllamaServerStartError(OllamaError):
     """Erreur lorsque le serveur Ollama ne démarre pas correctement."""
 
 
-# ------------------------------
-# Dataclasses pour structurer les réponses (lisible + typé)
-# ------------------------------
 
 
 @dataclass(frozen=True, slots=True)
@@ -79,9 +71,6 @@ class OllamaGenerateResult:
     eval_count: Optional[int] = None
 
 
-# ============================================================================
-# ⬇️ WRAPPER OLLAMAWRAPPER - INCHANGÉ - NE PAS MODIFIER ⬇️
-# ============================================================================
 
 class OllamaWrapper:
     """
@@ -104,9 +93,6 @@ class OllamaWrapper:
         self._base_url: str = base_url.rstrip("/")  # Normalise : pas de "/" final
         self._timeout_s: float = timeout_s  # Timeout réseau pour les requêtes HTTP
 
-    # --------------------------
-    # Méthodes "système"
-    # --------------------------
 
     def is_server_running(self) -> bool:
         """
@@ -215,9 +201,6 @@ class OllamaWrapper:
             return host, int(port_str)
         return url, 11434
 
-    # --------------------------
-    # Endpoints "information"
-    # --------------------------
 
     def get_version(self) -> str:
         """
@@ -303,10 +286,6 @@ class OllamaWrapper:
 
         return models
 
-    # --------------------------
-    # Génération
-    # --------------------------
-
     def generate_text(
         self,
         *,
@@ -375,9 +354,6 @@ class OllamaWrapper:
                 else None
             ),
         )
-    # --------------------------
-    # Couche HTTP (sans dépendance externe)
-    # --------------------------
 
     def _http_request_json(
         self,
