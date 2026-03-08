@@ -22,6 +22,12 @@ error_exit() {
     echo -e "${ERROR} $1"
     exit 1
 }
+
+
+echo -e "\n${INFO} Compilation des projets...\n"
+
+shopt -s nullglob
+
 cd projet || error_exit "Répertoire 'projet' introuvable"
 
 success=0

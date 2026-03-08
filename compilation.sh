@@ -45,8 +45,4 @@ else
     error_exit "Échec compilation Menu"
 fi
 
-echo -e "\n${INFO} Compilation des projets...\n"
-
-shopt -s nullglob
-
 ./update_games.sh
