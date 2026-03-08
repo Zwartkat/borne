@@ -67,7 +67,7 @@ Valide la syntaxe des jeux Python.
 - Pull request modifiant les jeux
 
 **Matrice:**
-- Python 3.11,3.12,3.13
+- Python 3.13
 
 **Vérifie:**
 - ✅ Syntaxe Python
