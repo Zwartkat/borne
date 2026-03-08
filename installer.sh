@@ -82,7 +82,6 @@ if ! ping -c 1 google.com >/dev/null 2>&1; then
 fi
 echo -e "${CHECK} Connexion internet active."
 
-# 3. Vérifier l'espace disque (min 500Mo libres)
 FREE_SPACE=$(df -m . | awk 'NR==2 {print $4}')
 if [ "$FREE_SPACE" -lt 500 ]; then
     echo -e "${ERROR} Espace disque insuffisant (min 500Mo requis)."
@@ -104,15 +103,10 @@ check_cmd "python3" "python3.13"
 check_cmd "git" "git"
 check_cmd "love" "love"
 
-# Correction spécifique Python
 if [ -f /lib/python3.13/EXTERNALLY-MANAGED ]; then
     echo -e "${INFO} Correction de l'environnement Python..."
     sudo rm /lib/python3.13/EXTERNALLY-MANAGED
 fi
-
-# ==============================================================================
-# SÉLECTION DU DOSSIER
-# ==============================================================================
 
 CHOICE=$(whiptail --title "Installation Borne" --menu "Où souhaitez-vous installer le projet ?" 15 60 2 \
 "Dossier courant" "$(pwd)" \
@@ -131,10 +125,6 @@ case $CHOICE in
         ;;
 esac
 
-# ==============================================================================
-# GESTION DU DÉPÔT GIT
-# ==============================================================================
-
 print_title "CONFIGURATION DU PROJET"
 
 GIT_DIR="$install_dir"
@@ -147,7 +137,6 @@ else
     git clone "$GIT_URL" "$GIT_DIR"
 fi
 
-# Installation des fichiers système
 if [ -f "$GIT_DIR/borne" ]; then
     sudo cp "$GIT_DIR/borne" /usr/share/X11/xkb/symbols/borne
     echo -e "${CHECK} Fichier XKB installé."
@@ -155,17 +144,12 @@ else
     echo -e "${YELLOW} Attention: fichier 'borne' introuvable dans le dépôt.${NC}"
 fi
 
-# ==============================================================================
-# FINALISATION
-# ==============================================================================
-
 echo -e "${INFO} Optimisation des scripts (dos2unix & chmod)..."
 find "$install_dir" -name "*.sh" -exec dos2unix -q {} \;
 find "$install_dir" -name "*.sh" -exec chmod +x {} \;
 
 # Configuration du chemin dans le launcher
 if [ -f "$GIT_DIR/launch.sh" ]; then
-    # Utilisation de | comme délimiteur sed car le chemin contient des /
     sed -i "s|^INSTALL_PATH=.*|INSTALL_PATH=$GIT_DIR|" "$GIT_DIR/launch.sh"
 fi
 
