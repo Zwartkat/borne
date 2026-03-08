@@ -9,8 +9,6 @@ Une borne d'arcade rétro multimédia programmée en Java, Python et Lua pour Ra
 - [Spécifications techniques](#-spécifications-techniques)
 - [Installation](#-installation)
 - [Contrôles](#-contrôles)
-- [Architecture](#-architecture)
-- [Développement](#-développement)
 - [Contribution](#-contribution)
 
 ---
@@ -20,8 +18,8 @@ Une borne d'arcade rétro multimédia programmée en Java, Python et Lua pour Ra
 **Borne Arcade** est un projet pluridisciplinaire développé à l'IUT du Littoral Côte d'Opale. Il s'agit d'une plateforme de jeu rétro pour arcade personnalisée, permettant de jouer à plusieurs jeux écrits en différents langages (Java, Python, Lua).
 
 ### Caractéristiques principales
-- ✅ Gestion de 2 joueurs simultanés
-- ✅ Support de 3 langages : Java, Python, Lua
+- Gestion de 2 joueurs simultanés
+- Support de 3 langages : Java, Python, Lua
 
 ---
 
@@ -39,7 +37,6 @@ Une borne d'arcade rétro multimédia programmée en Java, Python et Lua pour Ra
 | **Minesweeper** | Python |
 | **OsuTile** | Python |
 | **PianoTile** | Python |
-| **Pokechecs** | Java |
 | **Pong** | Java |
 | **Puissance X** | Java |
 | **Snake Eater** | Python |
@@ -56,15 +53,22 @@ Une borne d'arcade rétro multimédia programmée en Java, Python et Lua pour Ra
 - **OS** : Raspbian / Raspberry Pi OS
 
 ### Dépendances logicielles
-- **Java** : JDK 8+ (OpenJDK)
-- **Python** : 3.9+
-- **Lua** : 5.3+
+- **Java** : JDK 21+ (OpenJDK)
+- **Python** : 3.11+
+- **Lua** : 5.4+
 - **Git** : pour le versioning
 
 ---
 
 ## 🚀 Installation
 
+```bash
+curl -L -O https://github.com/Zwartkat/borne/releases/latest/download/installer.sh
+chmod +x ./installer.sh
+sudo ./installer.sh
+```
+
+Le script d'installation téléchargera automatiquement toutes les dépendances logicielles et installera la borne à l'endroit souhaité
 
 ---
 
@@ -94,7 +98,7 @@ q=Bouton4, s=Bouton5, d=Bouton6
 
 ### Navigation du menu
 - **Haut/Bas** (J1) : Sélectionner un jeu
-- 
+- **Bouton Bas Gauche** (J1) : Lancer un jeu 
 
 ### Configuration spéciale
 
@@ -127,20 +131,11 @@ borne_arcade/
 └── compilation.sh             # Script de compilation
 ```
 
-### Module Arcade
-
-Pour tous les jeux Java, le module Arcade fournit :
-- **HighScore** : Gestion des scores
-
 ---
-
-## 🛠️ Développement
-
-...
 
 ### Tests automatisés
 
-Le projet utilise GitHub Actions pour tester :
+Le projet utilise GitHub Actions pour tester les jeux présents:
 - ✅ Compilation Java
 - ✅ Syntaxe Python
 - ✅ Syntaxe Lua

@@ -2,7 +2,7 @@
 
 Documentation des workflows GitHub Actions disponibles pour ce projet.
 
-## 📋 Workflows Disponibles
+## Workflows Disponibles
 
 ### 1. **Build** (`build.yml`)
 Compile les modules Java du projet.
@@ -12,7 +12,7 @@ Compile les modules Java du projet.
 - Pull request sur `main` ou `develop`
 
 **Matrice:**
-- Java 11, 17
+- Java 21,25
 
 **Modules compilés:**
 - ✅ Arcade
@@ -20,6 +20,7 @@ Compile les modules Java du projet.
 - ✅ Columns
 - ✅ Pong
 - ✅ DinoRail
+- ...
 
 **Artefacts générés:**
 - Fichiers `.class` compilés
@@ -53,13 +54,8 @@ Génère la documentation JavaDoc et celle des jeux.
 - Déclenchement manuel (workflow_dispatch)
 
 **Génère:**
-- 📖 Documentation JavaDoc (API)
-- 🎮 Guide des jeux
-- Publie sur GitHub Pages (si activé)
-
-**Répertoires créés:**
-- `doc_borne/` - JavaDoc API
-- `docs_jeux/` - Documentation des jeux
+- Documentation JavaDoc 
+- Publie sur GitHub Pages
 
 ---
 
@@ -71,12 +67,11 @@ Valide la syntaxe des jeux Python.
 - Pull request modifiant les jeux
 
 **Matrice:**
-- Python 3.8, 3.10, 3.11
+- Python 3.11,3.12,3.13
 
 **Vérifie:**
 - ✅ Syntaxe Python
 - ✅ Imports (requirements.txt)
-- ✅ Jeu Ball Blast
 
 ---
 
@@ -91,8 +86,6 @@ Analyse la qualité du code.
 **Analysés:**
 - Statistiques de code (lignes, fichiers)
 - TODO/FIXME/HACK
-- Temps de passage du pipeline
-- Taille des fichiers
 
 ---
 
@@ -109,16 +102,6 @@ Vérifications automatiques pour les PRs.
 - ✅ Taille des fichiers
 - ✅ Documentation
 
-**Conventions de nommage:**
-```
-feature/description
-bugfix/description
-hotfix/description
-refactor/description
-docs/description
-test/description
-```
-
 ---
 
 ### 7. **Release** (`release.yml`)
@@ -129,20 +112,14 @@ Crée une version officielle du projet.
 - Déclenchement manuel
 
 **Actions:**
-- 🔄 Compilation complète
-- 📚 Génération de JavaDoc
-- 📚 Génération de doc des jeux
-- 📦 Création d'archives
-- 🎉 Création d'une release GitHub
-
-**Artefacts de release:**
-- `api-documentation-vX.Y.Z.zip`
-- `game-documentation-vX.Y.Z.zip`
-- Fichiers compilés
+-  Compilation complète
+-  Génération de JavaDoc
+-  Publication de l'installer
+-  Création d'une release GitHub
 
 ---
 
-## 🚀 Utilisation
+## Utilisation
 
 ### Déclencher une compilation
 ```bash
@@ -162,49 +139,10 @@ git push origin v1.0.0
 
 ---
 
-## 📊 État des Workflows
+## État des Workflows
 
 Pour voir l'état des workflows:
 1. Aller à l'onglet **Actions** du repository
 2. Voir l'historique des exécutions
 3. Cliquer sur un workflow pour voir les détails
 
----
-
-## 🧪 Tests Arcade
-
-Les tests pour le module Arcade sont disponibles dans le dossier `Arcade/`:
-
-- **TestPointeur.java** - Tests du système de pointeur
-- **TestBoite.java** - Tests des boîtes UI
-- **TestCouleur.java** - Tests des couleurs
-- **TestHighScore.java** - Tests des scores
-- **TestClavierBorneArcade.java** - Tests des contrôles
-
-### Exécuter les tests localement
-
-```bash
-# Compilation des tests
-cd Arcade
-javac -cp .:../lib/*:../MG2D.jar TestPointeur.java TestBoite.java TestCouleur.java
-
-# Exécution avec JUnit
-java -cp .:../lib/*:../MG2D.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
-```
-
----
-
-## 📝 Notes
-
-- Les workflows utilisent **Java 17** par défaut (avec fallback à Java 11)
-- La documentation est générée uniquement sur push à `main`
-- Les releases créent automatiquement une page de release avec les artefacts
-- Les TODOs/FIXMEs sont trackés et rapportés dans les analyses de qualité
-
----
-
-## 🔗 Liens Utiles
-
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [JUnit 5 Documentation](https://junit.org/junit5/)
-- [JavaDoc Guide](https://www.oracle.com/java/technologies/javase/javadoc-guide.html)

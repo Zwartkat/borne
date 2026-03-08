@@ -4,42 +4,28 @@ Guide détaillé de tous les contrôles disponibles sur la Borne d'Arcade.
 
 ## ⌨️ Touches de Clavier Standard
 
-| Fonction | Touche |
+| Contrôles | Touche |
 |----------|--------|
-| **Haut** | ↑ (Flèche Haut) |
-| **Bas** | ↓ (Flèche Bas) |
-| **Gauche** | ← (Flèche Gauche) |
-| **Droite** | → (Flèche Droite) |
-| **Action 1** | `Z` ou `A` |
-| **Action 2** | `X` ou `B` |
-| **Action 3** | `C` |
-| **Menu/Pause** | `Entrée` |
-| **Retour/Quitter** | `Échap` |
-
----
-
-## 🎮 Joystick/Gamepad
-
-### Contrôles Directionnels
-
-| Fonction | Joystick |
-|----------|----------|
-| **Haut** | Stick Analogique ↑ ou D-Pad ↑ |
-| **Bas** | Stick Analogique ↓ ou D-Pad ↓ |
-| **Gauche** | Stick Analogique ← ou D-Pad ← |
-| **Droite** | Stick Analogique → ou D-Pad → |
-
-### Boutons d'Action
-
-| Fonction | Joystick | Boutons |
-|----------|----------|---------|
-| **Action 1** | Bouton `A` | Green Button (Xbox) / Cross (PS) |
-| **Action 2** | Bouton `B` | Red Button (Xbox) / Circle (PS) |
-| **Action 3** | Bouton `X` | Blue Button (Xbox) / Square (PS) |
-| **Menu** | Bouton `Start` | Menu Button |
-| **Retour** | Bouton `Select` | Select Button |
-
----
+| **Joystick (J1) : Haut** | ↑ (Flèche Haut) |
+| **Joystick (J1) : Bas** | ↓ (Flèche Bas) |
+| **Joystick (J1) : Gauche** | ← (Flèche Gauche) |
+| **Joystick (J1) : Droite** | → (Flèche Droite) |
+| **Joystick (J2) : Haut** | o |
+| **Joystick (J2) : Bas** | l |
+| **Joystick (J2) : Gauche** | k |
+| **Joystick (J2) : Droite** | m |
+| **Boutons (J1) : Haut Gauche** | r |
+| **Boutons (J1) : Haut Milieu** | t |
+| **Boutons (J1) : Haut Droite** | y |
+| **Boutons (J1) : Bas Gauche** | f |
+| **Boutons (J1) : Bas Milieu** | g |
+| **Boutons (J1) : Bas Droite** | h |
+| **Boutons (J2) : Haut Gauche** | a |
+| **Boutons (J2) : Haut Milieu** | z |
+| **Boutons (J2) : Haut Droite** | e |
+| **Boutons (J2) : Bas Gauche** | q |
+| **Boutons (J2) : Bas Milieu** | s |
+| **Boutons (J2) : Bas Droite** | d |
 
 ## 🎯 Contrôles par Section
 
@@ -189,55 +175,27 @@ public void captureJoystick(JoystickEvent event) {
 
 ---
 
-## 🆘 Dépannage des Contrôles
+## Dépannage des Contrôles
 
 ### Les touches ne répondent pas
 
 **Solution :**
 1. Cliquer dans la fenêtre
-2. Appuyer sur `Entrée`
-3. Appuyer à nouveau sur la touche
 
-### Le joystick n'est pas reconnu
-
-**Solution :**
-1. Débrancher et rebrancher
-2. Redémarrer la borne
-3. Vérifier les pilotes USB
-
-### Touches inversées (AZERTY vs QWERTY)
-
-**Solution :**
-- Les touches sont mappées logiquement (Z = Action1)
-- Aucun changement de configuration nécessaire
-- Fonctionne sur tous les claviers
 
 ---
 
-## 🎯 Conseils d'Optimisation
-
-### Pour une Meilleure Réactivité
+## Conseils
 
 1. **Utiliser un Joystick** plutôt que le clavier
 2. **Vérifier le Focus** : cliquer dans la fenêtre
 3. **Réduire la Latence** : fermer les autres applications
-4. **Calibrer le Joystick** si disponible
-
-### Profil de Jeu Optimal
-
-| Profil | Clavier | Joystick |
-|--------|---------|----------|
-| **Casual** | ✅ | Recommandé |
-| **Compétition** | ✅ | ✅ Très bon |
-| **Speedrun** | Acceptable | ✅ Meilleur |
 
 ---
 
 ## 🔗 Liens Utiles
 
 - [Dépannage général](troubleshooting.md)
-- [FAQ](../faq.md)
-- [Code source ClavierBorneArcade](../../Arcade/ClavierBorneArcade.java)
 
 ---
 
